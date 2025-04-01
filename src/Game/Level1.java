@@ -7,7 +7,7 @@ import java.awt.*;
 public class Level1 extends JPanel{
 
     public Level1() {
-        setPreferredSize(getPreferredSize());
+        setPreferredSize(new Dimension(800, 800)); // Set the size of the panel
         setBackground(new Color(135, 206, 235));
     }
 
