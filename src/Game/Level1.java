@@ -1,6 +1,5 @@
 package Game;
 
-import java.security.Key;
 import javax.swing.JPanel;
 import java.awt.*;
 
