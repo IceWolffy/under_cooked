@@ -2,12 +2,21 @@ package Game;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import Entity.Player;
+import Game.KeyHandler;
+
 
 public class Level1 extends JPanel{
 
+	private Player player;
     public Level1() {
         setPreferredSize(new Dimension(1000, 900)); // Set the size of the panel
         setBackground(new Color(252, 244,163));
+        
+        KeyHandler keyH = new KeyHandler();
+        player = new Player(keyH);
+
+        addKeyListener(keyH);
     }
 
     @Override
@@ -35,6 +44,8 @@ public class Level1 extends JPanel{
         g.setColor(new Color(0, 0, 0)); // Set the color for the text
         g.setFont(new Font("Arial", Font.PLAIN, 40)); // Set the font for the level name
         g.drawString("Level 1", 70,87); //Dispalys the level name
+        
+        player.draw(g); //Draws player
     }
 
 
