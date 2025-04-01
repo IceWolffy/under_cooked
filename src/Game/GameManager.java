@@ -14,4 +14,11 @@ public class GameManager {
         startLevel1();
     }
 
+    public void startLevel1(){
+        Level1 level1 = new Level1();
+        frame.setContentPane(level1);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
 }
