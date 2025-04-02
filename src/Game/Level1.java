@@ -9,7 +9,7 @@ public class Level1 extends JPanel{
 	private Player player;
 
     public Level1() {
-        setPreferredSize(new Dimension(1920,1020)); // Set the size of the panel
+        setPreferredSize(new Dimension(1920,1080)); // Set the size of the panel
         setBackground(new Color(252, 244,163));
         
         KeyHandler keyH = new KeyHandler();
@@ -24,7 +24,7 @@ public class Level1 extends JPanel{
 
         // Draw the ground
         g.setColor(new Color(128, 128, 128)); // Brown color for the ground
-        g.fillRect(0, 800, 1000, 100); // Draw the ground at the bottom of the panel
+        g.fillRect(0, 1000, Constants.SCREEN_SIZE.width, 100); // Draw the ground at the bottom of the panel
 
         //Draw platforms
         g.setColor(new Color(36,36,36));
