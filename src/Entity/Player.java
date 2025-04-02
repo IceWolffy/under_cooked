@@ -7,16 +7,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Game.KeyHandler;
+import Constants.Constants;
 
 public class Player extends Entity {
     private KeyHandler keyH; // Store key handler
+    private Constants constants; // Create an instance of Constants class
     
-    // Physics variables
-    private boolean isJumping = false;
-    private int velocityY = 0;
-    private final int gravity = 1;
-    private final int jumpForce = -20;
-    private final int groundLevel = 800 - 150; // Bottom of screen - player height
 
     public Player(KeyHandler keyH) {
         this.keyH = keyH; // Assign key handler
@@ -58,23 +54,15 @@ public class Player extends Entity {
         }
         
         // Handle jumping
-        if (keyH.jumpPressed && !isJumping) {
-            isJumping = true;
-            velocityY = jumpForce;
+        if (keyH.jumpPressed && !constants.isJumping) {
+            constants.isJumping = true;
+            constants.velocityY = constants.jumpForce;
         }
         
         // Apply gravity
-        y += velocityY;
+        y += constants.velocityY;
         
-        if (isJumping) {
-            velocityY += gravity;
-        }
-        //Collision for ground level
-        if (y >= groundLevel) {  
-            y = groundLevel; // Stop falling at the ground level
-            isJumping = false; // Reset jump state
-            velocityY = 0; // Stop downward velocity
-        }
+
     }
 
     public void draw(Graphics g) {
