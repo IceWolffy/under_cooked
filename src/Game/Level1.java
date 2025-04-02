@@ -4,13 +4,9 @@ import javax.swing.JPanel;
 import java.awt.*;
 import Entity.Player;
 import Game.KeyHandler;
-import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class Level1 extends JPanel implements ActionListener{
+public class Level1 extends JPanel{
 	private Player player;
-	private Timer gameTimer;
 
     public Level1() {
         setPreferredSize(new Dimension(1000, 900)); // Set the size of the panel
@@ -20,21 +16,6 @@ public class Level1 extends JPanel implements ActionListener{
         player = new Player(keyH);
 
         addKeyListener(keyH);
-        setFocusable(true);
-        requestFocusInWindow();
-        
-        // Start game loop
-        gameTimer = new Timer(16, this); // ~60 FPS
-        gameTimer.start();
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Update game state
-        player.update();
-        
-        // Redraw the screen
-        repaint();
     }
 
     @Override
