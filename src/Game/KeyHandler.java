@@ -7,16 +7,15 @@ public class KeyHandler implements KeyListener{
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		 int code = e.getKeyCode();
-	     if (code == KeyEvent.VK_A) leftPressed = true;
-	     if (code == KeyEvent.VK_D) rightPressed = true;
-         if (code == KeyEvent.VK_SPACE) jumpPressed = true;
+		 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		int code = e.getKeyCode();
+	     if (code == KeyEvent.VK_A) leftPressed = true;
+	     if (code == KeyEvent.VK_D) rightPressed = true;
+        if (code == KeyEvent.VK_SPACE) jumpPressed = true;
 	}
 
 	@Override
