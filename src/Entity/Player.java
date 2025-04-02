@@ -1,6 +1,10 @@
 package Entity;
 
 import java.awt.*;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import Game.KeyHandler;
 
 public class Player extends Entity {
@@ -18,6 +22,25 @@ public class Player extends Entity {
         this.x = 100;  // Starting position
         this.y = 700;  // Start above the ground
         this.speed = 4; // Movement speed
+        
+        getPlayer1Image();
+    }
+    
+    public void getPlayer1Image() {
+    	try {
+    		walk01 = ImageIO.read(getClass().getResourceAsStream("/player1/walk01.png"));
+    		walk02 = ImageIO.read(getClass().getResourceAsStream("/player1/walk02.png"));
+    		walk03 = ImageIO.read(getClass().getResourceAsStream("/player1/walk03.png"));
+    		walk04 = ImageIO.read(getClass().getResourceAsStream("/player1/walk04.png"));
+    		walk05 = ImageIO.read(getClass().getResourceAsStream("/player1/walk05.png"));
+    		walk06 = ImageIO.read(getClass().getResourceAsStream("/player1/walk06.png"));
+    		walk07 = ImageIO.read(getClass().getResourceAsStream("/player1/walk07.png"));
+    		walk08 = ImageIO.read(getClass().getResourceAsStream("/player1/walk08.png"));
+    		
+    		
+    	}catch(IOException e){
+    		e.printStackTrace();
+    	}
     }
 
     public void update() {
