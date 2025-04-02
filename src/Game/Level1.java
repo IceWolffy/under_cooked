@@ -9,7 +9,7 @@ public class Level1 extends JPanel{
 	private Player player;
 
     public Level1() {
-        setPreferredSize(new Dimension(1000, 900)); // Set the size of the panel
+        setPreferredSize(new Dimension(1920,1020)); // Set the size of the panel
         setBackground(new Color(252, 244,163));
         
         KeyHandler keyH = new KeyHandler();
