@@ -6,9 +6,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import Constants.Constants;
 import Game.KeyHandler;
-import Constants.Constants;
 
 public class Player extends Entity {
+	
     private KeyHandler keyH; // Store key handler
     private boolean isJumping = false;
     private int velocityY = 0;
@@ -18,11 +18,10 @@ public class Player extends Entity {
 
     public Player(KeyHandler keyH) {
         this.keyH = keyH; // Assign key handler
-        this.x = 100;  // Starting position
+        this.x = 300;  // Starting position
         this.y = 700;  // Start above the ground
         this.speed = 5;
         this.direction = "right";
-        
         
         getPlayer1Image();
     }
@@ -37,8 +36,6 @@ public class Player extends Entity {
     		walk06 = ImageIO.read(getClass().getResourceAsStream("/player1/walk06.png"));
     		walk07 = ImageIO.read(getClass().getResourceAsStream("/player1/walk07.png"));
     		walk08 = ImageIO.read(getClass().getResourceAsStream("/player1/walk08.png"));
-    		
-    		
     	}catch(IOException e){
     		e.printStackTrace();
     	}
@@ -64,16 +61,18 @@ public class Player extends Entity {
         
         // Apply gravity
         y += velocityY;
-        
         if (isJumping) {
         	velocityY += gravity;
         }
+        
         //Collision for ground level
         if (y >= groundLevel) {  
             y = groundLevel; // Stop falling at the ground level
             isJumping = false; // Reset jump state
             velocityY = 0; // Stop downward velocity
         }
+        
+        // This is the code that makes player 1 jump shorter
         if (isJumping) {
             velocityY += gravity;
         }    
