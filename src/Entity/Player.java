@@ -21,8 +21,6 @@ public class Player extends Entity {
     }
 
     public void update() {
-    	//OG you can implement the movements here, if any changes are needed tell me.
-    	//Also the player needs to be then imported into the level1 which I can do after you finish the movement sutff
     	
     	// Handle horizontal movement
         if (keyH.leftPressed) {
