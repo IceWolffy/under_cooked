@@ -5,25 +5,35 @@ import java.awt.*;
 
 import Constants.Constants;
 import Entity.Player;
+import Entity.Player2;
 import Game.KeyHandler;
 
 public class Level1 extends JPanel {
 	private Player player;
+	private Player2 player2;
+	
 
 	public Level1() {
 		setPreferredSize(new Dimension(Constants.SCREEN_SIZE.width, Constants.SCREEN_SIZE.height)); // Set the size of
 																									// the panel
 		setBackground(new Color(252, 244, 163));
 
-		KeyHandler keyH = new KeyHandler();
+		KeyHandler keyH = new KeyHandler(true);   // Player 1 uses WASD controls
+		KeyHandler keyH2 = new KeyHandler(false); // Player 2 uses Arrow controls
+
 		player = new Player(keyH);
+		player2 = new Player2(keyH2);
+		
 		addKeyListener(keyH);
+		addKeyListener(keyH2);
+		
 		setFocusable(true);
 		requestFocusInWindow();
 		// Player logic
 		Thread gameThread = new Thread(() -> {
 			while (true) {
 				player.update(); // Move the player
+				player2.update(); // Update Player 2
 				repaint(); // Redraw the screen
 				try {
 					Thread.sleep(16); // ~60 FPS
@@ -64,6 +74,7 @@ public class Level1 extends JPanel {
 		g.drawString("Level 1", 70, 87); // Dispalys the level name
 
 		player.draw(g); // Draws player
+		 player2.draw(g);
 	}
 
 }
