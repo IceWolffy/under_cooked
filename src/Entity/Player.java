@@ -6,12 +6,6 @@ import Game.KeyHandler;
 public class Player extends Entity {
     private KeyHandler keyH; // Store key handler
     
-    // Physics variables
-    private boolean isJumping = false;
-    private int velocityY = 0;
-    private final int gravity = 1;
-    private final int jumpForce = -15;
-    private final int groundLevel = 800 - 32; // Bottom of screen - player height
 
     public Player(KeyHandler keyH) {
         this.keyH = keyH; // Assign key handler
