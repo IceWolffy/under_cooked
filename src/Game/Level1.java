@@ -1,14 +1,17 @@
-package Game;
+ package Game;
 
 import javax.swing.JPanel;
 import java.awt.*;
 import Entity.Player;
 import Game.KeyHandler;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-
-public class Level1 extends JPanel{
-
+public class Level1 extends JPanel implements ActionListener{
 	private Player player;
+	private Timer gameTimer;
+
     public Level1() {
         setPreferredSize(new Dimension(1000, 900)); // Set the size of the panel
         setBackground(new Color(252, 244,163));
@@ -17,6 +20,21 @@ public class Level1 extends JPanel{
         player = new Player(keyH);
 
         addKeyListener(keyH);
+        setFocusable(true);
+        requestFocusInWindow();
+        
+        // Start game loop
+        gameTimer = new Timer(16, this); // ~60 FPS
+        gameTimer.start();
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Update game state
+        player.update();
+        
+        // Redraw the screen
+        repaint();
     }
 
     @Override
@@ -45,10 +63,10 @@ public class Level1 extends JPanel{
         g.setFont(new Font("Arial", Font.PLAIN, 40)); // Set the font for the level name
         g.drawString("Level 1", 70,87); //Dispalys the level name
         
-        player.draw(g); //Draws player
+   	 	player.draw(g); //Draws player
     }
 
-
+    
     
 
 }
