@@ -1,6 +1,7 @@
 package Entity;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -14,14 +15,15 @@ public class Player extends Entity {
     private boolean isJumping = false;
     private int velocityY = 0;
     private final int gravity = 1;
-    private final int jumpForce = -15;
-    private final int groundLevel = 800 - 32; // Bottom of screen - player height
+    private final int jumpForce = -20;
+    private final int groundLevel = 800 - 150; // Bottom of screen - player height
 
     public Player(KeyHandler keyH) {
         this.keyH = keyH; // Assign key handler
         this.x = 100;  // Starting position
         this.y = 700;  // Start above the ground
-        this.speed = 4; // Movement speed
+        this.speed = 6; // Movement speed
+        this.direction = "right";
         
         getPlayer1Image();
     }
@@ -47,9 +49,11 @@ public class Player extends Entity {
     	
     	// Handle horizontal movement
         if (keyH.leftPressed) {
+        	direction = "left";
             x -= speed;
         }
         if (keyH.rightPressed) {
+        	direction = "right";
             x += speed;
         }
         
@@ -74,7 +78,15 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.BLUE);  // Set player color
-        g.fillRect(x, y, 32, 32); // Draw player as a blue square
+    	BufferedImage image = null;
+        switch(direction) {
+        case "right":
+        	image = walk01;
+        	break;
+        case "left":
+        	image = walk01;
+        	break;
+        }
+        g.drawImage(image, x, y, 256, 256, null);
     }
 }
