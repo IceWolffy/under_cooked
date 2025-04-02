@@ -3,8 +3,10 @@ package Game;
 import javax.swing.*;
 
 public class GameManager {
+	
 
     private JFrame frame;
+    
 
     public GameManager(){
         frame = new JFrame("UnderCooked");

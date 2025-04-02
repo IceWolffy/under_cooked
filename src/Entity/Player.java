@@ -1,6 +1,11 @@
 package Entity;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import Game.KeyHandler;
 import Constants.Constants;
 
@@ -13,18 +18,38 @@ public class Player extends Entity {
         this.keyH = keyH; // Assign key handler
         this.x = 100;  // Starting position
         this.y = 700;  // Start above the ground
-        this.speed = 4; // Movement speed
+        this.speed = 6; // Movement speed
+        this.direction = "right";
+        
+        getPlayer1Image();
+    }
+    
+    public void getPlayer1Image() {
+    	try {
+    		walk01 = ImageIO.read(getClass().getResourceAsStream("/player1/walk01.png"));
+    		walk02 = ImageIO.read(getClass().getResourceAsStream("/player1/walk02.png"));
+    		walk03 = ImageIO.read(getClass().getResourceAsStream("/player1/walk03.png"));
+    		walk04 = ImageIO.read(getClass().getResourceAsStream("/player1/walk04.png"));
+    		walk05 = ImageIO.read(getClass().getResourceAsStream("/player1/walk05.png"));
+    		walk06 = ImageIO.read(getClass().getResourceAsStream("/player1/walk06.png"));
+    		walk07 = ImageIO.read(getClass().getResourceAsStream("/player1/walk07.png"));
+    		walk08 = ImageIO.read(getClass().getResourceAsStream("/player1/walk08.png"));
+    		
+    		
+    	}catch(IOException e){
+    		e.printStackTrace();
+    	}
     }
 
     public void update() {
-    	//OG you can implement the movements here, if any changes are needed tell me.
-    	//Also the player needs to be then imported into the level1 which I can do after you finish the movement sutff
     	
     	// Handle horizontal movement
         if (keyH.leftPressed) {
+        	direction = "left";
             x -= speed;
         }
         if (keyH.rightPressed) {
+        	direction = "right";
             x += speed;
         }
         
@@ -37,13 +62,19 @@ public class Player extends Entity {
         // Apply gravity
         y += constants.velocityY;
         
-        if (constants.isJumping) {
-            constants.velocityY += constants.gravity;
-        }    
+
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.BLUE);  // Set player color
-        g.fillRect(x, y, 32, 32); // Draw player as a blue square
+    	BufferedImage image = null;
+        switch(direction) {
+        case "right":
+        	image = walk01;
+        	break;
+        case "left":
+        	image = walk01;
+        	break;
+        }
+        g.drawImage(image, x, y, 256, 256, null);
     }
 }
