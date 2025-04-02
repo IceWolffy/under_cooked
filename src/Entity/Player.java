@@ -41,7 +41,13 @@ public class Player extends Entity {
         
         if (isJumping) {
             velocityY += gravity;
-        }    
+        }
+        //Collision for ground level
+        if (y >= groundLevel) {  
+            y = groundLevel; // Stop falling at the ground level
+            isJumping = false; // Reset jump state
+            velocityY = 0; // Stop downward velocity
+        }
     }
 
     public void draw(Graphics g) {
