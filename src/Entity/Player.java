@@ -2,9 +2,11 @@ package Entity;
 
 import java.awt.*;
 import Game.KeyHandler;
+import Constants.Constants;
 
 public class Player extends Entity {
     private KeyHandler keyH; // Store key handler
+    private Constants constants; // Create an instance of Constants class
     
 
     public Player(KeyHandler keyH) {
@@ -27,16 +29,16 @@ public class Player extends Entity {
         }
         
         // Handle jumping
-        if (keyH.jumpPressed && !isJumping) {
-            isJumping = true;
-            velocityY = jumpForce;
+        if (keyH.jumpPressed && !constants.isJumping) {
+            constants.isJumping = true;
+            constants.velocityY = constants.jumpForce;
         }
         
         // Apply gravity
-        y += velocityY;
+        y += constants.velocityY;
         
-        if (isJumping) {
-            velocityY += gravity;
+        if (constants.isJumping) {
+            constants.velocityY += constants.gravity;
         }    
     }
 
