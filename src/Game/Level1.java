@@ -54,7 +54,8 @@ Level1
     
     
 	public Level1() {
-		setPreferredSize(new Dimension(1000, 900)); // Set the size of the panel
+		setPreferredSize(new Dimension(Constants.SCREEN_SIZE.width, Constants.SCREEN_SIZE.height)); // Set the size of
+																									// the panel
 		setBackground(new Color(252, 244, 163));
 
 		KeyHandler keyH = new KeyHandler();
@@ -62,7 +63,7 @@ Level1
 		addKeyListener(keyH);
 		setFocusable(true);
 		requestFocusInWindow();
-		//Player logic
+		// Player logic
 		Thread gameThread = new Thread(() -> {
 			while (true) {
 				player.update(); // Move the player
@@ -83,16 +84,19 @@ Level1
 
 		// Draw the ground
 		g.setColor(new Color(128, 128, 128)); // Brown color for the ground
-		g.fillRect(0, 800, 1000, 100); // Draw the ground at the bottom of the panel
+		g.fillRect(0, 980, Constants.SCREEN_SIZE.width, Constants.SCREEN_SIZE.height); // Draw the ground at the bottom
+																						// of the panel
 
 		// Draw platforms
 		g.setColor(new Color(36, 36, 36));
-		g.fillRect(75, 630, 350, 25); // Platform 1
-		g.fillRect(600, 475, 350, 25); // Platform 2
+		g.fillRect(470, 800, 1000, 25); // Platform middle
+		g.fillRect(0, 600, 450, 25); // Platform left
+		g.fillRect(1500, 600, 450, 25); // Platform right
 
 		// Ending platform
 		g.setColor(new Color(204, 119, 34));
 		g.fillRect(200, 325, 200, 25);
+		g.fillRect(700, 425, 500, 25);
 
 		// Decorations
 		// Level banner
