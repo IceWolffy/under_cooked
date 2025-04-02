@@ -2,6 +2,8 @@
 
 import javax.swing.JPanel;
 import java.awt.*;
+
+import Constants.Constants;
 import Entity.Player;
 import Game.KeyHandler;
 
@@ -24,7 +26,7 @@ public class Level1 extends JPanel{
 
         // Draw the ground
         g.setColor(new Color(128, 128, 128)); // Brown color for the ground
-        g.fillRect(0, 1000, Constants.SCREEN_SIZE.width, 100); // Draw the ground at the bottom of the panel
+        g.fillRect(0, 1000, constants.SCREEN_SIZE.width, 100); // Draw the ground at the bottom of the panel
 
         //Draw platforms
         g.setColor(new Color(36,36,36));
