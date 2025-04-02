@@ -3,27 +3,26 @@ package Entity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
+import Constants.Constants;
 import Game.KeyHandler;
+import Constants.Constants;
 
 public class Player extends Entity {
     private KeyHandler keyH; // Store key handler
-    
-    // Physics variables
     private boolean isJumping = false;
     private int velocityY = 0;
-    private final int gravity = 1;
-    private final int jumpForce = -20;
-    private final int groundLevel = 800 - 150; // Bottom of screen - player height
+    private final int gravity = Constants.gravity;
+    private final int jumpForce = Constants.jumpForce;
+    private final int groundLevel = Constants.groundLevel; 
 
     public Player(KeyHandler keyH) {
         this.keyH = keyH; // Assign key handler
         this.x = 100;  // Starting position
         this.y = 700;  // Start above the ground
-        this.speed = 6; // Movement speed
+        this.speed = 5;
         this.direction = "right";
+        
         
         getPlayer1Image();
     }
@@ -67,7 +66,7 @@ public class Player extends Entity {
         y += velocityY;
         
         if (isJumping) {
-            velocityY += gravity;
+        	velocityY += gravity;
         }
         //Collision for ground level
         if (y >= groundLevel) {  
@@ -75,6 +74,9 @@ public class Player extends Entity {
             isJumping = false; // Reset jump state
             velocityY = 0; // Stop downward velocity
         }
+        if (isJumping) {
+            velocityY += gravity;
+        }    
     }
 
     public void draw(Graphics g) {
