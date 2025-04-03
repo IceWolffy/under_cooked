@@ -70,12 +70,7 @@ public class Player extends Entity {
             y = groundLevel; // Stop falling at the ground level
             isJumping = false; // Reset jump state
             velocityY = 0; // Stop downward velocity
-        }
-        
-        // This is the code that makes player 1 jump shorter
-        if (isJumping) {
-            velocityY += gravity;
-        }    
+        }  
     }*/
     public void update() {
 
