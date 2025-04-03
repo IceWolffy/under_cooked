@@ -41,7 +41,7 @@ public class Player2 extends Entity {
         }
     }
 
-    public void update() {
+    /*public void update() {                        //old update fonction with no collision
         // Handle horizontal movement
         if (keyH2.leftPressed) {
             direction = "left";
@@ -71,7 +71,56 @@ public class Player2 extends Entity {
             isJumping = false; // Reset jump state
             velocityY = 0; // Stop downward velocity
         }
+    } */
+    public void update() {
+        // horizontal movement
+        if (keyH2.leftPressed) {
+            direction = "left";
+            x -= speed;
+        }
+    
+        if (keyH2.rightPressed) {
+            direction = "right";
+            x += speed;
+        }
+    
+        // jumping
+        if (keyH2.jumpPressed && !isJumping) {
+            isJumping = true;
+            velocityY = jumpForce;
+        }
+    
+        // gravity
+        y += velocityY;
+        if (isJumping) {
+            velocityY += gravity;
+        }
+    
+        // Collision for ground level
+        if (y >= groundLevel) {
+            y = groundLevel;
+            isJumping = false;
+            velocityY = 0;
+        }
+    
+        // Platform collision check
+        Rectangle platform1 = new Rectangle(470, 800, 1000, 25);
+        Rectangle platform2 = new Rectangle(0, 600, 450, 25);
+        Rectangle platform3 = new Rectangle(1500, 600, 450, 25);
+    
+        // Player2's feet
+        Rectangle feet = new Rectangle(x + 50, y + 256, 156, 5);
+    
+        if (feet.intersects(platform1) || feet.intersects(platform2) || feet.intersects(platform3)) {
+            isJumping = false;
+            velocityY = 0;
+    
+            if (feet.intersects(platform1)) y = platform1.y - 256;
+            if (feet.intersects(platform2)) y = platform2.y - 256;
+            if (feet.intersects(platform3)) y = platform3.y - 256;
+        }
     }
+    
 
     public void draw(Graphics g) {
         BufferedImage image = null;
