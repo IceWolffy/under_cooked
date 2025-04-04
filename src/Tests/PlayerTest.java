@@ -30,5 +30,13 @@ class PlayerTest {
         player.update();
         assertTrue(player.getX() < initialX, "Player should move left");
     }
+	@Test
+	void testJump() {
+        int initialY = player.getY();
+        keyH.jumpPressed = true;
+        player.update();
+        assertTrue(player.isJumping(), "Player should be in jumping state");
+        assertTrue(player.getVelocityY() < 0, "Player should have negative velocity when jumping");
+    }
 
 }
