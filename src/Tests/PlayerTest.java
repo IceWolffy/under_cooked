@@ -23,5 +23,12 @@ class PlayerTest {
 		player.update();
 		assertTrue(player.getX() > initialX, "Player should move right");
 	}
+	@Test
+	void testMoveLeft() {
+        int initialX = player.getX();
+        keyH.leftPressed = true;
+        player.update();
+        assertTrue(player.getX() < initialX, "Player should move left");
+    }
 
 }
