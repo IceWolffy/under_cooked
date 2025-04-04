@@ -74,7 +74,7 @@ public class Level1 extends JPanel {
 		g.drawString("Level 1", 70, 87); // Dispalys the level name
 
 		player.draw(g); // Draws player
-		 player2.draw(g);
+		player2.draw(g);
 	}
 
 }

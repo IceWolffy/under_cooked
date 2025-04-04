@@ -25,6 +25,30 @@ public class Player2 extends Entity {
         
         getPlayer2Image();
     }
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int newY) {
+        this.y = newY;
+    }
+
+    public boolean isJumping() {
+        return isJumping;
+    }
+
+    public int getVelocityY() {
+        return velocityY;
+    }
+
+    public int getGroundLevel() {
+        return groundLevel;
+    }
+
 
     public void getPlayer2Image() {
         try {
