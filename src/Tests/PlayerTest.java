@@ -1,19 +1,27 @@
 package Tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import Entity.Player;
+import Game.KeyHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
+	private Player player; // Variables for testing
+	private KeyHandler keyH;
 
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() throws Exception { // Before each test set up a keyHandler and a new player
+		keyH = new KeyHandler(true);
+		player = new Player(keyH);
 	}
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testMoveRight() {
+		int initialX = player.getX();
+		keyH.rightPressed = true;
+		player.update();
+		assertTrue(player.getX() > initialX, "Player should move right");
 	}
 
 }
