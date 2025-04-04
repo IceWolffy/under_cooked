@@ -25,6 +25,7 @@ public class Player2 extends Entity {
         
         getPlayer2Image();
     }
+    //Getters and setters
     public int getX() {
         return x;
     }

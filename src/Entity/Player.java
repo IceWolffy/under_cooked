@@ -25,6 +25,7 @@ public class Player extends Entity {
         
         getPlayer1Image();
     }
+    //Getters and Setters
     public int getX() {
         return x;
     }
@@ -50,7 +51,7 @@ public class Player extends Entity {
     }
 
     
-    public void getPlayer1Image() {
+    public void getPlayer1Image() { // Give player 1 their sprites (Work in Progress on the animations)
     	try {
             walk01 = ImageIO.read(getClass().getResourceAsStream("/player1/walk01.png"));
     		walk02 = ImageIO.read(getClass().getResourceAsStream("/player1/walk02.png"));
@@ -147,6 +148,7 @@ public class Player extends Entity {
     }
     
 
+    //Draws the player img
     public void draw(Graphics g) {
     	BufferedImage image = null;
         switch(direction) {

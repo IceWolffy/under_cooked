@@ -17,21 +17,21 @@ class PlayerTest {
 	}
 
 	@Test
-	void testMoveRight() {
+	void testMoveRight() { //Test that checks if the character can move right
 		int initialX = player.getX();
 		keyH.rightPressed = true;
 		player.update();
 		assertTrue(player.getX() > initialX, "Player should move right");
 	}
 	@Test
-	void testMoveLeft() {
+	void testMoveLeft() { //Test that checks if the character can move left
         int initialX = player.getX();
         keyH.leftPressed = true;
         player.update();
         assertTrue(player.getX() < initialX, "Player should move left");
     }
 	@Test
-	void testJump() {
+	void testJump() { //Test that checks if the character can jump
         int initialY = player.getY();
         keyH.jumpPressed = true;
         player.update();
