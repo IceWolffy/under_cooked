@@ -12,29 +12,18 @@ public class GameManager {
     public GameManager(){
         frame = new JFrame("UnderCooked");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setUndecorated(true);
+        frame.setResizable(false);
 
         startLevel1();
-        enterFullscreen();
+
     }
 
     public void startLevel1(){
         Level1 level1 = new Level1();
-        frame.getContentPane().removeAll();
-        frame.add(level1);
-        frame.revalidate();
-        frame.repaint();
-        frame.requestFocusInWindow();
+        frame.setContentPane(level1);
+        frame.pack();
+        frame.setVisible(true);
 
 }
 
-private void enterFullscreen(){
-    GraphicsDevice gd = frame.getGraphicsConfiguration().getDevice();
-    if (gd.isFullScreenSupported()) {
-       gd.setFullScreenWindow(frame);
-    } else {
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            frame.setVisible(true);
-    }
-}
 }
