@@ -1,6 +1,7 @@
 package Constants;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Constants {
     //Screen size constants
@@ -13,6 +14,12 @@ public class Constants {
     public final static int maxScreenRow = 9; // Height of the screen
     public final static int SCREEN_WIDTH = tileSize * maxScreenCol; // 768 pixels
     public final static int SCREEN_HEIGHT = tileSize * maxScreenRow; // 432 pixels
+
+    //Fullscreen
+    int screenWidth = SCREEN_WIDTH;
+    int screenHeight = SCREEN_HEIGHT;
+    BufferedImage tempScreen;
+    Graphics2D g2;
 
     // Physics variables
     public final static int gravity = 1;
