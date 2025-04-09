@@ -9,153 +9,169 @@ import Game.KeyHandler;
 import java.util.List;
 
 public class Player extends Entity {
-	
-    private KeyHandler keyH; // Store key handler
-    private boolean isJumping = false;
-    private int velocityY = 0;
-    private final int gravity = Constants.gravity;
-    private final int jumpForce = Constants.jumpForce;
-    private final int groundLevel = Constants.groundLevel; 
 
-    public Player(KeyHandler keyH) {
-        this.keyH = keyH; // Assign key handler
-        this.x = 300;  // Starting position
-        this.y = 700;  // Start above the ground
-        this.speed = 5;
-        this.direction = "right";
-        
-        getPlayer1Image();
-    }
-    //Getters and Setters
-    public int getX() {
-        return x;
-    }
 
-    public int getY() {
-        return y;
-    }
+	private KeyHandler keyH; // Store key handler
+	private boolean isJumping = false;
+	private int velocityY = 0;
+	private final int gravity = Constants.gravity;
+	private final int jumpForce = Constants.jumpForce;
+	private final int groundLevel = Constants.groundLevel;
+	private BufferedImage image;
+	private BufferedImage[] idleAnimation;
+	private int aniTick, aniIndex, aniSpeed = 30;
 
-    public void setY(int newY) {
-        this.y = newY;
-    }
+	public Player(KeyHandler keyH) {
+		this.keyH = keyH; // Assign key handler
+		this.x = 300; // Starting position
+		this.y = 700; // Start above the ground
+		this.speed = 5;
+		this.direction = "right";
 
-    public boolean isJumping() {
-        return isJumping;
-    }
+		getPlayer1Image();
+		idleAnimation();
+	}
 
-    public int getVelocityY() {
-        return velocityY;
-    }
+	// Getters and Setters
+	public int getX() {
+		return x;
+	}
 
-    public int getGroundLevel() {
-        return groundLevel;
-    }
+	public int getY() {
+		return y;
+	}
 
-    
-    public void getPlayer1Image() { // Give player 1 their sprites (Work in Progress on the animations)
-    	try {
-            walk01 = ImageIO.read(getClass().getResourceAsStream("/player1/walk01.png"));
-    		walk02 = ImageIO.read(getClass().getResourceAsStream("/player1/walk02.png"));
-    		walk03 = ImageIO.read(getClass().getResourceAsStream("/player1/walk03.png"));
-    		walk04 = ImageIO.read(getClass().getResourceAsStream("/player1/walk04.png"));
-    		walk05 = ImageIO.read(getClass().getResourceAsStream("/player1/walk05.png"));
-    		walk06 = ImageIO.read(getClass().getResourceAsStream("/player1/walk06.png"));
-    		walk07 = ImageIO.read(getClass().getResourceAsStream("/player1/walk07.png"));
-    		walk08 = ImageIO.read(getClass().getResourceAsStream("/player1/walk08.png"));
-    	}catch(IOException e){
-    		e.printStackTrace();
-    	}
-    }
+	public void setY(int newY) {
+		this.y = newY;
+	}
 
-    /*public void update() {                     //old update fonction
-    	
-    	// Handle horizontal movement
-        if (keyH.leftPressed) {
-        	direction = "left";
-            x -= speed;
-        }
-        if (keyH.rightPressed) {
-        	direction = "right";
-            x += speed;
-        }
-        
-        // Handle jumping
-        if (keyH.jumpPressed && !isJumping) {
-            isJumping = true;
-            velocityY = jumpForce;
-        }
-        
-        // Apply gravity
-        y += velocityY;
-        if (isJumping) {
-        	velocityY += gravity;
-        }
-        
-        //Collision for ground level
-        if (y >= groundLevel) {  
-            y = groundLevel; // Stop falling at the ground level
-            isJumping = false; // Reset jump state
-            velocityY = 0; // Stop downward velocity
-        }  
-    }*/
-    public void update(List<Rectangle> platforms) {
+	public boolean isJumping() {
+		return isJumping;
+	}
 
-        // horizontal movement
-        if (keyH.leftPressed) {
-            direction = "left";
-            x -= speed;
-        }
-        if (keyH.rightPressed) {
-            direction = "right";
-            x += speed;
-        }
-    
-        // jumping
-        if (keyH.jumpPressed && !isJumping) {
-            isJumping = true;
-            velocityY = jumpForce;
-        }
-    
-        // gravity
-        y += velocityY;
-        if (isJumping) {
-            velocityY += gravity;
-        }
-    
-        // Collision for ground level
-        if (y >= groundLevel) {
-            y = groundLevel;
-            isJumping = false;
-            velocityY = 0;
-        }
+	public int getVelocityY() {
+		return velocityY;
+	}
 
-        Rectangle feet = new Rectangle(x+50, y+256, 156,5);
-    
-        // Platform collision check
-        for (Rectangle platform : platforms) {
-            if (feet.intersects(platform)) {
-                // Collision detected with the platform
-                y = platform.y - 156; // Position player on top of the platform
-                isJumping = false; // Reset jump state
-                velocityY = 0; // Stop downward velocity
-                break; // Exit loop after collision is handled
-            }
-        }
-    
-    }
-    
+	public int getGroundLevel() {
+		return groundLevel;
+	}
 
-    //Draws the player img
-    public void draw(Graphics g) {
-    	BufferedImage image = null;
-        switch(direction) {
-        case "right":
-        	image = walk01;
-        	break;
-        case "left":
-        	image = walk01;
-        	break;
-        }
-        g.drawImage(image, x, y, 256, 256, null);
-    }
+	public void getPlayer1Image() { // Give player 1 their sprites (Work in Progress on the animations)
+		try {
+			walk = ImageIO.read(getClass().getResourceAsStream("/player1/walk.png"));
+			idle = ImageIO.read(getClass().getResourceAsStream("/player1/idle.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void idleAnimation() {
+		idleAnimation = new BufferedImage[3];
+		for (int i = 0; i < idleAnimation.length; i++) {
+			idleAnimation[i] = idle.getSubimage(i * 80, 0, 80, 80);
+		}
+	}
+
+	/*
+	 * public void update() { //old update fonction
+	 * 
+	 * // Handle horizontal movement if (keyH.leftPressed) { direction = "left"; x
+	 * -= speed; } if (keyH.rightPressed) { direction = "right"; x += speed; }
+	 * 
+	 * // Handle jumping if (keyH.jumpPressed && !isJumping) { isJumping = true;
+	 * velocityY = jumpForce; }
+	 * 
+	 * // Apply gravity y += velocityY; if (isJumping) { velocityY += gravity; }
+	 * 
+	 * //Collision for ground level if (y >= groundLevel) { y = groundLevel; // Stop
+	 * falling at the ground level isJumping = false; // Reset jump state velocityY
+	 * = 0; // Stop downward velocity } }
+	 */
+	public void update() {
+
+		// horizontal movement
+		if (keyH.leftPressed) {
+			direction = "left";
+			x -= speed;
+		}
+		if (keyH.rightPressed) {
+			direction = "right";
+			x += speed;
+		}
+
+		// jumping
+		if (keyH.jumpPressed && !isJumping) {
+			isJumping = true;
+			velocityY = jumpForce;
+		}
+
+		// gravity
+		y += velocityY;
+		if (isJumping) {
+			velocityY += gravity;
+		}
+
+		// Collision for ground level
+		if (y >= groundLevel) {
+			y = groundLevel;
+			isJumping = false;
+			velocityY = 0;
+		}
+
+		// Platform collision check
+		Rectangle platform1 = new Rectangle(470, 800, 1000, 25);
+		Rectangle platform2 = new Rectangle(0, 600, 450, 25);
+		Rectangle platform3 = new Rectangle(1500, 600, 450, 25);
+
+		// Player feet rectangle
+		Rectangle feet = new Rectangle(x + 50, y + 256, 156, 5);
+
+		if (feet.intersects(platform1) || feet.intersects(platform2) || feet.intersects(platform3)) {
+			isJumping = false;
+			velocityY = 0;
+
+			if (feet.intersects(platform1))
+				y = platform1.y - 256;
+			if (feet.intersects(platform2))
+				y = platform2.y - 256;
+			if (feet.intersects(platform3))
+				y = platform3.y - 256;
+		}
+
+	}
+
+	private void updateAnimationTick() {
+		aniTick++;
+		if (aniTick >= aniSpeed) {
+			aniTick = 0;
+			aniIndex++;
+			if (aniIndex >= idleAnimation.length) {
+				aniIndex = 0;
+			}
+		}
+
+	}
+
+	// Draws the player img
+	public void draw(Graphics g) {
+		switch (direction) {
+		case "right":
+			image = walk;
+			break;
+		case "left":
+			image = walk;
+			break;
+		}
+		updateAnimationTick();
+
+		if (keyH.leftPressed || keyH.rightPressed) {
+			// Optional: Draw walk frame instead
+			g.drawImage(walk.getSubimage(0, 0, 80, 80), x, y, 256, 256, null); // Temporary static walk frame
+		} else {
+			// Idle animation
+			g.drawImage(idleAnimation[aniIndex], x, y, 256, 256, null);
+		}
+
+	}
 }

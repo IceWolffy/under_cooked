@@ -71,7 +71,7 @@ public class Level1 extends JPanel {
 
 		g.setColor(new Color(0, 0, 0)); // Set the color for the text
 		g.setFont(new Font("Arial", Font.PLAIN, 40)); // Set the font for the level name
-		g.drawString("Level 1", 70, 87); // Dispalys the level name
+		g.drawString("Level 1", 70, 87); // Displays the level name
 
 		player.draw(g); // Draws player
 		player2.draw(g);

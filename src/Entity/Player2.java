@@ -53,14 +53,7 @@ public class Player2 extends Entity {
 
     public void getPlayer2Image() {
         try {
-            walk01 = ImageIO.read(getClass().getResourceAsStream("/player1/walk01.png"));
-            walk02 = ImageIO.read(getClass().getResourceAsStream("/player1/walk02.png"));
-            walk03 = ImageIO.read(getClass().getResourceAsStream("/player1/walk03.png"));
-            walk04 = ImageIO.read(getClass().getResourceAsStream("/player1/walk04.png"));
-            walk05 = ImageIO.read(getClass().getResourceAsStream("/player1/walk05.png"));
-            walk06 = ImageIO.read(getClass().getResourceAsStream("/player1/walk06.png"));
-            walk07 = ImageIO.read(getClass().getResourceAsStream("/player1/walk07.png"));
-            walk08 = ImageIO.read(getClass().getResourceAsStream("/player1/walk08.png"));
+            walk = ImageIO.read(getClass().getResourceAsStream("/player1/walk.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -152,10 +145,10 @@ public class Player2 extends Entity {
 
         switch (direction) {
             case "right":
-                image = walk01; // Use appropriate sprite for walking right
+                image = walk; // Use appropriate sprite for walking right
                 break;
             case "left":
-                image = walk01; // Use appropriate sprite for walking left
+                image = walk; // Use appropriate sprite for walking left
                 break;
         }
 
