@@ -3,5 +3,7 @@
         "res",
         "src"
     ],
-    "java.project.referencedLibraries": []
+    "java.project.referencedLibraries": [
+        "test-lib\\**\\*.jar"
+    ]
 }
