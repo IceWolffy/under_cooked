@@ -5,11 +5,11 @@ import java.awt.*;
 
 import Constants.Constants;
 import Entity.Player;
-import Entity.Player2;
 
+@SuppressWarnings("serial")
 public class Level1 extends JPanel {
 	private Player player;
-	private Player2 player2;
+	private Player player2;
 	
 
 	public Level1() {
@@ -20,8 +20,8 @@ public class Level1 extends JPanel {
 		KeyHandler keyH = new KeyHandler(true);   // Player 1 uses WASD controls
 		KeyHandler keyH2 = new KeyHandler(false); // Player 2 uses Arrow controls
 
-		player = new Player(keyH);
-		player2 = new Player2(keyH2);
+		player = new Player(keyH, 1);
+		player2 = new Player(keyH2, 2);
 		
 		addKeyListener(keyH);
 		addKeyListener(keyH2);
@@ -32,7 +32,7 @@ public class Level1 extends JPanel {
 		Thread gameThread = new Thread(() -> {
 			while (true) {
 				player.update(); // Move the player
-				player2.update(); // Update Player 2
+				player2.update(); // Move the player 2
 				repaint(); // Redraw the screen
 				try {
 					Thread.sleep(16); // ~60 FPS
