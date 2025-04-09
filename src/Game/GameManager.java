@@ -9,20 +9,19 @@ public class GameManager {
     
 
     public GameManager(){
-        frame = new JFrame("UnderCooked");
+        frame = new JFrame("UnderCooked"); // Initialize the frame FIRST
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-
-        startLevel1();
-
-    }
-
-    public void startLevel1(){
+        
+        // Initialize Level1 AFTER frame is created
         Level1 level1 = new Level1();
         frame.setContentPane(level1);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-}
+    }
+
+    
 
 }
