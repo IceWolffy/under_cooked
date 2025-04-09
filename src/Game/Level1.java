@@ -6,7 +6,6 @@ import java.awt.*;
 import Constants.Constants;
 import Entity.Player;
 import Entity.Player2;
-import Game.KeyHandler;
 
 public class Level1 extends JPanel {
 	private Player player;
@@ -14,7 +13,7 @@ public class Level1 extends JPanel {
 	
 
 	public Level1() {
-		setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)); // Set the size of
+		setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)); // Set the size of the panel to the screen size
 																									// the panel
 		setBackground(new Color(252, 244, 163));
 
@@ -42,7 +41,7 @@ public class Level1 extends JPanel {
 				}
 			}
 		});
-		gameThread.start();
+		gameThread.start();	
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class Level1 extends JPanel {
 
 		// Draw the ground
 		g.setColor(new Color(128, 128, 128)); // Brown color for the ground
-		g.fillRect(0, 920, Constants.GROUND_WIDTH, 250); // Draw the ground at the bottom
+		g.fillRect(0, 920, Constants.SCREEN_WIDTH, 250); // Draw the ground at the bottom
 																						// of the panel
 
 		// Draw platforms
