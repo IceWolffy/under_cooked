@@ -6,7 +6,6 @@ import java.awt.*;
 import Constants.Constants;
 import Entity.Player;
 import Entity.Player2;
-import Game.KeyHandler;
 
 public class Level1 extends JPanel {
 	private Player player;

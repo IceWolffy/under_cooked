@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import Constants.Constants;
 import Game.KeyHandler;
-import java.util.List;
 
 public class Player extends Entity {
 
