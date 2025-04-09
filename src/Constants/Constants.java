@@ -11,6 +11,8 @@ public class Constants {
     //screen size resolution
     public final static int maxScreenCol = 16; // Width of the screen
     public final static int maxScreenRow = 9; // Height of the screen
+    public final static int SCREEN_WIDTH = tileSize * maxScreenCol; // 768 pixels
+    public final static int SCREEN_HEIGHT = tileSize * maxScreenRow; // 432 pixels
 
     // Physics variables
     public final static int gravity = 1;
