@@ -14,7 +14,7 @@ public class Level1 extends JPanel {
 	
 
 	public Level1() {
-		setPreferredSize(new Dimension(Constants.SCREEN_SIZE.width, Constants.SCREEN_SIZE.height)); // Set the size of
+		setPreferredSize(new Dimension(Constants.SCREEN_SIZE.width, Constants.SCREEN_HEIGHT)); // Set the size of
 																									// the panel
 		setBackground(new Color(252, 244, 163));
 
@@ -51,7 +51,7 @@ public class Level1 extends JPanel {
 
 		// Draw the ground
 		g.setColor(new Color(128, 128, 128)); // Brown color for the ground
-		g.fillRect(0, 980, Constants.SCREEN_SIZE.width, Constants.SCREEN_SIZE.height); // Draw the ground at the bottom
+		g.fillRect(0, 980, Constants.SCREEN_SIZE.width, Constants.GROUND_HEIGHT); // Draw the ground at the bottom
 																						// of the panel
 
 		// Draw platforms
