@@ -20,16 +20,26 @@ public class Player extends Entity {
 	private BufferedImage[] idleAnimation;
 	private int aniTick, aniIndex, aniSpeed = 30;
 
-	public Player(KeyHandler keyH) {
-		this.keyH = keyH; // Assign key handler
-		this.x = 300; // Starting position
-		this.y = 700; // Start above the ground
-		this.speed = 5;
-		this.direction = "right";
+	// Differentiates between Player 1 and Player 2
+    private int playerId;
 
-		getPlayer1Image();
-		idleAnimation();
-	}
+    public Player(KeyHandler keyH, int playerId) {
+        this.keyH = keyH; // Assign key handler
+        this.playerId = playerId; // Assign player ID
+
+        // Set starting position based on player ID
+        if (playerId == 1) {
+            this.x = 300; // Starting position for Player 1
+        } else {
+            this.x = 200; // Starting position for Player 2
+        }
+        this.y = 700; // Start above the ground
+        this.speed = 5;
+        this.direction = "right";
+
+        loadPlayerImages();
+        idleAnimation();
+    }
 
 	// Getters and Setters
 	public int getX() {
@@ -56,14 +66,14 @@ public class Player extends Entity {
 		return groundLevel;
 	}
 
-	public void getPlayer1Image() { // Give player 1 their sprites (Work in Progress on the animations)
-		try {
-			walk = ImageIO.read(getClass().getResourceAsStream("/player1/walk.png"));
-			idle = ImageIO.read(getClass().getResourceAsStream("/player1/idle.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	public void loadPlayerImages() {
+        try {
+            walk = ImageIO.read(getClass().getResourceAsStream("/player1/walk.png"));
+            idle = ImageIO.read(getClass().getResourceAsStream("/player1/idle.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	private void idleAnimation() {
 		idleAnimation = new BufferedImage[3];
