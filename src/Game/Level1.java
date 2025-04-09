@@ -51,7 +51,7 @@ public class Level1 extends JPanel {
 
 		// Draw the ground
 		g.setColor(new Color(128, 128, 128)); // Brown color for the ground
-		g.fillRect(0, 980, Constants.GROUND_WIDTH, Constants.GROUND_HEIGHT); // Draw the ground at the bottom
+		g.fillRect(0, 920, Constants.GROUND_WIDTH, 250); // Draw the ground at the bottom
 																						// of the panel
 
 		// Draw platforms
