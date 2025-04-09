@@ -11,7 +11,7 @@ public class Constants {
 
     // Physics variables
     public final static int gravity = 1;
-    public final static int jumpForce = -20;
+    public final static int jumpForce = -18; // Jump force (negative because y-coordinates go down)
     public final static int groundLevel = 800 - 32; // Bottom of screen - player height
 
     //Key codes

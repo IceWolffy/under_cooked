@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import Constants.Constants;
 import Game.KeyHandler;
+import java.util.List;
 
 public class Player extends Entity {
 	
@@ -97,7 +98,7 @@ public class Player extends Entity {
             velocityY = 0; // Stop downward velocity
         }  
     }*/
-    public void update() {
+    public void update(List<Rectangle> platforms) {
 
         // horizontal movement
         if (keyH.leftPressed) {
@@ -127,22 +128,18 @@ public class Player extends Entity {
             isJumping = false;
             velocityY = 0;
         }
+
+        Rectangle feet = new Rectangle(x+50, y+256, 156,5);
     
         // Platform collision check
-        Rectangle platform1 = new Rectangle(470, 800, 1000, 25);
-        Rectangle platform2 = new Rectangle(0, 600, 450, 25);
-        Rectangle platform3 = new Rectangle(1500, 600, 450, 25);
-    
-        // Player feet rectangle
-        Rectangle feet = new Rectangle(x + 50, y + 256, 156, 5);
-    
-        if (feet.intersects(platform1) || feet.intersects(platform2) || feet.intersects(platform3)) {
-            isJumping = false;
-            velocityY = 0;
-    
-            if (feet.intersects(platform1)) y = platform1.y - 256;
-            if (feet.intersects(platform2)) y = platform2.y - 256;
-            if (feet.intersects(platform3)) y = platform3.y - 256;
+        for (Rectangle platform : platforms) {
+            if (feet.intersects(platform)) {
+                // Collision detected with the platform
+                y = platform.y - 156; // Position player on top of the platform
+                isJumping = false; // Reset jump state
+                velocityY = 0; // Stop downward velocity
+                break; // Exit loop after collision is handled
+            }
         }
     
     }
