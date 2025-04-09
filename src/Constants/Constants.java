@@ -5,21 +5,10 @@ import java.awt.image.BufferedImage;
 
 public class Constants {
     //Screen size constants
-    final static int originalTileSize = 16; // 16x16 tile size
-    final static int scale = 3; // Scale factor for the game
-    public final static int tileSize = originalTileSize * scale; // 48x48 tile size
-    
-    //screen size resolution
-    public final static int maxScreenCol = 16; // Width of the screen
-    public final static int maxScreenRow = 9; // Height of the screen
-    public final static int SCREEN_WIDTH = tileSize * maxScreenCol; // 768 pixels
-    public final static int SCREEN_HEIGHT = tileSize * maxScreenRow; // 432 pixels
-
-    //Fullscreen
-    int screenWidth = SCREEN_WIDTH;
-    int screenHeight = SCREEN_HEIGHT;
-    BufferedImage tempScreen;
-    Graphics2D g2;
+    public final static int SCREEN_WIDTH=1920; // Width of the screen
+    public final static int SCREEN_HEIGHT = 800; // Height of the screen
+    public final static int GROUND_HEIGHT = 100; // Height of the ground
+    public final static int GROUND_WIDTH = SCREEN_WIDTH; // Width of the ground
 
     // Physics variables
     public final static int gravity = 1;
