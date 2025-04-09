@@ -4,6 +4,9 @@ import java.awt.*;
 
 public class Constants {
     //Screen size constants
+    final static int originalTileSize = 16; // 16x16 tile size
+    final static int scale = 3; // Scale factor for the game
+    public final static int tileSize = originalTileSize * scale; // 48x48 tile size
     
     //screen size resolution
     public final static int maxScreenCol = 16; // Width of the screen
