@@ -13,7 +13,7 @@ class PlayerTest {
 	@BeforeEach
 	void setUp() throws Exception { // Before each test set up a keyHandler and a new player
 		keyH = new KeyHandler(true);
-		player = new Player(keyH);
+		player = new Player(keyH, 1);
 	}
 
 	@Test
