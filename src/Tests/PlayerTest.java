@@ -25,14 +25,14 @@ class PlayerTest {
 		int initialX = player.getX();
 		keyH.rightPressed = true;
 		player.update();
-		assertTrue(player.getX() > initialX, "Player should move right");
+		assertTrue(player.getX() > initialX, "Player 1 should move right");
 	}
 	@Test
 	void testPlayerMoveLeft() { //Test that checks if the character can move left
         int initialX = player.getX();
         keyH.leftPressed = true;
         player.update();
-        assertTrue(player.getX() < initialX, "Player should move left");
+        assertTrue(player.getX() < initialX, "Player 1 should move left");
     }
 	@Test
 	void testPlayerJump() { //Test that checks if the character can jump
@@ -40,7 +40,7 @@ class PlayerTest {
         keyH.jumpPressed = true;
         player.update();
         assertTrue(player.isJumping(), "Player should be in jumping state");
-        assertTrue(player.getVelocityY() < 0, "Player should have negative velocity when jumping");
+        assertTrue(player.getVelocityY() < 0, "Player 1 should have negative velocity when jumping");
     }
 	
 	@Test
@@ -64,6 +64,15 @@ class PlayerTest {
         player2.update();
         assertTrue(player2.isJumping(), "Player 2 should be in jumping state");
         assertTrue(player2.getVelocityY() < 0, "Player 2 should have negative velocity when jumping");
+    }
+	
+	// Test starting positions
+    @Test
+    void testPlayerStartingPositions() {
+        assertEquals(300, player.getX(), "Player 1 should start at x=300");
+        assertEquals(200, player2.getX(), "Player 2 should start at x=200");
+        assertEquals(700, player.getY(), "Both players should start at y=700");
+        assertEquals(700, player2.getY(), "Both players should start at y=700");
     }
 
 }
