@@ -20,16 +20,26 @@ public class Player extends Entity {
 	private BufferedImage[] idleAnimation;
 	private int aniTick, aniIndex, aniSpeed = 30;
 
-	public Player(KeyHandler keyH) {
-		this.keyH = keyH; // Assign key handler
-		this.x = 300; // Starting position
-		this.y = 700; // Start above the ground
-		this.speed = 5;
-		this.direction = "right";
+	// Differentiates between Player 1 and Player 2
+    private int playerId;
 
-		getPlayer1Image();
-		idleAnimation();
-	}
+    public Player(KeyHandler keyH, int playerId) {
+        this.keyH = keyH; // Assign key handler
+        this.playerId = playerId; // Assign player ID
+
+        // Set starting position based on player ID
+        if (playerId == 1) {
+            this.x = 300; // Starting position for Player 1
+        } else {
+            this.x = 200; // Starting position for Player 2
+        }
+        this.y = 700; // Start above the ground
+        this.speed = 5;
+        this.direction = "right";
+
+        loadPlayerImages();
+        idleAnimation();
+    }
 
 	// Getters and Setters
 	public int getX() {
@@ -56,14 +66,14 @@ public class Player extends Entity {
 		return groundLevel;
 	}
 
-	public void getPlayer1Image() { // Give player 1 their sprites (Work in Progress on the animations)
-		try {
-			walk = ImageIO.read(getClass().getResourceAsStream("/player1/walk.png"));
-			idle = ImageIO.read(getClass().getResourceAsStream("/player1/idle.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	public void loadPlayerImages() {
+        try {
+            walk = ImageIO.read(getClass().getResourceAsStream("/player1/walk.png"));
+            idle = ImageIO.read(getClass().getResourceAsStream("/player1/idle.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	private void idleAnimation() {
 		idleAnimation = new BufferedImage[3];
@@ -118,27 +128,29 @@ public class Player extends Entity {
 			velocityY = 0;
 		}
 
-		// Platform collision check
-		Rectangle platform1 = new Rectangle(470, 800, 1000, 25);
-		Rectangle platform2 = new Rectangle(0, 600, 450, 25);
-		Rectangle platform3 = new Rectangle(1500, 600, 450, 25);
-
-		// Player feet rectangle
-		Rectangle feet = new Rectangle(x + 50, y + 256, 156, 5);
-
-		if (feet.intersects(platform1) || feet.intersects(platform2) || feet.intersects(platform3)) {
-			isJumping = false;
-			velocityY = 0;
-
-			if (feet.intersects(platform1))
-				y = platform1.y - 256;
-			if (feet.intersects(platform2))
-				y = platform2.y - 256;
-			if (feet.intersects(platform3))
-				y = platform3.y - 256;
-		}
+		 checkPlatformCollision();
 
 	}
+	
+	private void checkPlatformCollision() {
+        Rectangle platform1 = new Rectangle(470, 800, 1000, 25);
+        Rectangle platform2 = new Rectangle(0, 600, 450, 25);
+        Rectangle platform3 = new Rectangle(1500, 600, 450, 25);
+
+        Rectangle feet = new Rectangle(x + 50, y + 256, 156, 5);
+
+        if (feet.intersects(platform1) || feet.intersects(platform2) || feet.intersects(platform3)) {
+            isJumping = false;
+            velocityY = 0;
+
+            if (feet.intersects(platform1)) 
+            	y = platform1.y - 256;
+            if (feet.intersects(platform2)) 
+            	y = platform2.y - 256;
+            if (feet.intersects(platform3)) 
+            	y = platform3.y - 256;
+        }
+    }
 
 	private void updateAnimationTick() {
 		aniTick++;
