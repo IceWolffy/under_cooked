@@ -25,7 +25,7 @@ public class MainMenu extends JPanel{
 
         //play button
         JButton playButton = new JButton("Play");
-        playButton.setBounds(400, 500, 280, 100); //x, y, width, height
+        playButton.setBounds(435, 370, 200, 80); //x, y, width, height
         playButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
         add(playButton);
 
