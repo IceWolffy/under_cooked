@@ -39,7 +39,7 @@ public class MainMenu extends JPanel{
 
         //exit button
         JButton exitButton = new JButton("Exit");
-        exitButton.setBounds(400, 650, 280, 100); // Set the position and size of the button
+        exitButton.setBounds(435, 470, 200, 80); // Set the position and size of the button
         exitButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
         add(exitButton);
 
