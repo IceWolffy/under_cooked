@@ -18,7 +18,9 @@ public class Player extends Entity {
 	private final int groundLevel = Constants.groundLevel;
 	private BufferedImage image;
 	private BufferedImage[] idleAnimation;
-	private int aniTick, aniIndex, aniSpeed = 30;
+	private BufferedImage[] walkAnimation;
+	private int walkTick, walkIndex, walkSpeed = 5;
+	private int idleTick, idleIndex, idleSpeed = 30;
 
 	// Differentiates between Player 1 and Player 2
     private int playerId;
@@ -39,6 +41,7 @@ public class Player extends Entity {
 
         loadPlayerImages();
         idleAnimation();
+        walkAnimation();
     }
 
 	// Getters and Setters
@@ -79,6 +82,12 @@ public class Player extends Entity {
 		idleAnimation = new BufferedImage[3];
 		for (int i = 0; i < idleAnimation.length; i++) {
 			idleAnimation[i] = idle.getSubimage(i * 80, 0, 80, 80);
+		}
+	}
+	private void walkAnimation() {
+		walkAnimation = new BufferedImage[8];
+		for (int i = 0; i < walkAnimation.length; i++) {
+			walkAnimation[i] = walk.getSubimage(i * 80, 0, 80, 80);
 		}
 	}
 
@@ -153,16 +162,29 @@ public class Player extends Entity {
     }
 
 	private void updateAnimationTick() {
-		aniTick++;
-		if (aniTick >= aniSpeed) {
-			aniTick = 0;
-			aniIndex++;
-			if (aniIndex >= idleAnimation.length) {
-				aniIndex = 0;
-			}
-		}
-
+	    if (keyH.leftPressed || keyH.rightPressed) {
+	        // Walk animation logic
+	        walkTick++;
+	        if (walkTick >= walkSpeed) {
+	            walkTick = 0;
+	            walkIndex++;
+	            if (walkIndex >= walkAnimation.length) {
+	                walkIndex = 0;
+	            }
+	        }
+	    } else {
+	        // Idle animation logic
+	        idleTick++;
+	        if (idleTick >= idleSpeed) {
+	            idleTick = 0;
+	            idleIndex++;
+	            if (idleIndex >= idleAnimation.length) {
+	                idleIndex = 0;
+	            }
+	        }
+	    }
 	}
+
 
 	// Draws the player img
 	public void draw(Graphics g) {
@@ -178,10 +200,10 @@ public class Player extends Entity {
 
 		if (keyH.leftPressed || keyH.rightPressed) {
 			// Optional: Draw walk frame instead
-			g.drawImage(walk.getSubimage(0, 0, 80, 80), x, y, 256, 256, null); // Temporary static walk frame
+			g.drawImage(walkAnimation[walkIndex], x, y, 256, 256, null);
 		} else {
 			// Idle animation
-			g.drawImage(idleAnimation[aniIndex], x, y, 256, 256, null);
+			g.drawImage(idleAnimation[idleIndex], x, y, 256, 256, null);
 		}
 
 	}
