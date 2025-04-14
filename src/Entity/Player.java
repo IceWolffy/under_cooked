@@ -25,7 +25,7 @@ public class Player extends Entity {
 	private int playerId;
 
 	public Player(KeyHandler keyH, int playerId) {
-		super(0, 0, 256, 256);
+		super(0, 0, 33 , 50);
 		
 		this.keyH = keyH; // Assign key handler
 		this.playerId = playerId; // Assign player ID
@@ -39,12 +39,14 @@ public class Player extends Entity {
 		this.startY = 700; // Start above the ground
 		this.speed = 5;
 		this.direction = "right";
+		this.x = this.startX;
+		this.y = this.startY;
 
 		loadPlayerImages();
 		idleAnimation();
 		walkAnimation();
-		updateHitBox();
 	}
+	
 
 	// Getters and Setters
 	public int getStartX() {
@@ -140,29 +142,16 @@ public class Player extends Entity {
 			velocityY = 0;
 		}
 
-		checkPlatformCollision();
+		updateHitbox();
 
 	}
-
-	private void checkPlatformCollision() {
-		Rectangle platform1 = new Rectangle(470, 800, 1000, 25);
-		Rectangle platform2 = new Rectangle(0, 600, 450, 25);
-		Rectangle platform3 = new Rectangle(1500, 600, 450, 25);
-
-		Rectangle feet = new Rectangle(x + 50, y + 256, 156, 5);
-
-		if (feet.intersects(platform1) || feet.intersects(platform2) || feet.intersects(platform3)) {
-			isJumping = false;
-			velocityY = 0;
-
-			if (feet.intersects(platform1))
-				y = platform1.y - 256;
-			if (feet.intersects(platform2))
-				y = platform2.y - 256;
-			if (feet.intersects(platform3))
-				y = platform3.y - 256;
-		}
+	@Override
+	public void updateHitbox() {
+	    // Update the hitbox to follow the player's position and match the sprite size
+	    hitbox.setBounds(x + 110, y + 102, 30, 30);  
 	}
+
+
 
 	private void updateAnimationTick() {
 		if (keyH.leftPressed || keyH.rightPressed) {
@@ -191,8 +180,8 @@ public class Player extends Entity {
 	// Draws the player img
 	public void draw(Graphics g) {
 		
-		updateAnimationTick();
 		drawHitbox(g);
+		updateAnimationTick();
 
 		if (keyH.leftPressed || keyH.rightPressed) {
 

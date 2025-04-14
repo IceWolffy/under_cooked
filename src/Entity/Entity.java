@@ -33,7 +33,7 @@ public class Entity { //Parent class, that can be used for other entities
 	private void initHitbox() {
 		hitbox = new Rectangle(x, y, width, height);
 	}
-	public void updateHitBox() {
+	public void updateHitbox() {
 		hitbox.x = x;
 		hitbox.y = y;
 	}
