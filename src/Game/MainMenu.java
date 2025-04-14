@@ -1,7 +1,10 @@
 package Game;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+
 import Constants.Constants;
 
 public class MainMenu extends JPanel{
@@ -10,7 +13,8 @@ public class MainMenu extends JPanel{
     public MainMenu(){
 
         try {
-            bgImage = new ImageIcon(getClass().getResource("/Images/Background.png")).getImage(); // Load the background image
+            String imagePath = "res" + File.separator + "player1" + File.separator + "undercooked_bg.png";
+            bgImage = ImageIO.read(new File(imagePath));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -21,7 +25,7 @@ public class MainMenu extends JPanel{
 
         //play button
         JButton playButton = new JButton("Play");
-        playButton.setBounds(400, 500, 280, 100); // Set the position and size of the button
+        playButton.setBounds(400, 500, 280, 100); //x, y, width, height
         playButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
         add(playButton);
 
