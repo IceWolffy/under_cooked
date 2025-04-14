@@ -5,8 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-import Constants.Constants;
-
 public class MainMenu extends JPanel{
     private Image bgImage;
 
