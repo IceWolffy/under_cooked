@@ -39,6 +39,9 @@ public class MainMenu extends JPanel{
         exitButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
         add(exitButton);
 
+        exitButton.addActionListener(e -> {
+            System.exit(0); // Exit the application when the button is clicked
+        });
     }
 
     @Override
