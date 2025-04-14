@@ -19,4 +19,12 @@ public class MainMenu extends JPanel{
 		setLayout(null);
 
     }
+
+    @Override
+    protected void paintComponent(Graphics g){
+        super.paintComponent(g);
+        if(bgImage !=null){
+            g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this); // Draw the background image
+        }
+    }
 }
