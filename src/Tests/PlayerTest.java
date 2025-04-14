@@ -85,10 +85,12 @@ class PlayerTest {
 		assertEquals(700, player2.getY(), "Both players should start at y=700");
 	}
 
+	
+	//Tests for Images/Sprites and Image loading
 	@Test
 	void testIdleAnimationSprite() {
-		InputStream stream = getClass().getResourceAsStream("/player1/walk.png");
-		assertNotNull(stream, "walk.png resource stream should not be null");
+		InputStream stream = getClass().getResourceAsStream("/player1/idle.png");
+		assertNotNull(stream, "idle.png resource stream should not be null");
 		try {
 			BufferedImage img = ImageIO.read(stream);
 			assertNotNull(img, "BufferedImage should not be null");
@@ -96,5 +98,6 @@ class PlayerTest {
 			fail("IOException while reading walk.png: " + e.getMessage());
 		}
 	}
+	
 
 }
