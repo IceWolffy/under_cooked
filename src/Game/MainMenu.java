@@ -41,6 +41,7 @@ public class MainMenu extends JPanel{
         JButton exitButton = new JButton("Exit");
         exitButton.setBounds(435, 470, 200, 80); // Set the position and size of the button
         exitButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
+        exitButton.setBackground(new Color(222, 206, 59)); // Set the background color of the button to red
         add(exitButton);
 
         exitButton.addActionListener(e -> {
