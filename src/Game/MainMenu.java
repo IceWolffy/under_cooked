@@ -25,6 +25,16 @@ public class MainMenu extends JPanel{
         playButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
         add(playButton);
 
+        playButton.addActionListener(e -> {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this); // Get the parent frame of the panel
+            frame.remove(this); // Remove the main menu panel from the frame
+            frame.add(new Level1()); // Add the game level panel to the frame
+            frame.revalidate(); // Revalidate the frame to update the layout
+            frame.repaint(); // Repaint the frame to show the new panel
+        });
+
+        
+
 
     }
 
