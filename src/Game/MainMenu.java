@@ -18,6 +18,14 @@ public class MainMenu extends JPanel{
         setPreferredSize(new Dimension(1080,1080)); // Set the size of the panel to the screen size												// the panel
 		setLayout(null);
 
+
+        //play button
+        JButton playButton = new JButton("Play");
+        playButton.setBounds(400, 500, 280, 100); // Set the position and size of the button
+        playButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
+        add(playButton);
+
+
     }
 
     @Override
