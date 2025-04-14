@@ -33,8 +33,11 @@ public class MainMenu extends JPanel{
             frame.repaint(); // Repaint the frame to show the new panel
         });
 
-        
-
+        //exit button
+        JButton exitButton = new JButton("Exit");
+        exitButton.setBounds(400, 650, 280, 100); // Set the position and size of the button
+        exitButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
+        add(exitButton);
 
     }
 
