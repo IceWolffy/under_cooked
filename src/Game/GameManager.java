@@ -13,9 +13,8 @@ public class GameManager {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         
-        // Initialize Level1 AFTER frame is created
-        Level1 level1 = new Level1();
-        frame.setContentPane(level1);
+        // Initialize the main menu panel
+        frame.setContentPane(new MainMenu());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
