@@ -98,6 +98,17 @@ class PlayerTest {
 			fail("IOException while reading walk.png: " + e.getMessage());
 		}
 	}
+	@Test
+	void testWalkAnimationSprite() {
+		InputStream stream = getClass().getResourceAsStream("/player1/walk.png");
+		assertNotNull(stream, "walk.png resource stream should not be null");
+		try {
+			BufferedImage img = ImageIO.read(stream);
+			assertNotNull(img, "BufferedImage should not be null");
+		} catch (IOException e) {
+			fail("IOException while reading walk.png: " + e.getMessage());
+		}
+	}
 	
 
 }
