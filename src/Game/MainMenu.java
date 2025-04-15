@@ -33,6 +33,11 @@ public class MainMenu extends JPanel{
             frame.setContentPane(new Level1()); // Remove the main menu panel from the frame
             frame.revalidate(); // Revalidate the frame to update the layout
             frame.pack(); // Repaint the frame to show the new panel
+            
+            /* This line makes sure that the game panel is listening for 
+             * keyboard inputs after the "Play" button is pressed
+             */
+            frame.getContentPane().requestFocusInWindow(); // Ensures the panel gets keyboard focus
         });
 
         //exit button
