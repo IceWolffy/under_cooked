@@ -1,14 +1,20 @@
 package Entity;
 
 import java.awt.*;
+import utils.HelpMethods;
+import utils.LoadSave;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import Constants.Constants;
+import Game.GameManager;
 import Game.KeyHandler;
+import utils.HelpMethods;
 
 public class Player extends Entity {
 
+	private int[][] lvlData;
 	private KeyHandler keyH; // Store key handler
 	private boolean isJumping = false;
 	private int velocityY = 0;
@@ -23,8 +29,8 @@ public class Player extends Entity {
 	// Differentiates between Player 1 and Player 2
 	private int playerId;
 
-	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY) {
-		super(spawnX, spawnY, 33 , 50);
+	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY, int[][] lvlData) {
+		super(spawnX, spawnY, 33, 50);
 
 		this.keyH = keyH;
 		this.playerId = playerId;
@@ -32,13 +38,13 @@ public class Player extends Entity {
 		this.startY = spawnY;
 		this.x = spawnX;
 		this.y = spawnY;
+		this.lvlData = lvlData;
 
 		// Load images, animations etc.
 		loadPlayerImages();
 		idleAnimation();
 		walkAnimation();
 	}
-	
 
 	// Getters and Setters
 	public int getStartX() {
@@ -60,7 +66,6 @@ public class Player extends Entity {
 	public int getVelocityY() {
 		return velocityY;
 	}
-
 
 	public void loadPlayerImages() {
 		try {
@@ -100,42 +105,56 @@ public class Player extends Entity {
 	 * falling at the ground level isJumping = false; // Reset jump state velocityY
 	 * = 0; // Stop downward velocity } }
 	 */
-	public void update() {
 
-		// horizontal movement
+	// horizontal movement
+	public void update() {
+		
+		// horizontal and vertical speeds
+		float xSpeed = 0;
+
+		// Horizontal movement
 		if (keyH.leftPressed) {
 			direction = "left";
-			x -= speed;
+			xSpeed -= speed;
 		}
 		if (keyH.rightPressed) {
 			direction = "right";
-			x += speed;
+			xSpeed += speed;
 		}
 
-		// jumping
+		// Jump
 		if (keyH.jumpPressed && !isJumping) {
 			isJumping = true;
 			velocityY = jumpForce;
 		}
 
-		// gravity
-		y += velocityY;
-		if (isJumping) {
-			velocityY += gravity;
+		// Apply gravity
+		velocityY += gravity;
+
+		float ySpeed = velocityY;
+
+		// Try moving
+		if (HelpMethods.canMoveHere((int) (x + xSpeed), (int) (y + ySpeed), width, height, lvlData)) {
+			x += xSpeed;
+			y += ySpeed;
+		} else {
+			// If can't move vertically, assume hitting ground or ceiling
+			if (velocityY > 0) {
+				isJumping = false;
+			}
+			velocityY = 0;
 		}
 
-
-
 		updateHitbox();
+	
 
 	}
+
 	@Override
 	public void updateHitbox() {
-	    // Update the hitbox to follow the player's position and match the sprite size
-	    hitbox.setBounds(x + 110, y + 102, 30, 30);  
+		// Update the hitbox to follow the player's position and match the sprite size
+		hitbox.setBounds(x, y, 33, 50);
 	}
-
-
 
 	private void updateAnimationTick() {
 		if (keyH.leftPressed || keyH.rightPressed) {
@@ -163,17 +182,17 @@ public class Player extends Entity {
 
 	// Draws the player img
 	public void draw(Graphics g) {
-		
+
 		drawHitbox(g);
 		updateAnimationTick();
 
 		if (keyH.leftPressed || keyH.rightPressed) {
 
-			g.drawImage(walkAnimation[walkIndex], x - 110, y - 105, 256, 256, null);
+			g.drawImage(walkAnimation[walkIndex], x , y , 64, 64, null);
 
 		} else {
 			// Idle animation
-			g.drawImage(idleAnimation[idleIndex], x - 110, y - 105, 256, 256, null);
+			g.drawImage(idleAnimation[idleIndex], x , y, 64, 64, null);
 		}
 
 	}

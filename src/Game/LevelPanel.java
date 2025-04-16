@@ -12,6 +12,7 @@ public class LevelPanel extends JPanel {
     private LevelHandler levelHandler;
     private Player player;
 	private Player player2;
+	
     
 
     public LevelPanel() {
@@ -19,8 +20,8 @@ public class LevelPanel extends JPanel {
     	KeyHandler keyH = new KeyHandler(true);   // Player 1 uses WASD controls
 		KeyHandler keyH2 = new KeyHandler(false); // Player 2 uses Arrow controls
 
-		player = new Player(keyH, 1, LoadSave.player1X, LoadSave.player1Y);
-		player2 = new Player(keyH2, 2, LoadSave.player2X, LoadSave.player2Y);
+		player = new Player(keyH, 1, LoadSave.player1X, LoadSave.player1Y, LoadSave.getLevelData());
+		player2 = new Player(keyH2, 2, LoadSave.player2X, LoadSave.player2Y, LoadSave.getLevelData());
 		
 		addKeyListener(keyH);
 		addKeyListener(keyH2);
@@ -34,6 +35,8 @@ public class LevelPanel extends JPanel {
         Thread gameThread = new Thread(() -> {
             while (true) {
                 levelHandler.update(); // If needed later
+                player.update();
+                player2.update();
                 repaint();
                 try {
                     Thread.sleep(16); // ~60 FPS

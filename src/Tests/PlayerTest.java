@@ -24,8 +24,8 @@ class PlayerTest {
 	void setUp() throws Exception { // Before each test set up a keyHandler and a new player
 		keyH = new KeyHandler(true); // Player 1 uses WASD controls
 		keyH2 = new KeyHandler(false); // Player 2 uses Arrow controls
-		player = new Player(keyH, 1,LoadSave.player1X, LoadSave.player1Y);
-		player2 = new Player(keyH2, 2,LoadSave.player2X, LoadSave.player2Y);
+		player = new Player(keyH, 1,LoadSave.player1X, LoadSave.player1Y, LoadSave.getLevelData());
+		player2 = new Player(keyH2, 2,LoadSave.player2X, LoadSave.player2Y, LoadSave.getLevelData());
 	}
 
 	@Test
