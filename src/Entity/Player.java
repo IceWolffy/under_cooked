@@ -192,6 +192,12 @@ public class Player extends Entity {
 			// Idle animation
 			g.drawImage(idleAnimation[idleIndex], x - 110, y - 99, 256, 256, null);
 		}
+		
+		// Debug info (Just for testing, delete later)
+	    g.setColor(Color.black);
+	    g.drawString("X: " + x + ", Y: " + y, x, y - 10);
+	    g.drawString("Can move left: " + HelpMethods.canMoveHere((int)(x - speed), y, width, height, lvlData), x, y - 25);
+	    g.drawString("Can move right: " + HelpMethods.canMoveHere((int)(x + speed), y, width, height, lvlData), x, y - 40);
 
 	}
 
