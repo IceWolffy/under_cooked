@@ -1,6 +1,8 @@
 package Game;
 
 import javax.swing.JPanel;
+import static Game.GameManager.GAME_HEIGHT;
+import static Game.GameManager.GAME_WIDTH;
 import java.awt.*;
 
 import Constants.Constants;
@@ -13,7 +15,7 @@ public class Level1 extends JPanel {
 	
 
 	public Level1() {
-		setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)); // Set the size of the panel to the screen size
+		setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT)); // Set the size of the panel to the screen size
 																									// the panel
 		setBackground(new Color(252, 244, 163));
 
