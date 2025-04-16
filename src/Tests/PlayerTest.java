@@ -30,10 +30,10 @@ class PlayerTest {
 
 	@Test
 	void testPlayerMoveRight() { // Test that checks if the character can move right
-		int initialX = player.getStartX();
+		int initialX = player.x;
 		keyH.rightPressed = true;
 		player.update();
-		assertTrue(player.getStartX() > initialX, "Player 1 should move right");
+		assertTrue(player.x > initialX, "Player 1 should move right");
 	}
 
 	@Test
