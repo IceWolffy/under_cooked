@@ -1,5 +1,8 @@
-/Constantsuti/
-/utils/
+/.DS_Store
+/Constants/
+/Entity/
 /Game/
-/player1/
+/Tests/
 /level/
+/player1/
+/utils/

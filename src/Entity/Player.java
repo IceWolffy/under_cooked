@@ -37,7 +37,7 @@ public class Player extends Entity {
 			this.startX = 200; // Starting position for Player 2
 		}
 		this.startY = 700; // Start above the ground
-		this.speed = 5;
+		this.speed = 6;
 		this.direction = "right";
 		this.x = this.startX;
 		this.y = this.startY;

@@ -2,45 +2,46 @@ package Game;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import static Game.GameManager.GAME_HEIGHT;
+import static Game.GameManager.GAME_WIDTH;
+
 import java.awt.*;
 import java.io.File;
 
 public class MainMenu extends JPanel{
     private Image bgImage;
 
-    public MainMenu(){
-
+    public MainMenu() {
         try {
-            String imagePath = "res" + File.separator + "player1" + File.separator + "undercooked_bg.png";
+            String imagePath = "res" + File.separator + "level" + File.separator + "undercooked_bg.png";
             bgImage = ImageIO.read(new File(imagePath));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        setPreferredSize(new Dimension(1080,1080)); // Set the size of the panel to the screen size												// the panel
-		setLayout(null);
+        setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT)); // Set the size of the panel to the screen size
+        setLayout(null);
 
-
-        //play button
+        // Play button
         JButton playButton = new JButton("Play");
-        playButton.setBounds(435, 370, 200, 80); //x, y, width, height
+        playButton.setBounds(435, 370, 200, 80); // x, y, width, height
         playButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
         playButton.setBackground(new Color(222, 206, 59));
         add(playButton);
 
         playButton.addActionListener(e -> {
-            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this); // Get the parent frame of the panel
-            frame.setContentPane(new Level1()); // Remove the main menu panel from the frame
-            frame.revalidate(); // Revalidate the frame to update the layout
-            frame.pack(); // Repaint the frame to show the new panel
-            
-            /* This line makes sure that the game panel is listening for 
-             * keyboard inputs after the "Play" button is pressed
-             */
-            frame.getContentPane().requestFocusInWindow(); // Ensures the panel gets keyboard focus
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+
+            // Pass the level map data when initializing the LevelPanel
+            frame.setContentPane(new LevelPanel()); 
+            frame.revalidate(); // Revalidate the layout
+            frame.repaint(); // Force repaint to update the frame
+            frame.getContentPane().requestFocusInWindow(); // Ensure focus
         });
 
-        //exit button
+        // Exit button
         JButton exitButton = new JButton("Exit");
         exitButton.setBounds(435, 470, 200, 80); // Set the position and size of the button
         exitButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
@@ -53,10 +54,11 @@ public class MainMenu extends JPanel{
     }
 
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(bgImage !=null){
+        if (bgImage != null) {
             g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this); // Draw the background image
         }
     }
+
 }

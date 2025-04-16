@@ -11,44 +11,44 @@ import Game.GameManager;
 
 public class LoadSave {
 
-	public static final String LEVEL_ATLAS = "terrainSprite.png";
-	public static final String LEVEL_ONE_DATA = "levelOne.png";
+	public static final String LEVEL_ATLAS = "/level/terrainSprite.png";
+	public static final String LEVEL_ONE_DATA = "/level/levelOne.png";
 
-	public static BufferedImage GetSpriteAtlas(String fileName) {
-		BufferedImage img = null;
-		InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);
-		try {
-			img = ImageIO.read(is);
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				is.close();
-			}
-			catch(IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return img;
+	public static BufferedImage GetSpriteAtlas(String path) {
+	    BufferedImage img = null;
+
+	    try (InputStream is = LoadSave.class.getResourceAsStream(path)) {
+	        if (is == null) {
+	            System.err.println("Error: Resource not found at " + path);
+	            return null;
+	        }
+	        img = ImageIO.read(is);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    return img;
 	}
 	public static int[][] getLevelData(){
 		int[][] lvlData	= new int[GameManager.TILES_IN_HEIGHT][GameManager.TILES_IN_WIDTH];
 		BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
 		
-		for (int i = 0; i < img.getHeight(); i++){
-			for (int j = 0; i < img.getWidth(); i++) {
-				Color color = new Color(img.getRGB(i, j));
-				int value = color.getRed();
-				if (value >= 247) {
-					value = 0;
-					lvlData[i][j] = color.getRed();
-				}
-				
-			}
+		for (int j = 0; j < img.getHeight(); j++) {
+		    for (int i = 0; i < img.getWidth(); i++) {
+		        Color color = new Color(img.getRGB(i, j)); // correct order
+		        int value = color.getRed();
+		        if (value >= 247) {
+		            value = 0;
+		        }
+		        lvlData[j][i] = value;
+		    }
 		}
+
+		System.out.println("First few tile values:");
+		for (int i = 0; i < 5; i++) {
+		    System.out.print(lvlData[0][i] + " ");
+		}
+		System.out.println();
 		return lvlData;
 	}
 }
