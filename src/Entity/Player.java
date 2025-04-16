@@ -107,12 +107,11 @@ public class Player extends Entity {
 	 */
 
 	// horizontal movement
+
 	public void update() {
-		
-		// horizontal and vertical speeds
+		// Movement speeds
 		float xSpeed = 0;
 
-		// Horizontal movement
 		if (keyH.leftPressed) {
 			direction = "left";
 			xSpeed -= speed;
@@ -128,17 +127,17 @@ public class Player extends Entity {
 			velocityY = jumpForce;
 		}
 
-		// Apply gravity
+		// Gravity
 		velocityY += gravity;
-
 		float ySpeed = velocityY;
 
-		// Try moving
-		if (HelpMethods.canMoveHere((int) (x + xSpeed), (int) (y + ySpeed), width, height, lvlData)) {
+		// Separate movement checks
+		if (HelpMethods.canMoveHere((int) (x + xSpeed), y, width, height, lvlData)) {
 			x += xSpeed;
+		}
+		if (HelpMethods.canMoveHere(x, (int) (y + ySpeed), width, height, lvlData)) {
 			y += ySpeed;
 		} else {
-			// If can't move vertically, assume hitting ground or ceiling
 			if (velocityY > 0) {
 				isJumping = false;
 			}
@@ -146,7 +145,6 @@ public class Player extends Entity {
 		}
 
 		updateHitbox();
-	
 
 	}
 
@@ -188,12 +186,13 @@ public class Player extends Entity {
 
 		if (keyH.leftPressed || keyH.rightPressed) {
 
-			g.drawImage(walkAnimation[walkIndex], x , y , 64, 64, null);
+			g.drawImage(walkAnimation[walkIndex], x - 110, y - 99, 256, 256, null);
 
 		} else {
 			// Idle animation
-			g.drawImage(idleAnimation[idleIndex], x , y, 64, 64, null);
+			g.drawImage(idleAnimation[idleIndex], x - 110, y - 99, 256, 256, null);
 		}
 
 	}
+
 }
