@@ -55,18 +55,18 @@ class PlayerTest {
 
 	@Test
 	void testPlayer2MoveRight() { // Test that checks if the character can move right
-		int initialX = player2.getStartX();
+		int initialX = player2.x;
 		keyH2.rightPressed = true;
 		player2.update();
-		assertTrue(player2.getStartX() > initialX, "Player 2 should move right");
+		assertTrue(player2.x > initialX, "Player 2 should move right");
 	}
 
 	@Test
 	void testPlayer2MoveLeft() { // Test that checks if the character can move left
-		int initialX = player2.getStartX();
+		int initialX = player2.x;
 		keyH2.leftPressed = true;
 		player2.update();
-		assertTrue(player2.getStartX() < initialX, "Player 2 should move left");
+		assertTrue(player2.x < initialX, "Player 2 should move left");
 	}
 
 	@Test
