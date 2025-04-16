@@ -3,6 +3,7 @@ package Game;
 import javax.swing.*;
 
 import Entity.Player;
+import utils.LoadSave;
 
 import java.awt.*;
 
@@ -14,11 +15,12 @@ public class LevelPanel extends JPanel {
     
 
     public LevelPanel() {
+    	LoadSave.getLevelData();
     	KeyHandler keyH = new KeyHandler(true);   // Player 1 uses WASD controls
 		KeyHandler keyH2 = new KeyHandler(false); // Player 2 uses Arrow controls
 
-		player = new Player(keyH, 1);
-		player2 = new Player(keyH2, 2);
+		player = new Player(keyH, 1, LoadSave.player1X, LoadSave.player1Y);
+		player2 = new Player(keyH2, 2, LoadSave.player2X, LoadSave.player2Y);
 		
 		addKeyListener(keyH);
 		addKeyListener(keyH2);

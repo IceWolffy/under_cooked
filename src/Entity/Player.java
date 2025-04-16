@@ -14,7 +14,6 @@ public class Player extends Entity {
 	private int velocityY = 0;
 	private final int gravity = Constants.gravity;
 	private final int jumpForce = Constants.jumpForce;
-	private final int groundLevel = Constants.groundLevel;
 	private BufferedImage image;
 	private BufferedImage[] idleAnimation;
 	private BufferedImage[] walkAnimation;
@@ -24,24 +23,17 @@ public class Player extends Entity {
 	// Differentiates between Player 1 and Player 2
 	private int playerId;
 
-	public Player(KeyHandler keyH, int playerId) {
-		super(0, 0, 33 , 50);
-		
-		this.keyH = keyH; // Assign key handler
-		this.playerId = playerId; // Assign player ID
+	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY) {
+		super(spawnX, spawnY, 33 , 50);
 
-		// Set starting position based on player ID
-		if (playerId == 1) {
-			this.startX = 300; // Starting position for Player 1
-		} else {
-			this.startX = 200; // Starting position for Player 2
-		}
-		this.startY = 700; // Start above the ground
-		this.speed = 6;
-		this.direction = "right";
-		this.x = this.startX;
-		this.y = this.startY;
+		this.keyH = keyH;
+		this.playerId = playerId;
+		this.startX = spawnX;
+		this.startY = spawnY;
+		this.x = spawnX;
+		this.y = spawnY;
 
+		// Load images, animations etc.
 		loadPlayerImages();
 		idleAnimation();
 		walkAnimation();
@@ -69,9 +61,6 @@ public class Player extends Entity {
 		return velocityY;
 	}
 
-	public int getGroundLevel() {
-		return groundLevel;
-	}
 
 	public void loadPlayerImages() {
 		try {
@@ -135,12 +124,7 @@ public class Player extends Entity {
 			velocityY += gravity;
 		}
 
-		// Collision for ground level
-		if (y >= groundLevel) {
-			y = groundLevel;
-			isJumping = false;
-			velocityY = 0;
-		}
+
 
 		updateHitbox();
 
@@ -185,11 +169,11 @@ public class Player extends Entity {
 
 		if (keyH.leftPressed || keyH.rightPressed) {
 
-			g.drawImage(walkAnimation[walkIndex], x, y, 256, 256, null);
+			g.drawImage(walkAnimation[walkIndex], x - 110, y - 105, 256, 256, null);
 
 		} else {
 			// Idle animation
-			g.drawImage(idleAnimation[idleIndex], x, y, 256, 256, null);
+			g.drawImage(idleAnimation[idleIndex], x - 110, y - 105, 256, 256, null);
 		}
 
 	}

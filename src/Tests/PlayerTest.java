@@ -2,6 +2,8 @@ package Tests;
 
 import Entity.Player;
 import Game.KeyHandler;
+import utils.LoadSave;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,8 +24,8 @@ class PlayerTest {
 	void setUp() throws Exception { // Before each test set up a keyHandler and a new player
 		keyH = new KeyHandler(true); // Player 1 uses WASD controls
 		keyH2 = new KeyHandler(false); // Player 2 uses Arrow controls
-		player = new Player(keyH, 1);
-		player2 = new Player(keyH2, 2);
+		player = new Player(keyH, 1,LoadSave.player1X, LoadSave.player1Y);
+		player2 = new Player(keyH2, 2,LoadSave.player2X, LoadSave.player2Y);
 	}
 
 	@Test
