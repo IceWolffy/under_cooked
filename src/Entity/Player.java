@@ -39,6 +39,9 @@ public class Player extends Entity {
 		this.x = spawnX;
 		this.y = spawnY;
 		this.lvlData = lvlData;
+		
+		// Sets the horizontal movement speed
+		this.speed = 5;
 
 		// Load images, animations etc.
 		loadPlayerImages();
