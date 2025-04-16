@@ -81,10 +81,10 @@ class PlayerTest {
 	// Test starting positions
 	@Test
 	void testPlayerStartingPositions() {
-		assertEquals(300, player.getStartX(), "Player 1 should start at x=300");
-		assertEquals(200, player2.getStartX(), "Player 2 should start at x=200");
-		assertEquals(700, player.getStartY(), "Both players should start at y=700");
-		assertEquals(700, player2.getStartY(), "Both players should start at y=700");
+		assertEquals(128, player.getStartX(), "Player 1 should start at x=128");
+		assertEquals(256, player2.getStartX(), "Player 2 should start at x=256");
+		assertEquals(704, player.getStartY(), "Both players should start at y=704");
+		assertEquals(704, player2.getStartY(), "Both players should start at y=704");
 	}
 
 	
