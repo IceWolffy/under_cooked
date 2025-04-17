@@ -195,5 +195,16 @@ class PlayerTest {
 	               "Should be able to add ingredient after clearing");
 	}
 	
+	@Test
+	void testInventoryScoreSystem() {
+	    // Test that score is properly updated
+	    assertEquals(0, player.getInventory().getScore(), "Score should start at 0");
+	    
+	    player.getInventory().addScore(10);
+	    assertEquals(10, player.getInventory().getScore(), "Score should be 10 after adding 10 points");
+	    
+	    player.getInventory().addScore(15);
+	    assertEquals(25, player.getInventory().getScore(), "Score should be 25 after adding another 15 points");
+	}
 
 }
