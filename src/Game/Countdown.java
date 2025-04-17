@@ -42,5 +42,12 @@ public class Countdown {
         return running;
     }
 
+    public void draw(Graphics g, int x, int y){
+        g.setColor(new Color(255, 255, 255));
+        g.setFont(new Font("Arial", Font.BOLD, 32));
+        String time = String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60);
+        g.drawString(time, x, y);
+    }
+
 
 }
