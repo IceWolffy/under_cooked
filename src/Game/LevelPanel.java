@@ -96,5 +96,7 @@ public class LevelPanel extends JPanel {
 
         player.draw(g); // Draws player
 		player2.draw(g);
+
+        countdown.draw(g, 10, 30); // Draw the countdown timer 
     }
 }
