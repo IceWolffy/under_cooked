@@ -8,4 +8,17 @@ public class Countdown {
     private Timer swingTimer;
     private boolean running = false;
 
+    public Countdown(int totalSeconds) {
+        this.secondsRemaining = totalSeconds;
+
+        swingTimer = new Timer(1000, e -> {
+            if (secondsRemaining > 0) {
+                secondsRemaining--;
+            } else {
+                swingTimer.stop();
+                running = false;
+            }
+        });
+    }
+
 }
