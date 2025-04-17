@@ -4,14 +4,20 @@ import javax.swing.*;
 
 import Entity.Player;
 import utils.LoadSave;
+import Entity.Ingredient;  //for ingredients
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class LevelPanel extends JPanel {
 
     private LevelHandler levelHandler;
     private Player player;
 	private Player player2;
+
+    private ArrayList<Ingredient> ingredients = new ArrayList<>();
+    private Random rand = new Random();
 	
     
 
@@ -32,11 +38,28 @@ public class LevelPanel extends JPanel {
 
         levelHandler = new LevelHandler();
 
+        // Spawn 5 ingredients randomly at start
+        for (int i = 0; i < 5; i++) {
+            ingredients.add(createRandomIngredient());
+        }
+
         Thread gameThread = new Thread(() -> {
             while (true) {
                 levelHandler.update(); // If needed later
                 player.update();
                 player2.update();
+
+                // Check collisions with ingredients and respawn
+                for (int i = 0; i < ingredients.size(); i++) {
+                    Ingredient ing = ingredients.get(i);
+                    if (!ing.collected && player.getBounds().intersects(ing.getBounds())) {
+                        ingredients.set(i, createRandomIngredient());
+                    }
+                    if (!ing.collected && player2.getBounds().intersects(ing.getBounds())) {
+                        ingredients.set(i, createRandomIngredient());
+                    }
+                }
+
                 repaint();
                 try {
                     Thread.sleep(16); // ~60 FPS
@@ -48,10 +71,25 @@ public class LevelPanel extends JPanel {
         gameThread.start();
     }
 
+    private Ingredient createRandomIngredient() {
+        int padding = 50;
+        int maxX = GameManager.GAME_WIDTH - Ingredient.SIZE - padding;
+        int maxY = GameManager.GAME_HEIGHT - 300; // avoid placing inside bottom ground
+        int x = rand.nextInt(maxX - padding) + padding;
+        int y = rand.nextInt(maxY - padding) + padding;
+        return new Ingredient(x, y);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         levelHandler.draw(g); // Draws the level using the LevelHandler
+        
+         // Draw ingredients
+         for (Ingredient ing : ingredients) {
+            ing.draw(g);
+        }
+
         player.draw(g); // Draws player
 		player2.draw(g);
     }

@@ -204,4 +204,9 @@ public class Player extends Entity {
 
 	}
 
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, 80, 80); // or use 64, 128, etc., based on your sprite size
+	}
+	
+
 }
