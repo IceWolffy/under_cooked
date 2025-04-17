@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import Constants.Constants;
 import Game.GameManager;
 import Game.KeyHandler;
-import utils.HelpMethods;
 
 public class Player extends Entity {
 
@@ -28,6 +27,9 @@ public class Player extends Entity {
 
 	// Differentiates between Player 1 and Player 2
 	private int playerId;
+	
+	// Add inventory for the player
+	private Inventory inventory;
 
 	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY, int[][] lvlData) {
 		super(spawnX, spawnY, 33, 50);
@@ -39,6 +41,9 @@ public class Player extends Entity {
 		this.x = spawnX;
 		this.y = spawnY;
 		this.lvlData = lvlData;
+		
+		// Initialize the inventory object
+		this.inventory = new Inventory(playerId);
 		
 		// Sets the horizontal movement speed
 		this.speed = 5;
@@ -69,6 +74,11 @@ public class Player extends Entity {
 	public int getVelocityY() {
 		return velocityY;
 	}
+	
+	// Add getter for inventory
+	public Inventory getInventory() {
+		return inventory;
+	}
 
 	public void loadPlayerImages() {
 		try {
@@ -92,24 +102,6 @@ public class Player extends Entity {
 			walkAnimation[i] = walk.getSubimage(i * 80, 0, 80, 80);
 		}
 	}
-
-	/*
-	 * public void update() { //old update fonction
-	 * 
-	 * // Handle horizontal movement if (keyH.leftPressed) { direction = "left"; x
-	 * -= speed; } if (keyH.rightPressed) { direction = "right"; x += speed; }
-	 * 
-	 * // Handle jumping if (keyH.jumpPressed && !isJumping) { isJumping = true;
-	 * velocityY = jumpForce; }
-	 * 
-	 * // Apply gravity y += velocityY; if (isJumping) { velocityY += gravity; }
-	 * 
-	 * //Collision for ground level if (y >= groundLevel) { y = groundLevel; // Stop
-	 * falling at the ground level isJumping = false; // Reset jump state velocityY
-	 * = 0; // Stop downward velocity } }
-	 */
-
-	// horizontal movement
 
 	public void update() {
 		// Movement speeds
@@ -148,7 +140,6 @@ public class Player extends Entity {
 		}
 
 		updateHitbox();
-
 	}
 
 	@Override
@@ -183,30 +174,27 @@ public class Player extends Entity {
 
 	// Draws the player img
 	public void draw(Graphics g) {
-
 		drawHitbox(g);
 		updateAnimationTick();
 
 		if (keyH.leftPressed || keyH.rightPressed) {
-
 			g.drawImage(walkAnimation[walkIndex], x - 110, y - 99, 256, 256, null);
-
 		} else {
 			// Idle animation
 			g.drawImage(idleAnimation[idleIndex], x - 110, y - 99, 256, 256, null);
 		}
 		
+		// Draw player's inventory at appropriate position
+		int inventoryX = playerId == 1 ? 10 : GameManager.GAME_WIDTH - 160;
+		inventory.draw(g, inventoryX, 10);
+		
 		// Debug info (Just for testing, delete later)
-	    g.setColor(Color.black);
-	    g.drawString("X: " + x + ", Y: " + y, x, y - 10);
-	    g.drawString("Can move left: " + HelpMethods.canMoveHere((int)(x - speed), y, width, height, lvlData), x, y - 25);
-	    g.drawString("Can move right: " + HelpMethods.canMoveHere((int)(x + speed), y, width, height, lvlData), x, y - 40);
-
+		g.setColor(Color.black);
+		g.drawString("X: " + x + ", Y: " + y, x, y - 10);
+		g.drawString("Inventory: " + inventory.getItemCount() + "/3", x, y - 25);
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 80, 80); // or use 64, 128, etc., based on your sprite size
+		return new Rectangle(x, y, 80, 80);
 	}
-	
-
 }
