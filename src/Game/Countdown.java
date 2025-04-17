@@ -34,4 +34,8 @@ public class Countdown {
         running = false;
     }
 
+    public int getSecondsRemaining() {
+        return secondsRemaining;
+    }
+
 }
