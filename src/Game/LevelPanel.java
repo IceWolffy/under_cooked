@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class LevelPanel extends JPanel {
 
+
     private LevelHandler levelHandler;
     private Player player;
 	private Player player2;
@@ -19,7 +20,7 @@ public class LevelPanel extends JPanel {
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
     private Random rand = new Random();
 	
-    
+    private Countdown countdown = new Countdown(120); // 120 seconds countdown
 
     public LevelPanel() {
     	LoadSave.getLevelData();
@@ -69,6 +70,9 @@ public class LevelPanel extends JPanel {
             }
         });
         gameThread.start();
+
+        //start the countdown
+        countdown.start();
     }
 
     private Ingredient createRandomIngredient() {
