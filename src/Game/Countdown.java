@@ -38,4 +38,9 @@ public class Countdown {
         return secondsRemaining;
     }
 
+    public boolean isRunning() { // Check if the timer is running
+        return running;
+    }
+
+
 }
