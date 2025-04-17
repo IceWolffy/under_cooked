@@ -46,7 +46,7 @@ public class Player extends Entity {
 		this.inventory = new Inventory(playerId);
 		
 		// Sets the horizontal movement speed
-		this.speed = 5;
+		this.speed = 8; // Testing inventory, the original was 5
 
 		// Load images, animations etc.
 		loadPlayerImages();
@@ -124,7 +124,7 @@ public class Player extends Entity {
 
 		// Gravity
 		velocityY += gravity;
-		float ySpeed = velocityY;
+		float ySpeed = velocityY * 2; // Testing inventory, can remove the "* 2" later
 
 		// Separate movement checks
 		if (HelpMethods.canMoveHere((int) (x + xSpeed), y, width, height, lvlData)) {
