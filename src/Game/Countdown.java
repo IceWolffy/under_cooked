@@ -28,4 +28,10 @@ public class Countdown {
         }
     }
 
+    public void reset(int totalSeconds){
+        swingTimer.stop();
+        this.secondsRemaining = totalSeconds;
+        running = false;
+    }
+
 }
