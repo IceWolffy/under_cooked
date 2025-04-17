@@ -21,4 +21,11 @@ public class Countdown {
         });
     }
 
+    public void start() {
+        if (!running) {
+            swingTimer.start();
+            running = true;
+        }
+    }
+
 }
