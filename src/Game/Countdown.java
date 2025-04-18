@@ -46,12 +46,12 @@ public class Countdown {
 
     public void draw(Graphics g){
 
-    int boxWidth = 250;
-    int boxHeight = 70;
-    int margin = 20;
+    int boxWidth = 200;
+    int boxHeight = 60;
+    int margin = 10;
 
     int x = GameManager.GAME_WIDTH - boxWidth - margin;
-    int y = margin;
+    int y = GameManager.GAME_HEIGHT - boxHeight - margin;
 
     // Draw background box
     g.setColor(new Color(0, 0, 0, 150)); // Semi-transparent black
@@ -70,7 +70,7 @@ public class Countdown {
         g.setColor(Color.WHITE);
     }
     
-    g.drawString("Time Left: " + secondsRemaining, x+25, y+45); // Adjusted position for better centering
+    g.drawString("Time Left: " + secondsRemaining, x+8, y+40); // Adjusted position for better centering
 
 
 }
