@@ -83,5 +83,10 @@ public class CountUp {
         g.setColor(Color.WHITE);
     }
 
+    // Draw the grade
+    g.drawString("Grade: " + grade, x + 25, y + 30); 
+    g.drawString("Time Elapsed: " + secondsElapsed + "s", x + 25, y + 50);
 
+
+}
 }
