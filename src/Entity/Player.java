@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import Constants.Constants;
 import Game.GameManager;
 import Game.KeyHandler;
+import Game.SoundEffects;
 
 public class Player extends Entity {
 
@@ -118,6 +119,7 @@ public class Player extends Entity {
 
 		// Jump
 		if (keyH.jumpPressed && !isJumping) {
+			SoundEffects.play("/sounds/PlayerJump.wav");  // Jump sound effect
 			isJumping = true;
 			velocityY = jumpForce;
 		}
