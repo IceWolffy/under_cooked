@@ -64,6 +64,7 @@ public class LevelPanel extends JPanel {
                     if (!ing.collected) {
                         // Player 1 collecting ingredients
                         if (player.getBounds().intersects(ing.getBounds()) && !player.getInventory().isFull()) {
+                            SoundEffects.play("/sounds/vegtableCollection.wav");  // Ingredient collected sound
                             ing.collected = true;
                             player.getInventory().addIngredient(ing);
                             
@@ -81,6 +82,7 @@ public class LevelPanel extends JPanel {
                         
                         // Player 2 collecting ingredients
                         if (player2.getBounds().intersects(ing.getBounds()) && !player2.getInventory().isFull()) {
+                            SoundEffects.play("/sounds/vegtableCollection.wav");  // Ingredient collected sound
                             ing.collected = true;
                             player2.getInventory().addIngredient(ing);
                             
