@@ -8,6 +8,7 @@ public class CountUp {
     private int targetSeconds;
     private Timer swingTimer;
     private boolean running = false;
+    private String grade;
 
     public CountUp(int targetSeconds) {
 
@@ -65,13 +66,21 @@ public class CountUp {
     // Draw timer text
     g.setFont(new Font("Arial", Font.BOLD, 30));
     
-    if (secondsRemaining <= 10) {
+    if (secondsElapsed < 30) {
+        grade = "S";
         g.setColor(Color.RED);
+    } else if (secondsElapsed < 60) {
+        grade = "A";
+        g.setColor(Color.ORANGE);
+    } else if (secondsElapsed < 90) {
+        grade = "B";
+        g.setColor(Color.YELLOW);
+    } else if (secondsElapsed < 120) {
+        grade = "C";
+        g.setColor(Color.GREEN);
     } else {
+        grade = "D";
         g.setColor(Color.WHITE);
-    }
-    
-    g.drawString("Time Left: " + secondsRemaining, x+25, y+45); // Adjusted position for better centering
     }
 
 
