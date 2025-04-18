@@ -16,13 +16,13 @@ public class CountdownTest {
     }
 
     @Test
-    public void testInitialState() {
+    public void testInitialState() { // This test will check if the initial state of the countdown is correct
         assertEquals("Initial seconds should be 10", 10, countdown.getSecondsRemaining());
         assertFalse("Timer should not be running initially", countdown.isRunning());
     }
 
     @Test
-    public void testStart() throws InterruptedException {
+    public void testStart() throws InterruptedException { // This test will check if the countdown starts correctly
         countdown.start();
         assertTrue("Timer should be running after start", countdown.isRunning());
 
@@ -44,7 +44,7 @@ public class CountdownTest {
     }
 
     @Test
-    public void testCountdownEndsCorrectly() throws InterruptedException {
+    public void testCountdownEndsCorrectly() throws InterruptedException { // This test will check if the countdown ends correctly
         countdown = new Countdown(2); // Only 2 seconds to make test fast
         countdown.start();
 
