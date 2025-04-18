@@ -31,6 +31,7 @@ public class MainMenu extends JPanel{
         add(playButton);
 
         playButton.addActionListener(e -> {
+            SoundEffects.stop();// stop any music first
             SoundEffects.play("/sounds/gameStart.wav");  // Game start sound
 
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -53,6 +54,9 @@ public class MainMenu extends JPanel{
         exitButton.addActionListener(e -> {
             System.exit(0); // Exit the application when the button is clicked
         });
+
+        SoundEffects.loop("/sounds/Mainmenu.wav");  // Looping menu music
+
     }
 
     @Override
