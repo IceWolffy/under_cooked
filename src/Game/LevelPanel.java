@@ -44,7 +44,6 @@ public class LevelPanel extends JPanel {
             ingredients.add(createRandomIngredient());
         }
 
-        /** 
         Thread gameThread = new Thread(() -> {
             while (true) {
                 levelHandler.update(); // If needed later
@@ -70,25 +69,7 @@ public class LevelPanel extends JPanel {
                 }
             }
         });
-        gameThread.start(); */
-        Timer gameTimer = new Timer(16, e -> {
-            levelHandler.update(); // If needed later
-            player.update();
-            player2.update();
-
-            // Check collisions with ingredients and respawn
-        for (int i = 0; i < ingredients.size(); i++) {
-            Ingredient ing = ingredients.get(i);
-            if (!ing.collected && player.getBounds().intersects(ing.getBounds())) {
-                ingredients.set(i, createRandomIngredient());
-            }
-            if (!ing.collected && player2.getBounds().intersects(ing.getBounds())) {
-                ingredients.set(i, createRandomIngredient());
-            }
-        }
-
-        repaint();
-        });
+        gameThread.start(); 
 
         //start the countdown
         countdown.start();
