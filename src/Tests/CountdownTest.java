@@ -21,6 +21,19 @@ public class CountdownTest {
         assertFalse("Timer should not be running initially", countdown.isRunning());
     }
 
+    @Test
+    public void testStart() throws InterruptedException {
+        countdown.start();
+        assertTrue("Timer should be running after start", countdown.isRunning());
+
+        Thread.sleep(1100); // Wait a little over 1 second
+
+        int secondsAfterTick = countdown.getSecondsRemaining();
+        assertTrue("Seconds should decrease after starting", secondsAfterTick < 10);
+
+        countdown.reset(10); // Reset it so other tests don't break
+    }
+
     
 
 }
