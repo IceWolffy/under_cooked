@@ -1,25 +1,27 @@
 package Game;
 
+import utils.LevelData;
+
 public class Level {
-    private int[][] levelData;
+    private int[][] terrain;
+    private int[][] background;
+    private int[][] foreground;
 
-    public Level(int[][] levelData) {
-        this.levelData = levelData;
-    }
-
-    public int getBackgroundSpriteIndex(int x, int y) {
-        // Logic to fetch background sprite index from levelData
-        // You can use a specific value to indicate background tiles
-        return levelData[y][x]; // Adjust based on how you store the data
+    public Level(LevelData data) {
+        this.terrain = data.terrain;
+        this.background = data.background;
+        this.foreground = data.foreground;
     }
 
     public int getTerrainAndDecoSpriteIndex(int x, int y) {
-        // Logic to fetch terrain and decoration sprite index from levelData
-        return levelData[y][x]; // Adjust based on how you store the data
+        return terrain[y][x];
+    }
+
+    public int getBackgroundSpriteIndex(int x, int y) {
+        return background[y][x];
     }
 
     public int getForegroundSpriteIndex(int x, int y) {
-        // Logic to fetch foreground sprite index from levelData
-        return levelData[y][x]; // Adjust based on how you store the data
+        return foreground[y][x];
     }
 }
