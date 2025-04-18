@@ -115,6 +115,32 @@ public class LevelPanel extends JPanel {
                     player2.getInventory().clearInventory();
                 }
 
+                // Check if countdown is finished
+                if (count.isFinished()) {
+                    // Determine winner based on score
+                    int player1Score = player.getInventory().getScore();
+                    int player2Score = player2.getInventory().getScore();
+
+                    String winnerName;
+                    if (player1Score > player2Score) {
+                        winnerName = "Player 1";
+                    } else if (player2Score > player1Score) {
+                        winnerName = "Player 2";
+                    } else {
+                        winnerName = "It's a Tie!";
+                    }
+
+                    // Switch to win panel
+                    SwingUtilities.invokeLater(() -> {
+                        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                        topFrame.setContentPane(new WinPanel(winnerName));
+                        topFrame.revalidate();
+                        topFrame.repaint();
+                    });
+
+                    break; // exit the game loop
+                }
+
                 repaint();
                 try {
                     Thread.sleep(16); // ~60 FPS
