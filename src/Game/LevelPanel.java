@@ -25,7 +25,7 @@ public class LevelPanel extends JPanel {
     
     // Points awarded per ingredient delivered
     private final int POINTS_PER_INGREDIENT = 10;
-    private Countdown countup = new Countdown(100); // 60 seconds countdown
+    private Countdown count = new Countdown(60); // 60 seconds countdown
 
     public LevelPanel() {
         LoadSave.getLevelData();
@@ -124,7 +124,7 @@ public class LevelPanel extends JPanel {
         gameThread.start(); 
 
         //start the countdown
-        countup.start();
+        count.start();
     }
 
     private Ingredient createRandomIngredient() {
@@ -158,6 +158,6 @@ public class LevelPanel extends JPanel {
                      GameManager.GAME_WIDTH / 2 - 200, 20);
         
         //draw timer
-        countup.draw(g);
+        count.draw(g);
     }
 }
