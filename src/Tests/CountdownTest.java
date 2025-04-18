@@ -44,15 +44,14 @@ public class CountdownTest {
     }
 
     @Test
-    public void testCountdown() throws InterruptedException { // This test will check if the countdown works correctly
+    public void testCountdownEndsCorrectly() throws InterruptedException {
+        countdown = new Countdown(2); // Only 2 seconds to make test fast
         countdown.start();
-        Thread.sleep(5000); // Wait for 5 seconds
 
-        int secondsAfterFive = countdown.getSecondsRemaining();
-        assertTrue("Seconds should be less than 10 after 5 seconds", secondsAfterFive < 10);
-        assertTrue("Seconds should be greater than or equal to 5", secondsAfterFive >= 5);
+        Thread.sleep(2500); // Wait enough time for it to hit 0
 
-        countdown.reset(10); // Reset it so other tests don't break
+        assertEquals("Timer should reach 0", 0, countdown.getSecondsRemaining());
+        assertFalse("Timer should stop running when it reaches 0", countdown.isRunning());
     }
 
 }
