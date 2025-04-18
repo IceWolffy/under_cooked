@@ -14,9 +14,9 @@ public class Countdown {
         this.secondsRemaining = totalSeconds;
 
         swingTimer = new Timer(1000, e -> {
-            if (secondsRemaining > 0) {
-                secondsRemaining--;
-            } else {
+            secondsRemaining--;
+            if (secondsRemaining <= 0) {
+                secondsRemaining = 0; // safety
                 swingTimer.stop();
                 running = false;
             }
