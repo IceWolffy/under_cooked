@@ -4,20 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Countdown {
-    private int secondsElapsed;
-    private int targetSeconds;
+    private int secondsRemaining;
+    private int totalSeconds;
     private Timer swingTimer;
     private boolean running = false;
-    private String grade;
 
-    public Countdown(int targetSeconds) {
+    public Countdown(int totalSeconds) {
 
-        this.targetSeconds = targetSeconds;
-        this.secondsElapsed = 0;
+        this.secondsRemaining = totalSeconds;
 
         swingTimer = new Timer(1000, e -> {
-            if (secondsElapsed < targetSeconds) {
-                secondsElapsed++;
+            if (secondsRemaining > 0) {
+                secondsRemaining--;
             } else {
                 swingTimer.stop();
                 running = false;
@@ -32,14 +30,14 @@ public class Countdown {
         }
     }
 
-    public void reset(){
+    public void reset(int totalSeconds){
         swingTimer.stop();
-        this.secondsElapsed = 0;
+        this.secondsRemaining = totalSeconds;
         running = false;
     }
 
-    public int getSecondsElapsed() {
-        return secondsElapsed;
+    public int getSecondsRemaining() {
+        return secondsRemaining;
     }
 
     public boolean isRunning() { // Check if the timer is running
@@ -66,26 +64,13 @@ public class Countdown {
     // Draw timer text
     g.setFont(new Font("Arial", Font.BOLD, 30));
     
-    if (secondsElapsed < 20) {
-        grade = "S";
-        g.setColor(new Color(239, 191, 4));
-    } else if (secondsElapsed < 40) {
-        grade = "A";
-        g.setColor(Color.WHITE);
-    } else if (secondsElapsed < 60) {
-        grade = "B";
-        g.setColor(Color.YELLOW);
-    } else if (secondsElapsed < 80) {
-        grade = "C";
-        g.setColor(Color.ORANGE);
-    } else {
-        grade = "D";
+    if (secondsRemaining < 30) {
         g.setColor(Color.RED);
+    } else {
+        g.setColor(Color.WHITE);
     }
-
-    // Draw the grade
-    g.drawString("Grade: " + grade, x + 25, y + 30); 
-    g.drawString("Time  : " + secondsElapsed + "s", x + 25, y + 58);
+    
+    g.drawString("Time Left: " + secondsRemaining, x+25, y+45); // Adjusted position for better centering
 
 
 }
