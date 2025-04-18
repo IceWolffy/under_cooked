@@ -53,8 +53,8 @@ public class Ingredient {
             //draw ingredient
             if (!collected && image != null) {
                 //only drawing first frame
-                int frameWidth = 16;  // adjust if needed
-                int frameHeight = 16;
+                int frameWidth = 32;  // adjust if needed
+                int frameHeight = 32;
                 g.drawImage(image,
                     x, y, x + SIZE, y + SIZE,  // where to draw on screen
                     0, 0, frameWidth, frameHeight, // what part of the image to draw
