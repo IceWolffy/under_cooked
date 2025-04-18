@@ -11,8 +11,11 @@ import Game.GameManager;
 
 public class LoadSave {
 
-	public static final String LEVEL_ATLAS = "/level/terrainSprite.png";
-	public static final String LEVEL_ONE_DATA = "/level/levelOne.png";
+	public static final String BACKGROUND_ATLAS = "/level/background.png";  // new background atlas
+	public static final String LEVEL_ATLAS = "/level/terrain.png";  // c
+	public static final String FOREGROUND_ATLAS = "/level/foreground.png";  // new foreground atlas
+	public static final String LEVEL_ONE_DATA = "/level/levelOne.png";  // path to your level data file (e.g., image or tilemap)
+
 	public static int player1X, player1Y;
 	public static int player2X, player2Y;
 
