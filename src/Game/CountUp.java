@@ -66,26 +66,26 @@ public class CountUp {
     // Draw timer text
     g.setFont(new Font("Arial", Font.BOLD, 30));
     
-    if (secondsElapsed < 30) {
+    if (secondsElapsed < 20) {
         grade = "S";
-        g.setColor(Color.RED);
-    } else if (secondsElapsed < 60) {
+        g.setColor(new Color(239, 191, 4));
+    } else if (secondsElapsed < 40) {
         grade = "A";
-        g.setColor(Color.ORANGE);
-    } else if (secondsElapsed < 90) {
+        g.setColor(Color.WHITE);
+    } else if (secondsElapsed < 60) {
         grade = "B";
         g.setColor(Color.YELLOW);
-    } else if (secondsElapsed < 120) {
+    } else if (secondsElapsed < 80) {
         grade = "C";
-        g.setColor(Color.GREEN);
+        g.setColor(Color.ORANGE);
     } else {
         grade = "D";
-        g.setColor(Color.WHITE);
+        g.setColor(Color.RED);
     }
 
     // Draw the grade
     g.drawString("Grade: " + grade, x + 25, y + 30); 
-    g.drawString("Time Elapsed: " + secondsElapsed + "s", x + 25, y + 50);
+    g.drawString("Time  : " + secondsElapsed + "s", x + 25, y + 58);
 
 
 }
