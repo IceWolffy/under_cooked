@@ -3,12 +3,12 @@ package Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class Countdown {
+public class CountUp {
     private int secondsRemaining;
     private Timer swingTimer;
     private boolean running = false;
 
-    public Countdown(int totalSeconds) {
+    public CountUp(int totalSeconds) {
         this.secondsRemaining = totalSeconds;
 
         swingTimer = new Timer(1000, e -> {

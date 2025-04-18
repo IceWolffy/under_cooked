@@ -20,7 +20,7 @@ public class LevelPanel extends JPanel {
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
     private Random rand = new Random();
 	
-    private Countdown countdown = new Countdown(120); // 120 seconds countdown
+    private CountUp countdown = new CountUp(120); // 120 seconds countdown
 
     public LevelPanel() {
     	LoadSave.getLevelData();
