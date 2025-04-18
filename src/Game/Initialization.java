@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 
 public class Initialization {
 	
+	// You have to run the game twice. We'll fix this soon
     public static void main(String[] args) {
     	// Preload sounds before launching the GUI
         SoundEffects.preload("/sounds/gameStart.wav");
