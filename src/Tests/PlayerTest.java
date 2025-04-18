@@ -1,5 +1,6 @@
 package Tests;
 
+import Entity.Ingredient;
 import Entity.Player;
 import Game.KeyHandler;
 import utils.LoadSave;
@@ -112,5 +113,98 @@ class PlayerTest {
 		}
 	}
 	
+	@Test
+	void testInventoryInitialization() {
+	    // Test that the inventory is properly initialized and empty at the start
+	    assertEquals(0, player.getInventory().getItemCount(), "Player inventory should start empty");
+	    assertEquals(0, player.getInventory().getScore(), "Player score should start at 0");
+	    assertEquals(0, player2.getInventory().getItemCount(), "Player 2 inventory should start empty");
+	    assertEquals(0, player2.getInventory().getScore(), "Player 2 score should start at 0");
+	}
+
+	@Test
+	void testInventoryAddIngredient() {
+	    // Create a test ingredient
+	    Ingredient testIngredient = new Ingredient(100, 100);
+	    
+	    // Add the ingredient to the inventory and check if it was added successfully
+	    assertTrue(player.getInventory().addIngredient(testIngredient), "Ingredient should be added successfully");
+	    assertEquals(1, player.getInventory().getItemCount(), "Inventory should contain one item");
+	    
+	    // Add ingredients until full and verify capacity is respected
+	    Ingredient ingredient2 = new Ingredient(120, 120);
+	    Ingredient ingredient3 = new Ingredient(140, 140);
+	    Ingredient ingredient4 = new Ingredient(160, 160);
+	    
+	    player.getInventory().addIngredient(ingredient2);
+	    player.getInventory().addIngredient(ingredient3);
+	    assertEquals(3, player.getInventory().getItemCount(), "Inventory should contain three items");
+	    
+	    // Try to add beyond capacity
+	    assertFalse(player.getInventory().addIngredient(ingredient4), "Inventory should reject items beyond capacity");
+	    assertEquals(3, player.getInventory().getItemCount(), "Inventory should still contain three items");
+	    assertTrue(player.getInventory().isFull(), "Inventory should be reported as full");
+	}
+
+	@Test
+	void testInventoryClear() {
+	    // Add some ingredients to the inventory
+	    player.getInventory().addIngredient(new Ingredient(100, 100));
+	    player.getInventory().addIngredient(new Ingredient(120, 120));
+	    assertEquals(2, player.getInventory().getItemCount(), "Inventory should have two items");
+	    
+	    // Clear the inventory and verify it's empty
+	    player.getInventory().clearInventory();
+	    assertEquals(0, player.getInventory().getItemCount(), "Inventory should be empty after clearing");
+	    assertFalse(player.getInventory().isFull(), "Inventory should not be full after clearing");
+	}
+
+	@Test
+	void testPlayersHaveSeparateInventories() {
+	    // Fill player 1's inventory
+	    for (int i = 0; i < 3; i++) {
+	        player.getInventory().addIngredient(new Ingredient(100 + i*20, 100));
+	    }
+	    assertTrue(player.getInventory().isFull(), "Player 1's inventory should be full");
+	    
+	    // Player 2's inventory should still be empty
+	    assertEquals(0, player2.getInventory().getItemCount(), "Player 2's inventory should be empty");
+	    assertFalse(player2.getInventory().isFull(), "Player 2's inventory should not be full");
+	    
+	    // Add score only to player 2
+	    player2.getInventory().addScore(50);
+	    assertEquals(0, player.getInventory().getScore(), "Player 1's score should still be 0");
+	    assertEquals(50, player2.getInventory().getScore(), "Player 2's score should be 50");
+	}
+
+	@Test
+	void testInventoryCapacityLimit() {
+	    // Test the capacity limit of 3 ingredients
+	    for (int i = 0; i < 3; i++) {
+	        assertTrue(player.getInventory().addIngredient(new Ingredient(100 + i*20, 100)), 
+	                   "Should be able to add ingredient " + (i+1));
+	    }
+	    
+	    // The 4th ingredient should be rejected
+	    assertFalse(player.getInventory().addIngredient(new Ingredient(160, 100)), 
+	                "Should not be able to add a 4th ingredient");
+	    
+	    // Clear one space and try again
+	    player.getInventory().clearInventory();
+	    assertTrue(player.getInventory().addIngredient(new Ingredient(100, 100)), 
+	               "Should be able to add ingredient after clearing");
+	}
+	
+	@Test
+	void testInventoryScoreSystem() {
+	    // Test that score is properly updated
+	    assertEquals(0, player.getInventory().getScore(), "Score should start at 0");
+	    
+	    player.getInventory().addScore(10);
+	    assertEquals(10, player.getInventory().getScore(), "Score should be 10 after adding 10 points");
+	    
+	    player.getInventory().addScore(15);
+	    assertEquals(25, player.getInventory().getScore(), "Score should be 25 after adding another 15 points");
+	}
 
 }
