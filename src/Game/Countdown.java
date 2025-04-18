@@ -43,10 +43,27 @@ public class Countdown {
     }
 
     public void draw(Graphics g, int x, int y){
-        g.setColor(new Color(255, 255, 255));
-        g.setFont(new Font("Arial", Font.BOLD, 32));
-        String time = String.format("%02d:%02d", secondsRemaining / 60, secondsRemaining % 60);
-        g.drawString(time, x, y);
+        Graphics2D g2 = (Graphics2D) g;
+
+    // Draw background box
+    g2.setColor(new Color(0, 0, 0, 150)); // Semi-transparent black
+    g2.fillRoundRect(x, y, 200, 70, 25, 25);
+
+    // Draw border
+    g2.setColor(Color.WHITE);
+    g2.setStroke(new BasicStroke(3));
+    g2.drawRoundRect(x, y, 200, 70, 25, 25);
+
+    // Draw timer text
+    g2.setFont(new Font("Arial", Font.BOLD, 30));
+    
+    if (secondsRemaining <= 10) {
+        g2.setColor(Color.RED);
+    } else {
+        g2.setColor(Color.WHITE);
+    }
+    
+    g2.drawString("Time Left: " + secondsRemaining, x + 15, y + 45);
     }
 
 
