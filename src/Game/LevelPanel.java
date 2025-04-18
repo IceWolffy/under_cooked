@@ -75,7 +75,19 @@ public class LevelPanel extends JPanel {
             levelHandler.update(); // If needed later
             player.update();
             player2.update();
-            
+
+            // Check collisions with ingredients and respawn
+        for (int i = 0; i < ingredients.size(); i++) {
+            Ingredient ing = ingredients.get(i);
+            if (!ing.collected && player.getBounds().intersects(ing.getBounds())) {
+                ingredients.set(i, createRandomIngredient());
+            }
+            if (!ing.collected && player2.getBounds().intersects(ing.getBounds())) {
+                ingredients.set(i, createRandomIngredient());
+            }
+        }
+
+        repaint();
         });
 
         //start the countdown
