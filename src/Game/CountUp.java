@@ -4,16 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CountUp {
-    private int secondsRemaining;
+    private int secondsElapsed;
+    private int targetSeconds;
     private Timer swingTimer;
     private boolean running = false;
 
-    public CountUp(int totalSeconds) {
-        this.secondsRemaining = totalSeconds;
+    public CountUp(int targetSeconds) {
+
+        this.targetSeconds = targetSeconds;
+        this.secondsElapsed = 0;
 
         swingTimer = new Timer(1000, e -> {
-            if (secondsRemaining > 0) {
-                secondsRemaining--;
+            if (secondsElapsed < targetSeconds) {
+                secondsElapsed++;
             } else {
                 swingTimer.stop();
                 running = false;
@@ -28,14 +31,14 @@ public class CountUp {
         }
     }
 
-    public void reset(int totalSeconds){
+    public void reset(){
         swingTimer.stop();
-        this.secondsRemaining = totalSeconds;
+        this.secondsElapsed = 0;
         running = false;
     }
 
-    public int getSecondsRemaining() {
-        return secondsRemaining;
+    public int getSecondsElapsed() {
+        return secondsElapsed;
     }
 
     public boolean isRunning() { // Check if the timer is running
