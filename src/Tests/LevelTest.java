@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Game.LevelHandler;
+import utils.HelpMethods;
 import utils.LoadSave;
 
 public class LevelTest {
@@ -51,5 +52,11 @@ public class LevelTest {
         for (BufferedImage sprite : sprites) {
             assertNotNull(sprite, "Each foreground sprite should not be null");
         }
+    }
+    @Test
+    void testIsSolidOutOfBounds() {
+        var data = LoadSave.getLevelData();
+        boolean result = HelpMethods.isSolid(-10, -10, data);
+        assertTrue(result, "Out-of-bounds coordinates should be solid");
     }
 }
