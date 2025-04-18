@@ -26,6 +26,22 @@ public class SoundEffects {
 
     public static void play(String soundFile) {
         preload(soundFile);
+
+        if (soundFile.contains("Playermovement")) {
+            // Special handling for movment sound: create new clip for each walk sound
+            try {
+                InputStream audioSrc = SoundEffects.class.getResourceAsStream(soundFile);
+                AudioInputStream ais = AudioSystem.getAudioInputStream(audioSrc);
+                Clip walkClip = AudioSystem.getClip();
+                walkClip.open(ais);
+                walkClip.start();
+            } catch (Exception e) {
+                System.out.println("Error playing walk sound: " + soundFile);
+                e.printStackTrace();
+            }
+            return;
+        }
+
         Clip clip = soundCache.get(soundFile);
         if (clip == null) return;
 
