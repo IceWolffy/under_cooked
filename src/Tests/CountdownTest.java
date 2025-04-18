@@ -43,6 +43,16 @@ public class CountdownTest {
         assertEquals("Seconds should reset to 20", 20, countdown.getSecondsRemaining());
     }
 
-    
+    @Test
+    public void testCountdown() throws InterruptedException { // This test will check if the countdown works correctly
+        countdown.start();
+        Thread.sleep(5000); // Wait for 5 seconds
+
+        int secondsAfterFive = countdown.getSecondsRemaining();
+        assertTrue("Seconds should be less than 10 after 5 seconds", secondsAfterFive < 10);
+        assertTrue("Seconds should be greater than or equal to 5", secondsAfterFive >= 5);
+
+        countdown.reset(10); // Reset it so other tests don't break
+    }
 
 }
