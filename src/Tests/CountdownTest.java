@@ -34,6 +34,15 @@ public class CountdownTest {
         countdown.reset(10); // Reset it so other tests don't break
     }
 
+    @Test
+    public void testReset() { // This test will check if the reset method works correctly
+        countdown.start();
+        countdown.reset(20);
+
+        assertFalse("Timer should not be running after reset", countdown.isRunning());
+        assertEquals("Seconds should reset to 20", 20, countdown.getSecondsRemaining());
+    }
+
     
 
 }
