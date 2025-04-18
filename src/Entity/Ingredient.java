@@ -47,12 +47,19 @@ public class Ingredient {
     public void draw(Graphics g) {
         if (!collected) {
     
-            //g.setColor(Color.GREEN);   'circle'
+            //g.setColor(Color.GREEN);   'for circle'
             //g.fillOval(x, y, SIZE, SIZE);
 
             //draw ingredient
             if (!collected && image != null) {
-                g.drawImage(image, x, y, SIZE, SIZE, null);
+                //only drawing first frame
+                int frameWidth = 16;  // adjust if needed
+                int frameHeight = 16;
+                g.drawImage(image,
+                    x, y, x + SIZE, y + SIZE,  // where to draw on screen
+                    0, 0, frameWidth, frameHeight, // what part of the image to draw
+                    null
+                );
             }
 
         }
