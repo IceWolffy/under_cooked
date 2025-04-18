@@ -13,6 +13,7 @@ import java.util.Random;
 
 public class LevelPanel extends JPanel {
 
+
     private LevelHandler levelHandler;
     private Player player;
     private Player player2;
@@ -20,9 +21,11 @@ public class LevelPanel extends JPanel {
 
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
     private Random rand = new Random();
+
     
     // Points awarded per ingredient delivered
     private final int POINTS_PER_INGREDIENT = 10;
+
 
     public LevelPanel() {
         LoadSave.getLevelData();
@@ -118,7 +121,10 @@ public class LevelPanel extends JPanel {
                 }
             }
         });
-        gameThread.start();
+        gameThread.start(); 
+
+        //start the countdown
+        countup.start();
     }
 
     private Ingredient createRandomIngredient() {
