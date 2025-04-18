@@ -3,14 +3,14 @@ package Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class CountUp {
+public class Countdown {
     private int secondsElapsed;
     private int targetSeconds;
     private Timer swingTimer;
     private boolean running = false;
     private String grade;
 
-    public CountUp(int targetSeconds) {
+    public Countdown(int targetSeconds) {
 
         this.targetSeconds = targetSeconds;
         this.secondsElapsed = 0;

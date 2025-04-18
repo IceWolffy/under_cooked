@@ -25,7 +25,7 @@ public class LevelPanel extends JPanel {
     
     // Points awarded per ingredient delivered
     private final int POINTS_PER_INGREDIENT = 10;
-    private CountUp countup = new CountUp(100); // 60 seconds countdown
+    private Countdown countup = new Countdown(100); // 60 seconds countdown
 
     public LevelPanel() {
         LoadSave.getLevelData();
