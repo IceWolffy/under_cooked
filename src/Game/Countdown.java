@@ -42,28 +42,26 @@ public class Countdown {
         return running;
     }
 
-    public void draw(Graphics g, int x, int y){
-        Graphics2D g2 = (Graphics2D) g;
+    public void draw(Graphics g){
 
     // Draw background box
-    g2.setColor(new Color(0, 0, 0, 150)); // Semi-transparent black
-    g2.fillRoundRect(x, y, 200, 70, 25, 25);
+    g.setColor(new Color(0, 0, 0, 150)); // Semi-transparent black
+    g.fillRoundRect(1500, 100, 200, 70, 25, 25);
 
     // Draw border
-    g2.setColor(Color.WHITE);
-    g2.setStroke(new BasicStroke(3));
-    g2.drawRoundRect(x, y, 200, 70, 25, 25);
+    g.setColor(Color.WHITE);
+    g.drawRoundRect(1500, 100, 200, 70, 25, 25);
 
     // Draw timer text
-    g2.setFont(new Font("Arial", Font.BOLD, 30));
+    g.setFont(new Font("Arial", Font.BOLD, 30));
     
     if (secondsRemaining <= 10) {
-        g2.setColor(Color.RED);
+        g.setColor(Color.RED);
     } else {
-        g2.setColor(Color.WHITE);
+        g.setColor(Color.WHITE);
     }
     
-    g2.drawString("Time Left: " + secondsRemaining, x + 15, y + 45);
+    g.drawString("Time Left: " + secondsRemaining+" sec", 1550, 140); // Adjusted position for better centering
     }
 
 
