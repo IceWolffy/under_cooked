@@ -20,7 +20,7 @@ public class LevelPanel extends JPanel {
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
     private Random rand = new Random();
 	
-    private CountUp countdown = new CountUp(120); // 120 seconds countdown
+    private CountUp countup = new CountUp(120); // 120 seconds countdown
 
     public LevelPanel() {
     	LoadSave.getLevelData();
@@ -72,7 +72,7 @@ public class LevelPanel extends JPanel {
         gameThread.start(); 
 
         //start the countdown
-        countdown.start();
+        countup.start();
     }
 
     private Ingredient createRandomIngredient() {
@@ -97,6 +97,6 @@ public class LevelPanel extends JPanel {
         player.draw(g); // Draws player
 		player2.draw(g);
 
-        countdown.draw(g); // Draw the countdown timer 
+        countup.draw(g); // Draw the countdown timer 
     }
 }
