@@ -37,6 +37,17 @@ public class LevelHandler {
         importTerrainAndDecoSprites();
         importForegroundSprites();
     }
+    public BufferedImage[] getTerrainSprites() {
+        return terrainAndDecoSprites;
+    }
+
+    public BufferedImage[] getBackgroundSprites() {
+        return backgroundSprites;
+    }
+
+    public BufferedImage[] getForegroundSprites() {
+        return foregroundSprites;
+    }
 
     private void importBackgroundSprites() {
         BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUND_ATLAS);
