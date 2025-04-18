@@ -44,6 +44,7 @@ public class LevelPanel extends JPanel {
             ingredients.add(createRandomIngredient());
         }
 
+        /** 
         Thread gameThread = new Thread(() -> {
             while (true) {
                 levelHandler.update(); // If needed later
@@ -69,7 +70,13 @@ public class LevelPanel extends JPanel {
                 }
             }
         });
-        gameThread.start();
+        gameThread.start(); */
+        Timer gameTimer = new Timer(16, e -> {
+            levelHandler.update(); // If needed later
+            player.update();
+            player2.update();
+            
+        });
 
         //start the countdown
         countdown.start();
