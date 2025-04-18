@@ -25,12 +25,15 @@ public class MainMenu extends JPanel{
 
         // Play button
         JButton playButton = new JButton("Play");
-        playButton.setBounds(435, 370, 200, 80); // x, y, width, height
+        playButton.setBounds(715, 290, 200, 70); // x, y, width, height
         playButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
         playButton.setBackground(new Color(222, 206, 59));
         add(playButton);
 
         playButton.addActionListener(e -> {
+            SoundEffects.stop();// stop any music first
+            SoundEffects.play("/sounds/gameStart.wav");  // Game start sound
+
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
 
@@ -43,7 +46,7 @@ public class MainMenu extends JPanel{
 
         // Exit button
         JButton exitButton = new JButton("Exit");
-        exitButton.setBounds(435, 470, 200, 80); // Set the position and size of the button
+        exitButton.setBounds(715, 380, 200, 70); // Set the position and size of the button
         exitButton.setFont(new Font("Arial", Font.BOLD, 30)); // Set the font of the button text
         exitButton.setBackground(new Color(222, 206, 59)); // Set the background color of the button
         add(exitButton);
@@ -51,6 +54,9 @@ public class MainMenu extends JPanel{
         exitButton.addActionListener(e -> {
             System.exit(0); // Exit the application when the button is clicked
         });
+
+        SoundEffects.loop("/sounds/Mainmenu.wav");  // Looping menu music
+
     }
 
     @Override

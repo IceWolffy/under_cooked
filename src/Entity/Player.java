@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import Constants.Constants;
 import Game.GameManager;
 import Game.KeyHandler;
+import Game.SoundEffects;
 
 public class Player extends Entity {
 
@@ -32,7 +33,12 @@ public class Player extends Entity {
 	// Add inventory for the player
 	private Inventory inventory;
 
+
 	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY, LevelData levelData) {
+
+	//cooldown field for player movment sound effect
+	private long lastWalkSoundTime = 0;
+	private final long walkCooldown = 300; // ms between sound plays
 		super(spawnX, spawnY, 33, 50);
 
 		this.keyH = keyH;
@@ -108,17 +114,30 @@ public class Player extends Entity {
 		// Movement speeds
 		float xSpeed = 0;
 
-		if (keyH.leftPressed) {
+		//movment block
+		/*if (keyH.leftPressed) {
 			direction = "left";
 			xSpeed -= speed;
 		}
 		if (keyH.rightPressed) {
 			direction = "right";
 			xSpeed += speed;
+		}*/ // new movment block supports sound effect
+		if (keyH.leftPressed || keyH.rightPressed) {
+			direction = keyH.leftPressed ? "left" : "right";
+			x += keyH.rightPressed ? speed : -speed;
+		
+			long now = System.currentTimeMillis();
+			if (now - lastWalkSoundTime >= walkCooldown) {
+				SoundEffects.play("/sounds/Playermovement.wav");  // Walk sound effect
+				lastWalkSoundTime = now;
+			}
 		}
+		
 
 		// Jump
 		if (keyH.jumpPressed && !isJumping) {
+			SoundEffects.play("/sounds/PlayerJump.wav");  // Jump sound effect
 			isJumping = true;
 			velocityY = jumpForce;
 		}

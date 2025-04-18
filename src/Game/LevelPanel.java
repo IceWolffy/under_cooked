@@ -13,6 +13,7 @@ import java.util.Random;
 
 public class LevelPanel extends JPanel {
 
+
     private LevelHandler levelHandler;
     private Player player;
     private Player player2;
@@ -20,9 +21,11 @@ public class LevelPanel extends JPanel {
 
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
     private Random rand = new Random();
+
     
     // Points awarded per ingredient delivered
     private final int POINTS_PER_INGREDIENT = 10;
+    private Countdown count = new Countdown(60); // 60 seconds countdown
 
     public LevelPanel() {
         LoadSave.getLevelData();
@@ -61,6 +64,7 @@ public class LevelPanel extends JPanel {
                     if (!ing.collected) {
                         // Player 1 collecting ingredients
                         if (player.getBounds().intersects(ing.getBounds()) && !player.getInventory().isFull()) {
+                            SoundEffects.play("/sounds/vegtableCollection.wav");  // Ingredient collected sound
                             ing.collected = true;
                             player.getInventory().addIngredient(ing);
                             
@@ -78,6 +82,7 @@ public class LevelPanel extends JPanel {
                         
                         // Player 2 collecting ingredients
                         if (player2.getBounds().intersects(ing.getBounds()) && !player2.getInventory().isFull()) {
+                            SoundEffects.play("/sounds/vegtableCollection.wav");  // Ingredient collected sound
                             ing.collected = true;
                             player2.getInventory().addIngredient(ing);
                             
@@ -118,7 +123,10 @@ public class LevelPanel extends JPanel {
                 }
             }
         });
-        gameThread.start();
+        gameThread.start(); 
+
+        //start the countdown
+        count.start();
     }
 
     private Ingredient createRandomIngredient() {
@@ -148,7 +156,11 @@ public class LevelPanel extends JPanel {
         
         // Draw game instructions
         g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("Collect ingredients and deliver them to the orange drop-off point!", 
-                     GameManager.GAME_WIDTH / 2 - 200, 20);
+                     GameManager.GAME_WIDTH / 2 - 325, 20);
+        
+        //draw timer
+        count.draw(g);
     }
 }
