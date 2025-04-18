@@ -1,60 +1,54 @@
-/*package Game;
-
-import javax.sound.sampled.*;
-
-public class SoundEffects {
-    public static void play(String soundFile) {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                SoundEffects.class.getResourceAsStream(soundFile));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception e) {
-            System.out.println("Error playing sound: " + soundFile);
-            e.printStackTrace();
-        }
-    }
-}*/
 package Game;
 
 import javax.sound.sampled.*;
+import java.util.HashMap;
+import java.io.InputStream;
 
 public class SoundEffects {
-    private static Clip currentClip;
 
-    public static void play(String soundFile) {
-        stop(); // Stop any currently playing sound
+    private static Clip currentClip;  //preload and cache to prevent game & sound lag
+    private static final HashMap<String, Clip> soundCache = new HashMap<>();
+
+    public static void preload(String soundFile) {
+        if (soundCache.containsKey(soundFile)) return;
+
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                SoundEffects.class.getResourceAsStream(soundFile));
-            currentClip = AudioSystem.getClip();
-            currentClip.open(audioInputStream);
-            currentClip.start();
+            InputStream audioSrc = SoundEffects.class.getResourceAsStream(soundFile);
+            AudioInputStream ais = AudioSystem.getAudioInputStream(audioSrc);
+            Clip clip = AudioSystem.getClip();
+            clip.open(ais);
+            soundCache.put(soundFile, clip);
         } catch (Exception e) {
-            System.out.println("Error playing sound: " + soundFile);
+            System.out.println("Error preloading sound: " + soundFile);
             e.printStackTrace();
         }
     }
 
+    public static void play(String soundFile) {
+        preload(soundFile);
+        Clip clip = soundCache.get(soundFile);
+        if (clip == null) return;
+
+        // Restart from beginning every time
+        clip.setFramePosition(0);
+        clip.start();
+    }
+
     public static void loop(String soundFile) {
-        stop(); // Stop any currently playing sound
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                SoundEffects.class.getResourceAsStream(soundFile));
-            currentClip = AudioSystem.getClip();
-            currentClip.open(audioInputStream);
-            currentClip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (Exception e) {
-            System.out.println("Error looping sound: " + soundFile);
-            e.printStackTrace();
-        }
+        stop(); // Stop any running loop
+        preload(soundFile);
+        currentClip = soundCache.get(soundFile);
+        if (currentClip == null) return;
+
+        currentClip.setFramePosition(0);
+        currentClip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public static void stop() {
         if (currentClip != null && currentClip.isRunning()) {
             currentClip.stop();
-            currentClip.close();
+            currentClip.setFramePosition(0);
         }
     }
 }
+
