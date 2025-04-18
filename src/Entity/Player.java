@@ -2,6 +2,7 @@ package Entity;
 
 import java.awt.*;
 import utils.HelpMethods;
+import utils.LevelData;
 import utils.LoadSave;
 
 import java.awt.image.BufferedImage;
@@ -14,7 +15,7 @@ import Game.SoundEffects;
 
 public class Player extends Entity {
 
-	private int[][] lvlData;
+	private LevelData lvlData;
 	private KeyHandler keyH; // Store key handler
 	private boolean isJumping = false;
 	private int velocityY = 0;
@@ -32,12 +33,12 @@ public class Player extends Entity {
 	// Add inventory for the player
 	private Inventory inventory;
 
+
+	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY, LevelData levelData) {
+
 	//cooldown field for player movment sound effect
 	private long lastWalkSoundTime = 0;
 	private final long walkCooldown = 300; // ms between sound plays
-
-
-	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY, int[][] lvlData) {
 		super(spawnX, spawnY, 33, 50);
 
 		this.keyH = keyH;
@@ -46,7 +47,7 @@ public class Player extends Entity {
 		this.startY = spawnY;
 		this.x = spawnX;
 		this.y = spawnY;
-		this.lvlData = lvlData;
+		this.lvlData = levelData;
 		
 		// Initialize the inventory object
 		this.inventory = new Inventory(playerId);

@@ -1,13 +1,27 @@
 package Game;
 
-public class Level {
-	
-	private int[][] lvlData;
+import utils.LevelData;
 
-	public Level(int[][] lvlData) {
-		this.lvlData = lvlData;
-	}
-	public int getSpriteIndex(int x, int y) {
-		return lvlData[y][x];
-	}
+public class Level {
+    private int[][] terrain;
+    private int[][] background;
+    private int[][] foreground;
+
+    public Level(LevelData data) {
+        this.terrain = data.terrain;
+        this.background = data.background;
+        this.foreground = data.foreground;
+    }
+
+    public int getTerrainAndDecoSpriteIndex(int x, int y) {
+        return terrain[y][x];
+    }
+
+    public int getBackgroundSpriteIndex(int x, int y) {
+        return background[y][x];
+    }
+
+    public int getForegroundSpriteIndex(int x, int y) {
+        return foreground[y][x];
+    }
 }
