@@ -32,13 +32,14 @@ public class Player extends Entity {
 	
 	// Add inventory for the player
 	private Inventory inventory;
+	private long lastWalkSoundTime = 0;
+	private final long walkCooldown = 300;
 
 
 	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY, LevelData levelData) {
 
 	//cooldown field for player movment sound effect
-	private long lastWalkSoundTime = 0;
-	private final long walkCooldown = 300; // ms between sound plays
+	 // ms between sound plays
 		super(spawnX, spawnY, 33, 50);
 
 		this.keyH = keyH;

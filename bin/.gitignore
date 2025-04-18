@@ -1,8 +1,9 @@
 /.DS_Store
-/Constants/
+/ingredients/
+/level/
+/player1/
+/sounds/
 /Entity/
 /Game/
 /Tests/
-/level/
-/player1/
 /utils/
