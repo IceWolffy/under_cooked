@@ -31,6 +31,8 @@ public class MainMenu extends JPanel{
         add(playButton);
 
         playButton.addActionListener(e -> {
+            SoundEffects.play("/sounds/gameStart.wav");  // Game start sound
+
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
 
