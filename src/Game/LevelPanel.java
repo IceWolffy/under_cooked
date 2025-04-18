@@ -25,7 +25,7 @@ public class LevelPanel extends JPanel {
     
     // Points awarded per ingredient delivered
     private final int POINTS_PER_INGREDIENT = 10;
-
+    private CountUp countup = new CountUp(100); // 60 seconds countdown
 
     public LevelPanel() {
         LoadSave.getLevelData();
@@ -156,5 +156,8 @@ public class LevelPanel extends JPanel {
         g.setColor(Color.BLACK);
         g.drawString("Collect ingredients and deliver them to the orange drop-off point!", 
                      GameManager.GAME_WIDTH / 2 - 200, 20);
+        
+        //draw timer
+        countup.draw(g);
     }
 }
