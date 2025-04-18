@@ -42,4 +42,14 @@ public class LevelTest {
             assertNotNull(sprite, "Each background sprite should not be null");
         }
     }
+    @Test
+    void testForegroundSpritesAreLoaded() {
+        BufferedImage[] sprites = handler.getForegroundSprites();
+        assertNotNull(sprites, "Foreground sprites should not be null");
+        assertTrue(sprites.length > 0, "Foreground sprite array should have elements");
+
+        for (BufferedImage sprite : sprites) {
+            assertNotNull(sprite, "Each foreground sprite should not be null");
+        }
+    }
 }
