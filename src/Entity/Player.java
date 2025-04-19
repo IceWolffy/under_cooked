@@ -27,6 +27,10 @@ public class Player extends Entity {
 	private int walkTick, walkIndex, walkSpeed = 5;
 	private int idleTick, idleIndex, idleSpeed = 30;
 
+	private double speedMultiplier = 1.0;
+	private int baseSpeed = 5;
+
+
 	// Differentiates between Player 1 and Player 2
 	private int playerId;
 	
@@ -218,4 +222,9 @@ public class Player extends Entity {
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, 80, 80);
 	}
+
+	public void setSpeedMultiplier(double multiplier) {
+		this.speedMultiplier = multiplier;
+	}
+	
 }
