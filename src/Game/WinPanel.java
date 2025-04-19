@@ -15,7 +15,7 @@ public class WinPanel extends JPanel {
         this.winner = winner;
 
         try {
-            background = ImageIO.read(getClass().getResourceAsStream("/winpanel/win_background.png"));
+            background = ImageIO.read(getClass().getResourceAsStream("/winpanel/win_background.jpeg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
