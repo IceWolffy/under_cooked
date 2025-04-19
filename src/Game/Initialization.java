@@ -20,7 +20,7 @@ public class Initialization {
 
         // Preload image
         try {
-            winBackgroundImage = ImageIO.read(Initialization.class.getResourceAsStream("/images/win_background.png"));
+            winBackgroundImage = ImageIO.read(Initialization.class.getResourceAsStream("/winpanel/win_background.jpeg"));
         } catch (IOException e) {
             System.err.println("Could not load win background image");
             e.printStackTrace();
