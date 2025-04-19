@@ -3,6 +3,7 @@ package Game;
 import javax.swing.*;
 
 import Entity.Player;
+import Entity.SpecialCoins;
 import Entity.DropOffPoint;
 import utils.LoadSave;
 import Entity.Ingredient;
@@ -21,6 +22,16 @@ public class LevelPanel extends JPanel {
 
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
     private Random rand = new Random();
+
+    private SpecialCoins mysteryCoin = null;
+    private long gameStartTime;
+    private long nextMysteryCoinSpawnTime;
+
+    private String popupMessage = null;
+    private Color popupColor = Color.BLACK;
+    private long messageEndTime = 0;
+
+
 
     
     // Points awarded per ingredient delivered
@@ -115,6 +126,17 @@ public class LevelPanel extends JPanel {
                     player2.getInventory().clearInventory();
                 }
 
+                // Player 1 touches mystery coin
+                if (mysteryCoin != null && !mysteryCoin.isCollected() && player.getBounds().intersects(mysteryCoin.getBounds())) {
+                    handleMysteryCoin(player, "Player 1");
+                }
+
+                // Player 2 touches mystery coin
+                if (mysteryCoin != null && !mysteryCoin.isCollected() && player2.getBounds().intersects(mysteryCoin.getBounds())) {
+                    handleMysteryCoin(player2, "Player 2");
+                }
+
+
                 // Check if countdown is finished
                 if (count.isFinished()) {
                     // Determine winner based on score
@@ -141,6 +163,14 @@ public class LevelPanel extends JPanel {
                     break; // exit the game loop
                 }
 
+                long now = System.currentTimeMillis();
+
+                // Spawn new mystery coin every 10 seconds
+                if (mysteryCoin == null && now >= nextMysteryCoinSpawnTime) {
+                    mysteryCoin = createMysteryCoin();
+                }
+
+
                 repaint();
                 try {
                     Thread.sleep(16); // ~60 FPS
@@ -153,7 +183,13 @@ public class LevelPanel extends JPanel {
 
         //start the countdown
         count.start();
+
+        gameStartTime = System.currentTimeMillis();
+        nextMysteryCoinSpawnTime = gameStartTime + 10_000; // 10 seconds after game start
+
+    
     }
+
 
     private Ingredient createRandomIngredient() {
         int padding = 50;
@@ -163,6 +199,17 @@ public class LevelPanel extends JPanel {
         int y = rand.nextInt(maxY - padding) + padding;
         return new Ingredient(x, y);
     }
+
+    private SpecialCoins createMysteryCoin() {
+        int padding = 50;
+        int maxX = GameManager.GAME_WIDTH - 32 - padding;
+        int maxY = GameManager.GAME_HEIGHT - 300;
+        int x = rand.nextInt(maxX - padding) + padding;
+        int y = rand.nextInt(maxY - padding) + padding;
+    
+        return new SpecialCoins(x, y);
+    }
+    
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -188,5 +235,49 @@ public class LevelPanel extends JPanel {
         
         //draw timer
         count.draw(g);
+
+        if (popupMessage != null && System.currentTimeMillis() < messageEndTime) {
+            g.setFont(new Font("Arial", Font.BOLD, 30));
+            g.setColor(popupColor);
+            g.drawString(popupMessage, GameManager.GAME_WIDTH / 2 - 200, 100);
+        }
+        
+
     }
+
+    private void handleMysteryCoin(Player touchedPlayer, String playerName) {
+        mysteryCoin.collect(); // Mark as collected
+        nextMysteryCoinSpawnTime = System.currentTimeMillis() + 10_000;
+    
+        boolean speedUp = rand.nextBoolean(); // Random effect
+    
+        if (speedUp) {
+            touchedPlayer.setSpeedMultiplier(2.0); // You’ll create this method in Player.java
+            showTemporaryMessage(playerName + " has gained speed poison!", Color.GREEN);
+        } else {
+            touchedPlayer.setSpeedMultiplier(0.5);
+            showTemporaryMessage(playerName + " has been slowed!", Color.RED);
+        }
+    
+        // Reset speed after 7 seconds
+        new Thread(() -> {
+            try {
+                Thread.sleep(7000);
+                touchedPlayer.setSpeedMultiplier(1.0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    
+        // Remove coin after 1 frame
+        mysteryCoin = null;
+    }
+
+    private void showTemporaryMessage(String message, Color color) {
+        popupMessage = message;
+        popupColor = color;
+        messageEndTime = System.currentTimeMillis() + 3000; // Show for 3 seconds
+    }
+    
+    
 }
