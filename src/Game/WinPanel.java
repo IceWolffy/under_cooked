@@ -2,21 +2,32 @@ package Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 public class WinPanel extends JPanel {
 
     private String winner;
+    private BufferedImage background;
 
     public WinPanel(String winner) {
         this.winner = winner;
 
-        setBackground(Color.BLACK);
+        try {
+            background = ImageIO.read(getClass().getResourceAsStream("/winpanel/win_background.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         setLayout(null);
+        setFocusable(true);
+        requestFocusInWindow();
 
         SoundEffects.stop(); // stop any background music
         SoundEffects.play("/sounds/win.wav"); //  play win music
 
-        // Label
+        // Label winner
         JLabel label = new JLabel(winner + " Wins!", SwingConstants.CENTER);
         label.setForeground(Color.YELLOW);
         label.setFont(new Font("Arial", Font.BOLD, 48));
@@ -36,12 +47,16 @@ public class WinPanel extends JPanel {
             topFrame.repaint();
         });
 
-        setFocusable(true);
-        requestFocusInWindow();
+        //setFocusable(true);
+        //requestFocusInWindow();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        if (background != null) {
+            g.drawImage(background, 0, 0, GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT, null);
+        }
     }
 }
