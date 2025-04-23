@@ -9,9 +9,8 @@ import java.awt.*;
 import java.io.File;
 
 public class PauseScreen extends JPanel {
-    private Image bgImage1;
-    private Image bgImage2;
-    private Image bgImage3;
+    private Image[] backgrounds = new Image[3];
+    private int currentBackgroundIndex = 0;
 
     public PauseScreen(){
         try {
@@ -21,7 +20,7 @@ public class PauseScreen extends JPanel {
             e.printStackTrace();
         }
 
-        
+
 
     }
 
