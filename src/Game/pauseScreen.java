@@ -34,6 +34,14 @@ public class PauseScreen extends JPanel {
         repaint(); // Refresh the panel to show the new background
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgrounds[currentBackgroundIndex] != null) {
+            g.drawImage(backgrounds[currentBackgroundIndex], 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
 
 
 }
