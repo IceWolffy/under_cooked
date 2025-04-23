@@ -21,10 +21,21 @@ public class PauseScreen extends JPanel {
             e.printStackTrace();
         }
 
+        
+
     
 
 
 
+    }
+
+    private JButton createTransparentButton() {
+        JButton button = new JButton();
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        return button;
     }
 
     // Call this method when ESC is pressed
