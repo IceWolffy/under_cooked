@@ -21,7 +21,6 @@ public class PauseScreen extends JPanel {
             e.printStackTrace();
         }
 
-        // Call this method when ESC is pressed
     
 
 
