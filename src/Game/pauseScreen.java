@@ -9,5 +9,10 @@ import java.awt.*;
 import java.io.File;
 
 public class pauseScreen extends JPanel {
+    private Image bgImage1;
+    private Image bgImage2;
+    private Image bgImage3;
+
+    
 
 }
