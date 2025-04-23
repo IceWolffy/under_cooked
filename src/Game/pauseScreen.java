@@ -8,6 +8,6 @@ import static Game.GameManager.GAME_WIDTH;
 import java.awt.*;
 import java.io.File;
 
-public class pauseScreen {
+public class pauseScreen extends JPanel {
 
 }
