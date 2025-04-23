@@ -13,6 +13,18 @@ public class PauseScreen extends JPanel {
     private Image bgImage2;
     private Image bgImage3;
 
+    public PauseScreen(){
+        try {
+            String imagePath = "res" + File.separator + "level" + File.separator + "undercooked_bg.png";
+            bgImage1 = ImageIO.read(new File(imagePath));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        
+
+    }
+
 
 
 }
