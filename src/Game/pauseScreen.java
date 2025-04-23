@@ -14,9 +14,9 @@ public class PauseScreen extends JPanel {
 
     public PauseScreen(){
         try {
-            backgrounds[0] = ImageIO.read(new File("res" + File.separator + "level" + File.separator + ""));
-            backgrounds[1] = ImageIO.read(new File("res" + File.separator + "level" + File.separator + ""));
-            backgrounds[2] = ImageIO.read(new File("res" + File.separator + "level" + File.separator + ""));
+            backgrounds[0] = ImageIO.read(new File("res" + File.separator + "level" + File.separator + "pause1.png"));
+            backgrounds[1] = ImageIO.read(new File("res" + File.separator + "level" + File.separator + "pause2.png"));
+            backgrounds[2] = ImageIO.read(new File("res" + File.separator + "level" + File.separator + "pause3.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
