@@ -11,6 +11,9 @@ import java.io.File;
 public class PauseScreen extends JPanel {
     private Image[] backgrounds = new Image[3];
     private int currentBackgroundIndex = 0;
+    private JButton menuButton;
+    private JButton resumeButton;
+    private JButton restartButton;
 
     public PauseScreen(){
         try {
@@ -20,6 +23,13 @@ public class PauseScreen extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        menuButton = createTransparentButton();
+        resumeButton = createTransparentButton();
+        restartButton = createTransparentButton();
+
+        
+
 
         
 
