@@ -7,8 +7,6 @@ import javax.swing.*;
 
 public class GameManager {
 	
-
-    private JFrame frame;
     
     public final static int TILES_DEFAULT_SIZE = 32;
     public final static float SCALE = 2.0f;
