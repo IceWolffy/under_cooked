@@ -2,8 +2,6 @@ package Game;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-import java.awt.CardLayout;
-import javax.swing.JPanel;
 
 public class KeyHandler implements KeyListener {
 
@@ -11,16 +9,11 @@ public class KeyHandler implements KeyListener {
 
     private boolean isPlayerOne; // Flag to differentiate between players
 
-    // New dependencies for screen control
-    private CardLayout cardLayout;
-    private JPanel screenContainer;
-    private Countdown countdown;
+    private GameManager gameManager; // Reference to GameManager
 
-    public KeyHandler(boolean isPlayerOne, CardLayout layout, JPanel container, Countdown countdown) {
+    public KeyHandler(boolean isPlayerOne, GameManager gameManager) {
         this.isPlayerOne = isPlayerOne; // Assign flag during initialization
-        this.cardLayout = layout;
-        this.screenContainer = container;
-        this.countdown = countdown;
+        this.gameManager = gameManager; // Assign the GameManager instance
 
     }
 
