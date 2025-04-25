@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class LevelPanel extends JPanel {
 
-
+    private GameManager gameManager = new GameManager(); // Reference to GameManager
     private LevelHandler levelHandler;
     private Player player;
     private Player player2;
@@ -29,8 +29,8 @@ public class LevelPanel extends JPanel {
 
     public LevelPanel() {
         LoadSave.getLevelData();
-        KeyHandler keyH = new KeyHandler(true);   // Player 1 uses WASD controls
-        KeyHandler keyH2 = new KeyHandler(false); // Player 2 uses Arrow controls
+        KeyHandler keyH = new KeyHandler(true, gameManager);   // Player 1 uses WASD controls
+        KeyHandler keyH2 = new KeyHandler(false, gameManager); // Player 2 uses Arrow controls
 
         player = new Player(keyH, 1, LoadSave.player1X, LoadSave.player1Y, LoadSave.getLevelData());
         player2 = new Player(keyH2, 2, LoadSave.player2X, LoadSave.player2Y, LoadSave.getLevelData());
