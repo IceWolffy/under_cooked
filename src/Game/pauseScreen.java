@@ -49,6 +49,14 @@ public class PauseScreen extends JPanel {
             cardLayout.show(mainPanel, "menuScreen");
         });
 
+        //resume button
+        resumeButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 50, 200, 50);
+        resumeButton.addActionListener(e -> {
+            System.out.println("Resume button clicked");
+            countdown.start();
+            cardLayout.show(mainPanel, "gameScreen");
+        });
+
 
         
 
