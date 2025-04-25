@@ -29,7 +29,7 @@ public class LevelPanel extends JPanel {
 
     public LevelPanel(GameManager gameManager) {
         this.gameManager = gameManager; // Initialize GameManager reference
-        
+
         LoadSave.getLevelData();
         KeyHandler keyH = new KeyHandler(true, gameManager);   // Player 1 uses WASD controls
         KeyHandler keyH2 = new KeyHandler(false, gameManager); // Player 2 uses Arrow controls
@@ -45,7 +45,6 @@ public class LevelPanel extends JPanel {
         setPreferredSize(new Dimension(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT));
         setBackground(new Color(252, 244, 163));
         setFocusable(true);
-        requestFocusInWindow();
 
         levelHandler = new LevelHandler();
 
