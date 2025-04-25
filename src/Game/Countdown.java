@@ -35,6 +35,13 @@ public class Countdown {
         running = false;
     }
 
+    public void resume() {
+        if (running!= true) {
+            swingTimer.start();
+            running = true;        
+        }
+    }
+
     public void reset(int totalSeconds){
         swingTimer.stop();
         this.secondsRemaining = totalSeconds;
