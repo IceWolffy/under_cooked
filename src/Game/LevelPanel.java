@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class LevelPanel extends JPanel {
 
-    private GameManager gameManager = new GameManager(); // Reference to GameManager
+    private GameManager gameManager; // Reference to GameManager
     private LevelHandler levelHandler;
     private Player player;
     private Player player2;
@@ -27,7 +27,9 @@ public class LevelPanel extends JPanel {
     private final int POINTS_PER_INGREDIENT = 10;
     private Countdown count = new Countdown(60); // 60 seconds countdown
 
-    public LevelPanel() {
+    public LevelPanel(GameManager gameManager) {
+        this.gameManager = gameManager; // Initialize GameManager reference
+        
         LoadSave.getLevelData();
         KeyHandler keyH = new KeyHandler(true, gameManager);   // Player 1 uses WASD controls
         KeyHandler keyH2 = new KeyHandler(false, gameManager); // Player 2 uses Arrow controls
