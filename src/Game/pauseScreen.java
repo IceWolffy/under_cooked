@@ -15,17 +15,11 @@ public class PauseScreen extends JPanel {
     private JButton resumeButton;
     private JButton restartButton;
 
-    private CardLayout cardLayout;
-    private JPanel mainPanel;
-    private Countdown countdown;
-    private LevelPanel levelPanel;
+    private GameManager gameManager;
 
 
-    public PauseScreen(CardLayout layout, JPanel container, Countdown countdown, LevelPanel levelPanel){
-        this.cardLayout = layout;
-        this.mainPanel = container;
-        this.countdown = countdown;
-        this.levelPanel = levelPanel;
+    public PauseScreen(GameManager gameManager) {
+        this.gameManager = gameManager;
 
         setLayout(null); // Use null layout for absolute positioning
 
@@ -45,24 +39,22 @@ public class PauseScreen extends JPanel {
         menuButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 100, 200, 50);
         menuButton.addActionListener(e -> {
             System.out.println("Menu button clicked");
-            countdown.stop();
-            cardLayout.show(mainPanel, "menuScreen");
+            gameManager.getMainPanel();
         });
 
         //resume button
         resumeButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 50, 200, 50);
         resumeButton.addActionListener(e -> {
             System.out.println("Resume button clicked");
-            countdown.resume();
-            cardLayout.show(mainPanel, "gameScreen");
+            gameManager.getCountdown().start(); // Start the countdown again
         });
 
         //restart button
         restartButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2, 200, 50);
         restartButton.addActionListener(e -> {
-            countdown.reset(60);
-            levelPanel.repaint();
-            cardLayout.show(mainPanel, "Level");
+            gameManager.getLevelPanel(); 
+            gameManager.getCountdown().start(); // Start the countdown again
+            
         });
 
     }
