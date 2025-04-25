@@ -24,6 +24,8 @@ public class GameManager {
     private PauseScreen pauseScreen;
     private Countdown countdown;
 
+    private boolean paused = false;
+
     public GameManager(){
         layout = new CardLayout();
         mainPanel = new JPanel(layout);
