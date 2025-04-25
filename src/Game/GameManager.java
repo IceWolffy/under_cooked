@@ -44,7 +44,11 @@ public class GameManager {
     public JPanel getMainPanel() {
         return mainPanel;
     }
-    
+
+    public JPanel getLevelPanel() {
+        return levelPanel;
+    }
+
 
     
 
