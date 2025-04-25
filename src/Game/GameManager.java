@@ -58,6 +58,10 @@ public class GameManager {
         layout.show(mainPanel, "Pause");
     }
 
+    public void resumeGame() {
+        countdown.resume();
+        layout.show(mainPanel, "gameScreen");
+    }
     
 
 }
