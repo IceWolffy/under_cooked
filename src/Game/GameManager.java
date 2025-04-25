@@ -39,6 +39,14 @@ public class GameManager {
         mainPanel.add(mainMenu, "menuScreen");
         mainPanel.add(levelPanel, "gameScreen");
         mainPanel.add(pauseScreen, "pauseScreen");
+
+        JFrame frame = new JFrame("Undercooked");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(mainPanel);
+        frame.pack();
+        frame.setVisible(true);
+
+        showScreen("menuScreen");
     }
     
     public void showScreen(String screenName) {
