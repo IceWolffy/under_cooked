@@ -68,6 +68,11 @@ public class GameManager {
         layout.show(mainPanel, "Level");
         countdown.start();
     }
+
+    public void goToMenu() {
+        countdown.stop();
+        layout.show(mainPanel, "Menu");
+    }
     
 
 }
