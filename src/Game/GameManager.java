@@ -40,6 +40,10 @@ public class GameManager {
         mainPanel.add(levelPanel, "gameScreen");
         mainPanel.add(pauseScreen, "pauseScreen");
     }
+    
+    public void showScreen(String screenName) {
+        layout.show(mainPanel, screenName);
+    }
 
     public JPanel getMainPanel() {
         return mainPanel;
