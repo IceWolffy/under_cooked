@@ -51,6 +51,9 @@ public class GameManager {
     
     public void showScreen(String screenName) {
         layout.show(mainPanel, screenName);
+        if (screenName.equals("gameScreen")) {
+        levelPanel.requestFocusInWindow();
+    }
     }
 
     public JPanel getMainPanel() {
