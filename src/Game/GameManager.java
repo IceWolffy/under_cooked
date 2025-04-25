@@ -70,23 +70,25 @@ public class GameManager {
 
     public void pauseGame() {
         countdown.stop();
-        layout.show(mainPanel, "Pause");
+        layout.show(mainPanel, "pauseScreen");
     }
 
     public void resumeGame() {
         countdown.resume();
         layout.show(mainPanel, "gameScreen");
+        levelPanel.requestFocusInWindow(); // Ensure key input works after resuming
     }
 
     public void restartGame() {
         countdown.reset(60);
-        layout.show(mainPanel, "Level");
+        layout.show(mainPanel, "gameScreen");
         countdown.start();
+        levelPanel.requestFocusInWindow(); // Ensure key input works 
     }
 
     public void goToMenu() {
         countdown.stop();
-        layout.show(mainPanel, "Menu");
+        layout.show(mainPanel, "menuScreen");
     }
     
 
