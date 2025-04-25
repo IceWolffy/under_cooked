@@ -49,6 +49,10 @@ public class GameManager {
         return levelPanel;
     }
 
+    public Countdown getCountdown() {
+        return countdown;
+    }
+
 
     
 
