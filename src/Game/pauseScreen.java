@@ -15,7 +15,20 @@ public class PauseScreen extends JPanel {
     private JButton resumeButton;
     private JButton restartButton;
 
-    public PauseScreen(){
+    private CardLayout cardLayout;
+    private JPanel mainPanel;
+    private Countdown countdown;
+    private LevelPanel levelPanel;
+
+
+    public PauseScreen(CardLayout layout, JPanel container, Countdown countdown, LevelPanel levelPanel){
+        this.cardLayout = layout;
+        this.mainPanel = container;
+        this.countdown = countdown;
+        this.levelPanel = levelPanel;
+
+        setLayout(null); // Use null layout for absolute positioning
+
         try {
             backgrounds[0] = ImageIO.read(new File("res" + File.separator + "level" + File.separator + "pause1.png"));
             backgrounds[1] = ImageIO.read(new File("res" + File.separator + "level" + File.separator + "pause2.png"));
@@ -28,7 +41,13 @@ public class PauseScreen extends JPanel {
         resumeButton = createTransparentButton();
         restartButton = createTransparentButton();
 
-        
+        //menu button
+        menuButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 100, 200, 50);
+        menuButton.addActionListener(e -> {
+            System.out.println("Menu button clicked");
+            countdown.stop();
+            cardLayout.show(mainPanel, "menuScreen");
+        });
 
 
         
