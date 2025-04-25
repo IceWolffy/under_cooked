@@ -130,6 +130,31 @@ public class LevelPanel extends JPanel {
         count.start();
     }
 
+    public void resetLevel() {
+        // 1. Reset player positions
+        player.setStartX(LoadSave.player1X);
+        player.setStartY(LoadSave.player1Y);
+        player2.setStartX(LoadSave.player2X);
+        player2.setStartY(LoadSave.player2Y);
+    
+        // 2. Reset player inventories (if you want to clear what they're carrying)
+        player.getInventory().clearInventory();
+        player2.getInventory().clearInventory();
+    
+        // 3. Reset scores (if you want to reset scores on restart)
+        player.getInventory().resetScore();
+        player2.getInventory().resetScore();
+    
+        // 4. Clear and respawn ingredients
+        ingredients.clear();
+        for (int i = 0; i < 5; i++) {
+            ingredients.add(createRandomIngredient());
+        }
+    
+        // 6. Repaint the panel to reflect the reset state
+        repaint();
+    }
+
     private Ingredient createRandomIngredient() {
         int padding = 50;
         int maxX = GameManager.GAME_WIDTH - Ingredient.SIZE - padding;
