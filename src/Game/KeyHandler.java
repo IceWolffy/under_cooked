@@ -11,8 +11,17 @@ public class KeyHandler implements KeyListener {
 
     private boolean isPlayerOne; // Flag to differentiate between players
 
-    public KeyHandler(boolean isPlayerOne) {
+    // New dependencies for screen control
+    private CardLayout cardLayout;
+    private JPanel screenContainer;
+    private Countdown countdown;
+
+    public KeyHandler(boolean isPlayerOne, CardLayout layout, JPanel container, Countdown countdown) {
         this.isPlayerOne = isPlayerOne; // Assign flag during initialization
+        this.cardLayout = layout;
+        this.screenContainer = container;
+        this.countdown = countdown;
+
     }
 
     @Override
@@ -33,6 +42,8 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_RIGHT) rightPressed = true;
             if (code == KeyEvent.VK_UP) jumpPressed = true;
         }
+
+        
     }
 
     @Override
