@@ -80,7 +80,7 @@ public class PauseScreen extends JPanel {
     // Call this method when ESC is pressed
     public void switchBackground() {
         currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
-        repaint(); // Refresh the panel to show the new background
+        repaint(); // Refreshes the panel to show the new background
     }
 
     @Override

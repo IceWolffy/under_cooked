@@ -30,6 +30,11 @@ public class Countdown {
         }
     }
 
+    public void stop() {
+        swingTimer.stop();
+        running = false;
+    }
+
     public void reset(int totalSeconds){
         swingTimer.stop();
         this.secondsRemaining = totalSeconds;
