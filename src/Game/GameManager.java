@@ -62,6 +62,12 @@ public class GameManager {
         countdown.resume();
         layout.show(mainPanel, "gameScreen");
     }
+
+    public void restartGame() {
+        countdown.reset(60);
+        layout.show(mainPanel, "Level");
+        countdown.start();
+    }
     
 
 }
