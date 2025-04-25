@@ -39,22 +39,20 @@ public class PauseScreen extends JPanel {
         menuButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 100, 200, 50);
         menuButton.addActionListener(e -> {
             System.out.println("Menu button clicked");
-            gameManager.getMainPanel();
+            gameManager.pauseGame();
         });
 
         //resume button
         resumeButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 50, 200, 50);
         resumeButton.addActionListener(e -> {
             System.out.println("Resume button clicked");
-            gameManager.getCountdown().start(); // Start the countdown again
+            gameManager.resumeGame(); // Call the method to resume the game
         });
 
         //restart button
         restartButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2, 200, 50);
         restartButton.addActionListener(e -> {
-            gameManager.getLevelPanel(); 
-            gameManager.getCountdown().start(); // Start the countdown again
-            
+            gameManager.restartGame();         
         });
 
     }
