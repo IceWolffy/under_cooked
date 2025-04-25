@@ -41,6 +41,11 @@ public class GameManager {
         mainPanel.add(pauseScreen, "pauseScreen");
     }
 
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+    
+
     
 
 }
