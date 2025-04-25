@@ -53,6 +53,10 @@ public class GameManager {
         return countdown;
     }
 
+    public void pauseGame() {
+        countdown.stop();
+        layout.show(mainPanel, "Pause");
+    }
 
     
 
