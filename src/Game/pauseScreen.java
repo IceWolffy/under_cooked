@@ -39,7 +39,7 @@ public class PauseScreen extends JPanel {
         menuButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 100, 200, 50);
         menuButton.addActionListener(e -> {
             System.out.println("Menu button clicked");
-            gameManager.pauseGame();
+            gameManager.goToMenu();
         });
 
         //resume button
