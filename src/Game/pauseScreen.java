@@ -53,17 +53,16 @@ public class PauseScreen extends JPanel {
         resumeButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 50, 200, 50);
         resumeButton.addActionListener(e -> {
             System.out.println("Resume button clicked");
-            countdown.start();
+            countdown.resume();
             cardLayout.show(mainPanel, "gameScreen");
         });
 
         //restart button
         restartButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2, 200, 50);
         restartButton.addActionListener(e -> {
-            System.out.println("Restart button clicked");
-            countdown.stop();
-            levelPanel.restartLevel();
-            cardLayout.show(mainPanel, "gameScreen");
+            countdown.reset(60);
+            levelPanel.repaint();
+            cardLayout.show(mainPanel, "Level");
         });
 
     }
