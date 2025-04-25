@@ -2,6 +2,8 @@ package Game;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 public class KeyHandler implements KeyListener {
 
