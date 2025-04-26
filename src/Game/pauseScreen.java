@@ -36,7 +36,7 @@ public class PauseScreen extends JPanel {
         restartButton = createTransparentButton();
 
         //menu button
-        menuButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 100, 200, 50);
+        menuButton.setBounds(300,400, 200, 50);
         menuButton.addActionListener(e -> {
             System.out.println("Menu button clicked");
             gameManager.goToMenu();
@@ -63,6 +63,8 @@ public class PauseScreen extends JPanel {
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
         button.setFocusPainted(false);
+        button.setBorder(null);
+        button.setFocusable(false);
         return button;
     }
 

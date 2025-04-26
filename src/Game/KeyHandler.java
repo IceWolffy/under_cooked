@@ -37,7 +37,7 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_UP) jumpPressed = true;
         }
 
-        if (code == KeyEvent.VK_ESCAPE) {
+        if (code == KeyEvent.VK_ESCAPE && isPlayerOne) {
             if (!gameManager.isPaused()) {
                 gameManager.pauseGame();
             } else {
