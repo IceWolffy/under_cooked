@@ -34,27 +34,32 @@ public class PauseScreen extends JPanel {
         menuButton = createTransparentButton();
         resumeButton = createTransparentButton();
         restartButton = createTransparentButton();
+        
 
         //menu button
-        menuButton.setBounds(300,400, 200, 50);
+        menuButton.setBounds(321,300, 280, 220); //x,y,width,height
         menuButton.addActionListener(e -> {
             System.out.println("Menu button clicked");
             gameManager.goToMenu();
         });
 
         //resume button
-        resumeButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2 - 50, 200, 50);
+        resumeButton.setBounds(700, 300, 270, 220);
         resumeButton.addActionListener(e -> {
             System.out.println("Resume button clicked");
             gameManager.resumeGame(); // Call the method to resume the game
         });
 
         //restart button
-        restartButton.setBounds(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 2, 200, 50);
+        restartButton.setBounds(1070, 300, 270, 220);
         restartButton.addActionListener(e -> {
             gameManager.restartGame();         
         });
 
+        // Add buttons to the panel
+        add(menuButton);
+        add(resumeButton);
+        add(restartButton);
     }
 
     private JButton createTransparentButton() {
@@ -65,6 +70,7 @@ public class PauseScreen extends JPanel {
         button.setFocusPainted(false);
         button.setBorder(null);
         button.setFocusable(false);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         return button;
     }
 
