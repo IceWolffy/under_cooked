@@ -9,8 +9,12 @@ public class KeyHandler implements KeyListener {
 
     private boolean isPlayerOne; // Flag to differentiate between players
 
-    public KeyHandler(boolean isPlayerOne) {
+    private GameManager gameManager; // Reference to GameManager
+
+    public KeyHandler(boolean isPlayerOne, GameManager gameManager) {
         this.isPlayerOne = isPlayerOne; // Assign flag during initialization
+        this.gameManager = gameManager; // Assign the GameManager instance
+
     }
 
     @Override
@@ -18,6 +22,7 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        System.out.println("Key pressed: " + e.getKeyCode());
         int code = e.getKeyCode();
 
         if (isPlayerOne) {
@@ -31,10 +36,21 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_RIGHT) rightPressed = true;
             if (code == KeyEvent.VK_UP) jumpPressed = true;
         }
+
+        if (code == KeyEvent.VK_ESCAPE && isPlayerOne) {
+            if (!gameManager.isPaused()) {
+                gameManager.pauseGame();
+            } else {
+                gameManager.resumeGame();
+            }
+        }
+
+        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        System.out.println("Key pressed: " + e.getKeyCode());
         int code = e.getKeyCode();
 
         if (isPlayerOne) {

@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class LevelPanel extends JPanel {
 
-
+    private GameManager gameManager; // Reference to GameManager
     private LevelHandler levelHandler;
     private Player player;
     private Player player2;
@@ -27,10 +27,11 @@ public class LevelPanel extends JPanel {
     private final int POINTS_PER_INGREDIENT = 10;
     private Countdown count = new Countdown(60); // 60 seconds countdown
 
-    public LevelPanel() {
+    public LevelPanel(GameManager gameManager) {
+        // Initialize GameManager reference
         LoadSave.getLevelData();
-        KeyHandler keyH = new KeyHandler(true);   // Player 1 uses WASD controls
-        KeyHandler keyH2 = new KeyHandler(false); // Player 2 uses Arrow controls
+        KeyHandler keyH = new KeyHandler(true, gameManager);   // Player 1 uses WASD controls
+        KeyHandler keyH2 = new KeyHandler(false, gameManager); // Player 2 uses Arrow controls
 
         player = new Player(keyH, 1, LoadSave.player1X, LoadSave.player1Y, LoadSave.getLevelData());
         player2 = new Player(keyH2, 2, LoadSave.player2X, LoadSave.player2Y, LoadSave.getLevelData());
@@ -43,7 +44,6 @@ public class LevelPanel extends JPanel {
         setPreferredSize(new Dimension(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT));
         setBackground(new Color(252, 244, 163));
         setFocusable(true);
-        requestFocusInWindow();
 
         levelHandler = new LevelHandler();
 
@@ -127,6 +127,31 @@ public class LevelPanel extends JPanel {
 
         //start the countdown
         count.start();
+    }
+
+    public void resetLevel() {
+        // 1. Reset player positions
+        player.setStartX(LoadSave.player1X);
+        player.setStartY(LoadSave.player1Y);
+        player2.setStartX(LoadSave.player2X);
+        player2.setStartY(LoadSave.player2Y);
+    
+        // 2. Reset player inventories (if you want to clear what they're carrying)
+        player.getInventory().clearInventory();
+        player2.getInventory().clearInventory();
+    
+        // 3. Reset scores (if you want to reset scores on restart)
+        player.getInventory().resetScore();
+        player2.getInventory().resetScore();
+    
+        // 4. Clear and respawn ingredients
+        ingredients.clear();
+        for (int i = 0; i < 5; i++) {
+            ingredients.add(createRandomIngredient());
+        }
+    
+        // 6. Repaint the panel to reflect the reset state
+        repaint();
     }
 
     private Ingredient createRandomIngredient() {

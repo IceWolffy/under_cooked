@@ -70,6 +70,9 @@ public class Player extends Entity {
 	public int getStartY() {
 		return startY;
 	}
+	public void setStartX(int newX) {
+		this.startX = newX;
+	}
 
 	public void setStartY(int newY) {
 		this.startY = newY;

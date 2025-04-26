@@ -11,8 +11,11 @@ import java.io.File;
 
 public class MainMenu extends JPanel{
     private Image bgImage;
+    private GameManager gameManager;
 
-    public MainMenu() {
+    public MainMenu(GameManager gameManager) {
+        this.gameManager = gameManager;
+
         try {
             String imagePath = "res" + File.separator + "level" + File.separator + "undercooked_bg.png";
             bgImage = ImageIO.read(new File(imagePath));
@@ -38,7 +41,7 @@ public class MainMenu extends JPanel{
 
 
             // Pass the level map data when initializing the LevelPanel
-            frame.setContentPane(new LevelPanel()); 
+            gameManager.showScreen("gameScreen"); 
             frame.revalidate(); // Revalidate the layout
             frame.repaint(); // Force repaint to update the frame
             frame.getContentPane().requestFocusInWindow(); // Ensure focus
