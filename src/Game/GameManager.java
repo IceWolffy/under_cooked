@@ -96,6 +96,10 @@ public class GameManager {
         countdown.stop();
         layout.show(mainPanel, "menuScreen");
     }
+
+    public boolean isPaused() {
+        return paused;
+    }
     
 
 }
