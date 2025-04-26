@@ -22,8 +22,7 @@ public class HelpMethods {
 	    int terrainValue = lvlData.terrain[yIndex][xIndex];
 	    int foregroundValue = lvlData.foreground[yIndex][xIndex];
 
-	    if (foregroundValue == 13) return true;
-	    // Here's the fix: 
+
 	    return terrainValue != 0;
 	}
 
