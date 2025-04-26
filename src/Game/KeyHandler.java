@@ -9,8 +9,6 @@ public class KeyHandler implements KeyListener {
 
     private boolean isPlayerOne; // Flag to differentiate between players
 
-    private boolean isPaused = false;
-
     private GameManager gameManager; // Reference to GameManager
 
     public KeyHandler(boolean isPlayerOne, GameManager gameManager) {
