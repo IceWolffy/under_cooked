@@ -8,7 +8,7 @@ import static Game.GameManager.GAME_WIDTH;
 import java.awt.*;
 import java.io.File;
 
-public class PauseScreen extends JPanel {
+public class pauseScreen extends JPanel {
     private Image[] backgrounds = new Image[3];
     private int currentBackgroundIndex = 0;
     private JButton menuButton;
@@ -18,7 +18,7 @@ public class PauseScreen extends JPanel {
     private GameManager gameManager;
 
 
-    public PauseScreen(GameManager gameManager) {
+    public pauseScreen(GameManager gameManager) {
         this.gameManager = gameManager;
 
         setLayout(null); // Use null layout for absolute positioning

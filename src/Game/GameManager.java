@@ -20,7 +20,7 @@ public class GameManager {
 
     private LevelPanel levelPanel;
     private MainMenu mainMenu;
-    private PauseScreen pauseScreen;
+    private pauseScreen pauseScreen;
     private Countdown countdown;
 
     private boolean paused = false;
@@ -32,7 +32,7 @@ public class GameManager {
         countdown = new Countdown(60); // 60 seconds countdown
 
         levelPanel = new LevelPanel(this); // Pass GameManager to LevelPanel
-        pauseScreen = new PauseScreen(this);
+        pauseScreen = new pauseScreen(this);
         mainMenu = new MainMenu(this);
 
         mainPanel.add(mainMenu, "menuScreen");
@@ -42,6 +42,9 @@ public class GameManager {
         JFrame frame = new JFrame("Undercooked");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(mainPanel);
+        frame.setResizable(false); // Prevent window resizing
+        frame.setSize(GAME_WIDTH, GAME_HEIGHT); // Set explicit size
+        frame.setLocationRelativeTo(null); // Center the window
         frame.pack();
         frame.setVisible(true);
 
