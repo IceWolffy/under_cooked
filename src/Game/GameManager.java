@@ -77,9 +77,12 @@ public class GameManager {
     }
 
     public void resumeGame() {
-        countdown.resume();
-        layout.show(mainPanel, "gameScreen");
-        levelPanel.requestFocusInWindow(); // Ensure key input works after resuming
+        if (paused) {
+            countdown.resume();
+            showScreen("gameScreen");
+            levelPanel.requestFocusInWindow();
+            paused = false;
+        }
     }
 
     public void restartGame() {
