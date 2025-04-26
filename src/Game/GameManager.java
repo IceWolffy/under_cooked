@@ -69,8 +69,11 @@ public class GameManager {
     }
 
     public void pauseGame() {
-        countdown.stop();
-        layout.show(mainPanel, "pauseScreen");
+        if (!paused) {
+            countdown.stop();
+            showScreen("pauseScreen");
+            paused = true;
+        }
     }
 
     public void resumeGame() {
