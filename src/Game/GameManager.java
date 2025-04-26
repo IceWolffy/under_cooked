@@ -2,7 +2,6 @@ package Game;
 
 import java.awt.CardLayout;
 
-import javax.smartcardio.Card;
 import javax.swing.*;
 
 public class GameManager {
