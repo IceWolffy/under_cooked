@@ -51,7 +51,8 @@ public class GameManager {
     public void showScreen(String screenName) {
         layout.show(mainPanel, screenName);
         if (screenName.equals("gameScreen")) {
-        levelPanel.requestFocusInWindow();
+            // Use invokeLater to guarantee focus after layout change
+            SwingUtilities.invokeLater(() -> levelPanel.requestFocusInWindow());
     }
     }
 
@@ -86,14 +87,14 @@ public class GameManager {
 
     public void restartGame() {
         countdown.reset(60);
-        layout.show(mainPanel, "gameScreen");
+        showScreen("gameScreen");
         countdown.start();
         levelPanel.requestFocusInWindow(); // Ensure key input works 
     }
 
     public void goToMenu() {
         countdown.stop();
-        layout.show(mainPanel, "menuScreen");
+        showScreen("menuScreen");
     }
 
     public boolean isPaused() {
