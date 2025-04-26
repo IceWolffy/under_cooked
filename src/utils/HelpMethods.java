@@ -4,40 +4,43 @@ import Game.GameManager;
 
 public class HelpMethods {
 
-    public static boolean canMoveHere(int x, int y, int width, int height, LevelData lvlData) {
-        // Check if player can move here based on terrain
-        if (!isSolid(x, y, lvlData)) {
-            if (!isSolid(x + width, y + height, lvlData)) {
-                if (!isSolid(x + width, y, lvlData)) {
-                    if (!isSolid(x, y + height, lvlData)) {
-                        return true; // All checks passed, player can move here
-                    }
-                }
-            }
-        }
-        return false; // Player cannot move here if any of the checks failed
-    }
+	public static boolean canMoveHere(int x, int y, int width, int height, LevelData lvlData, int xSpeed, int ySpeed) {
+	    int futureX = x + xSpeed;
+	    int futureY = y + ySpeed;
 
-    public static boolean isSolid(int x, int y, LevelData lvlData) {
-        // Ensure the coordinates are within the level bounds
-        if (x < 0 || x > GameManager.GAME_WIDTH) {
-            return true; // Outside game area, considered solid
-        }
-        if (y < 0 || y > GameManager.GAME_HEIGHT) {
-            return true; // Outside game area, considered solid
-        }
+	    return !isSolidArea(futureX, futureY, width, height, lvlData);
+	}
 
-        // Calculate the tile coordinates from the pixel positions
-        int xIndex = x / GameManager.TILES_SIZE;
-        int yIndex = y / GameManager.TILES_SIZE;
 
-        // Check the terrain array of the level
-        int value = lvlData.terrain[yIndex][xIndex]; // Correct access to terrain data
-        
-        // Determine if the tile is solid based on the terrain value
-        if (value > 247 || value < 0 || value == 22) {
-            return true; // If solid, return true
-        }
-        return false; // If not solid, return false
-    }
+	public static boolean isSolid(int x, int y, LevelData lvlData) {
+	    if (x < 0 || x >= GameManager.GAME_WIDTH) return true;
+	    if (y < 0 || y >= GameManager.GAME_HEIGHT) return true;
+
+	    int xIndex = x / GameManager.TILES_SIZE;
+	    int yIndex = y / GameManager.TILES_SIZE;
+
+	    int terrainValue = lvlData.terrain[yIndex][xIndex];
+	    int foregroundValue = lvlData.foreground[yIndex][xIndex];
+
+
+	    return terrainValue != 0;
+	}
+
+	private static boolean isSolidArea(int x, int y, int width, int height, LevelData lvlData) {
+	    for (int i = 0; i <= width; i += GameManager.TILES_SIZE / 2) {
+	        if (isSolid(x + i, y, lvlData) || isSolid(x + i, y + height, lvlData)) {
+	            return true;
+	        }
+	    }
+
+	    for (int i = 0; i <= height; i += GameManager.TILES_SIZE / 2) {
+	        if (isSolid(x, y + i, lvlData) || isSolid(x + width, y + i, lvlData)) {
+	            return true;
+	        }
+	    }
+
+	    return false;
+	}
+
+
 }

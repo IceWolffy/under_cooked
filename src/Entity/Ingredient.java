@@ -11,7 +11,7 @@ public class Ingredient {
     public int x, y;
     //public BufferedImage image;
     public boolean collected = false;
-    public static final int SIZE = 48; //20 incase of circles
+    public static final int SIZE = 70; //20 incase of circles
 
     private BufferedImage image;
 
@@ -24,7 +24,7 @@ public class Ingredient {
         "potato.png",
         "radish.png",
         "rose.png",
-        "spinash.png",
+        "spinach.png",
         "sunflower.png",
         "turnip.png"
 

@@ -26,6 +26,9 @@ public class Player extends Entity {
 	private BufferedImage[] walkAnimation;
 	private int walkTick, walkIndex, walkSpeed = 5;
 	private int idleTick, idleIndex, idleSpeed = 30;
+	
+	private String direction = "right";  // Default direction is right
+
 
 	// Differentiates between Player 1 and Player 2
 	private int playerId;
@@ -114,57 +117,48 @@ public class Player extends Entity {
 		}
 	}
 
-	public void update() {
-		// Movement speeds
-		float xSpeed = 0;
+		public void update() {
+		    int xSpeed = 0;
+		    int ySpeed = 0;
 
-		//movment block
-		/*if (keyH.leftPressed) {
-			direction = "left";
-			xSpeed -= speed;
-		}
-		if (keyH.rightPressed) {
-			direction = "right";
-			xSpeed += speed;
-		}*/ // new movment block supports sound effect
-		if (keyH.leftPressed || keyH.rightPressed) {
-			direction = keyH.leftPressed ? "left" : "right";
-			x += keyH.rightPressed ? speed : -speed;
-		
-			long now = System.currentTimeMillis();
-			if (now - lastWalkSoundTime >= walkCooldown) {
-				SoundEffects.play("/sounds/Playermovement.wav");  // Walk sound effect
-				lastWalkSoundTime = now;
-			}
-		}
-		
+		    // Horizontal movement
+		    if (keyH.leftPressed) {
+		        direction = "left";
+		        xSpeed = -speed;
+		    } else if (keyH.rightPressed) {
+		        direction = "right";
+		        xSpeed = speed;
+		    }
 
-		// Jump
-		if (keyH.jumpPressed && !isJumping) {
-			SoundEffects.play("/sounds/PlayerJump.wav");  // Jump sound effect
-			isJumping = true;
-			velocityY = jumpForce;
-		}
+		    // Jump
+		    if (keyH.jumpPressed && !isJumping) {
+		        SoundEffects.play("/sounds/PlayerJump.wav");  
+		        isJumping = true;
+		        velocityY = jumpForce;
+		    }
 
-		// Gravity
-		velocityY += gravity;
-		float ySpeed = velocityY * 2; // Testing inventory, can remove the "* 2" later
+		    // Gravity
+		    velocityY += gravity;
+		    ySpeed = velocityY * 2; // adjust as needed
 
-		// Separate movement checks
-		if (HelpMethods.canMoveHere((int) (x + xSpeed), y, width, height, lvlData)) {
-			x += xSpeed;
-		}
-		if (HelpMethods.canMoveHere(x, (int) (y + ySpeed), width, height, lvlData)) {
-			y += ySpeed;
-		} else {
-			if (velocityY > 0) {
-				isJumping = false;
-			}
-			velocityY = 0;
+		    // 👉 NOW check collision for X
+		    if (HelpMethods.canMoveHere(x, y, width, height, lvlData, xSpeed, 0)) {
+		        x += xSpeed;
+		    }
+
+		    // 👉 Check collision for Y
+		    if (HelpMethods.canMoveHere(x, y, width, height, lvlData, 0, ySpeed)) {
+		        y += ySpeed;
+		    } else {
+		        if (velocityY > 0) {
+		            isJumping = false;
+		        }
+		        velocityY = 0;
+		    }
+
+		    updateHitbox();
 		}
 
-		updateHitbox();
-	}
 
 	@Override
 	public void updateHitbox() {
