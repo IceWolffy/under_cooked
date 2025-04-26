@@ -66,9 +66,9 @@ public class LoadSave {
                     r = g = 0;
                 }
 
-                if (r >= 247) r = 0;
-                if (g >= 247) g = 0;
-                if (b >= 247) b = 0;
+                if (r >= 248) r = 0;
+                if (g >= 248) g = 0;
+                if (b >= 248) b = 0;
 
                 terrain[j][i] = r;
                 foreground[j][i] = g;

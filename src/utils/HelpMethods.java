@@ -4,49 +4,44 @@ import Game.GameManager;
 
 public class HelpMethods {
 
-	public static boolean canMoveHere(int x, int y, int width, int height, LevelData lvlData, int velocityY) {
-	    if (!isSolid(x, y, lvlData, velocityY)) {
-	        if (!isSolid(x + width, y + height, lvlData, velocityY)) {
-	            if (!isSolid(x + width, y, lvlData, velocityY)) {
-	                if (!isSolid(x, y + height, lvlData, velocityY)) {
-	                    return true;
-	                }
-	            }
+	public static boolean canMoveHere(int x, int y, int width, int height, LevelData lvlData, int xSpeed, int ySpeed) {
+	    int futureX = x + xSpeed;
+	    int futureY = y + ySpeed;
+
+	    return !isSolidArea(futureX, futureY, width, height, lvlData);
+	}
+
+
+	public static boolean isSolid(int x, int y, LevelData lvlData) {
+	    if (x < 0 || x >= GameManager.GAME_WIDTH) return true;
+	    if (y < 0 || y >= GameManager.GAME_HEIGHT) return true;
+
+	    int xIndex = x / GameManager.TILES_SIZE;
+	    int yIndex = y / GameManager.TILES_SIZE;
+
+	    int terrainValue = lvlData.terrain[yIndex][xIndex];
+	    int foregroundValue = lvlData.foreground[yIndex][xIndex];
+
+	    if (foregroundValue == 13) return true;
+	    // Here's the fix: 
+	    return terrainValue != 0;
+	}
+
+	private static boolean isSolidArea(int x, int y, int width, int height, LevelData lvlData) {
+	    for (int i = 0; i <= width; i += GameManager.TILES_SIZE / 2) {
+	        if (isSolid(x + i, y, lvlData) || isSolid(x + i, y + height, lvlData)) {
+	            return true;
 	        }
 	    }
+
+	    for (int i = 0; i <= height; i += GameManager.TILES_SIZE / 2) {
+	        if (isSolid(x, y + i, lvlData) || isSolid(x + width, y + i, lvlData)) {
+	            return true;
+	        }
+	    }
+
 	    return false;
 	}
 
-    public static boolean isSolid(int x, int y, LevelData lvlData, int velocityY) {
-        if (x < 0 || x > GameManager.GAME_WIDTH) {
-            return true;
-        }
-        if (y < 0 || y > GameManager.GAME_HEIGHT) {
-            return true;
-        }
-
-        int xIndex = x / GameManager.TILES_SIZE;
-        int yIndex = y / GameManager.TILES_SIZE;
-
-        int terrainValue = lvlData.terrain[yIndex][xIndex];
-        int foregroundValue = lvlData.foreground[yIndex][xIndex];
-
-        if (foregroundValue == 13) {
-            if (velocityY < 0) {
-                // Moving up: don't block
-                return false;
-            } else {
-                // Moving down or standing: block
-                return true;
-            }
-        }
-
-        // Normal terrain blocking
-        if (terrainValue > 247 || terrainValue < 0 || terrainValue == 22) {
-            return true;
-        }
-
-        return false;
-    }
 
 }
