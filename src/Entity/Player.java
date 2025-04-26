@@ -26,6 +26,9 @@ public class Player extends Entity {
 	private BufferedImage[] walkAnimation;
 	private int walkTick, walkIndex, walkSpeed = 5;
 	private int idleTick, idleIndex, idleSpeed = 30;
+	
+	private String direction = "right";  // Default direction is right
+
 
 	// Differentiates between Player 1 and Player 2
 	private int playerId;
