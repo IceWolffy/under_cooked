@@ -24,7 +24,7 @@ public class Ingredient {
         "potato.png",
         "radish.png",
         "rose.png",
-        "spinash.png",
+        "spinach.png",
         "sunflower.png",
         "turnip.png"
 

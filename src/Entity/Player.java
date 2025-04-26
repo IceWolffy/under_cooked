@@ -154,16 +154,16 @@ public class Player extends Entity {
 		float ySpeed = velocityY * 2; // Testing inventory, can remove the "* 2" later
 
 		// Separate movement checks
-		if (HelpMethods.canMoveHere((int) (x + xSpeed), y, width, height, lvlData)) {
-			x += xSpeed;
+		if (HelpMethods.canMoveHere((int) (x + xSpeed), y, width, height, lvlData, velocityY)) {
+		    x += xSpeed;
 		}
-		if (HelpMethods.canMoveHere(x, (int) (y + ySpeed), width, height, lvlData)) {
-			y += ySpeed;
+		if (HelpMethods.canMoveHere(x, (int) (y + ySpeed), width, height, lvlData, velocityY)) {
+		    y += ySpeed;
 		} else {
-			if (velocityY > 0) {
-				isJumping = false;
-			}
-			velocityY = 0;
+		    if (velocityY > 0) {
+		        isJumping = false;
+		    }
+		    velocityY = 0;
 		}
 
 		updateHitbox();

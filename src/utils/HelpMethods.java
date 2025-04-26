@@ -4,40 +4,49 @@ import Game.GameManager;
 
 public class HelpMethods {
 
-    public static boolean canMoveHere(int x, int y, int width, int height, LevelData lvlData) {
-        // Check if player can move here based on terrain
-        if (!isSolid(x, y, lvlData)) {
-            if (!isSolid(x + width, y + height, lvlData)) {
-                if (!isSolid(x + width, y, lvlData)) {
-                    if (!isSolid(x, y + height, lvlData)) {
-                        return true; // All checks passed, player can move here
-                    }
-                }
-            }
-        }
-        return false; // Player cannot move here if any of the checks failed
-    }
+	public static boolean canMoveHere(int x, int y, int width, int height, LevelData lvlData, int velocityY) {
+	    if (!isSolid(x, y, lvlData, velocityY)) {
+	        if (!isSolid(x + width, y + height, lvlData, velocityY)) {
+	            if (!isSolid(x + width, y, lvlData, velocityY)) {
+	                if (!isSolid(x, y + height, lvlData, velocityY)) {
+	                    return true;
+	                }
+	            }
+	        }
+	    }
+	    return false;
+	}
 
-    public static boolean isSolid(int x, int y, LevelData lvlData) {
-        // Ensure the coordinates are within the level bounds
+    public static boolean isSolid(int x, int y, LevelData lvlData, int velocityY) {
         if (x < 0 || x > GameManager.GAME_WIDTH) {
-            return true; // Outside game area, considered solid
+            return true;
         }
         if (y < 0 || y > GameManager.GAME_HEIGHT) {
-            return true; // Outside game area, considered solid
+            return true;
         }
 
-        // Calculate the tile coordinates from the pixel positions
         int xIndex = x / GameManager.TILES_SIZE;
         int yIndex = y / GameManager.TILES_SIZE;
 
-        // Check the terrain array of the level
-        int value = lvlData.terrain[yIndex][xIndex]; // Correct access to terrain data
-        
-        // Determine if the tile is solid based on the terrain value
-        if (value > 247 || value < 0 || value == 22) {
-            return true; // If solid, return true
+        int terrainValue = lvlData.terrain[yIndex][xIndex];
+        int foregroundValue = lvlData.foreground[yIndex][xIndex];
+
+        if (foregroundValue == 13) {
+            if (velocityY < 0) {
+                // Moving up: don't block
+                return false;
+            } else {
+                // Moving down or standing: block
+                return true;
+            }
         }
-        return false; // If not solid, return false
+
+        // Normal terrain blocking
+        if (terrainValue > 247 || terrainValue < 0 || terrainValue == 22) {
+            return true;
+        }
+
+        return false;
     }
+
 }
