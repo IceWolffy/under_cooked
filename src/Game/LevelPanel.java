@@ -28,8 +28,7 @@ public class LevelPanel extends JPanel {
     private Countdown count = new Countdown(60); // 60 seconds countdown
 
     public LevelPanel(GameManager gameManager) {
-        this.gameManager = gameManager; // Initialize GameManager reference
-
+        // Initialize GameManager reference
         LoadSave.getLevelData();
         KeyHandler keyH = new KeyHandler(true, gameManager);   // Player 1 uses WASD controls
         KeyHandler keyH2 = new KeyHandler(false, gameManager); // Player 2 uses Arrow controls
