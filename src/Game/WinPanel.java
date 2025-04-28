@@ -18,7 +18,7 @@ public class WinPanel extends JPanel {
         setLayout(null); // no layout manager
 
         try {
-            bgImage = ImageIO.read(new File("res" + File.separator + "level" + File.separator + "win_screen_bg.png"));
+            bgImage = ImageIO.read(new File("res" + File.separator + "winpanel" + File.separator + "winpanel2.jpg"));
         } catch (Exception e) {
             e.printStackTrace();
         }
