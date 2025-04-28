@@ -3,60 +3,47 @@ package Game;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import javax.imageio.ImageIO;
-import java.io.IOException;
 
 public class WinPanel extends JPanel {
+    private String winnerName;
+    private BufferedImage bgImage;
+    private GameManager gameManager; // <-- 🆕 ADD this!
 
-    private String winner;
-    private BufferedImage background;
+    public WinPanel(String winnerName, GameManager gameManager) {
+        this.winnerName = winnerName;
+        this.gameManager = gameManager; // <-- 🆕 ASSIGN IT
 
-    public WinPanel(String winner) {
-        this.winner = winner;
+        setLayout(null); // no layout manager
 
         try {
-            background = ImageIO.read(getClass().getResourceAsStream("/winpanel/win_background.jpeg"));
-        } catch (IOException e) {
+            bgImage = ImageIO.read(new File("res" + File.separator + "level" + File.separator + "win_screen_bg.png"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        setLayout(null);
-        setFocusable(true);
-        requestFocusInWindow();
-
-        SoundEffects.stop(); // stop any background music
-        SoundEffects.play("/sounds/win.wav"); //  play win music
-
-        // Label winner
-        JLabel label = new JLabel(winner + " Wins!", SwingConstants.CENTER);
-        label.setForeground(Color.YELLOW);
-        label.setFont(new Font("Arial", Font.BOLD, 48));
-        label.setBounds(300, 200, 600, 100);
-        add(label);
-
-        // Return to main menu button
-        JButton backButton = new JButton("Back to Main Menu");
-        backButton.setFont(new Font("Arial", Font.PLAIN, 24));
-        backButton.setBounds(400, 350, 300, 60);
+        JButton backButton = new JButton("Back to Menu");
+        backButton.setBounds(600, 500, 200, 50);
+        backButton.setFont(new Font("Arial", Font.BOLD, 20));
+        backButton.setBackground(new Color(222, 206, 59));
         add(backButton);
 
         backButton.addActionListener(e -> {
-            JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            topFrame.setContentPane(new MainMenu());
-            topFrame.revalidate();
-            topFrame.repaint();
+            SoundEffects.stop();
+            gameManager.goToMenu(); // <-- 🆕 CLEAN WAY TO RETURN TO MENU
         });
-
-        //setFocusable(true);
-        //requestFocusInWindow();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        if (background != null) {
-            g.drawImage(background, 0, 0, GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT, null);
+        if (bgImage != null) {
+            g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
         }
+
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 50));
+        g.drawString(winnerName + " Wins!", 500, 300);
     }
 }
