@@ -86,4 +86,11 @@ public class Countdown {
 
 
 }
+
+//used for winpanel logic
+public boolean isFinished() {
+    return secondsRemaining <= 0;
+}
+
+
 }
