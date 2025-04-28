@@ -37,7 +37,7 @@ public class LevelPanel extends JPanel {
         player2 = new Player(keyH2, 2, LoadSave.player2X, LoadSave.player2Y, LoadSave.getLevelData());
         
         // Create a drop-off point (cooking station) in the center of the map
-        dropOffPoint = new DropOffPoint(GameManager.GAME_WIDTH / 2 - 32, GameManager.GAME_HEIGHT / 2 + 256);
+        dropOffPoint = new DropOffPoint(GameManager.GAME_WIDTH / 2 - 65, GameManager.GAME_HEIGHT / 2 + 256);
         
         addKeyListener(keyH);
         addKeyListener(keyH2);
