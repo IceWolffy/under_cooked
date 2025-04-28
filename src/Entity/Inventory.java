@@ -59,7 +59,7 @@ public class Inventory {
         g.drawRect(x, y, 150, 50);
         
         // Draw player label and score
-        g.setColor(playerId == 1 ? Color.BLUE : Color.RED);
+        g.setColor(playerId == 1 ? new Color(34, 139, 34) : new Color(183, 28, 28));
         g.drawString("Player " + playerId + " - Score: " + score, x + 10, y + 20);
         
        
