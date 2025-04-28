@@ -19,6 +19,6 @@ public class DropOffPoint {
     }
     
     public Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle(x + 60, y, width - 60, height);
     }
 }
