@@ -207,7 +207,7 @@ public class Player extends Entity {
 		inventory.draw(g, inventoryX, 10);
 		
 		// Debug info (Just for testing, delete later)
-		g.setColor(Color.black);
+		g.setColor(Color.WHITE);
 		g.drawString("X: " + x + ", Y: " + y, x, y - 10);
 		g.drawString("Inventory: " + inventory.getItemCount() + "/3", x, y - 25);
 	}
