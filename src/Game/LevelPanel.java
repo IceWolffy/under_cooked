@@ -207,9 +207,9 @@ public class LevelPanel extends JPanel {
         
         // Draw game instructions
         g.setColor(new Color(255, 250, 160));
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Collect ingredients and deliver them to the drop-off point!", 
-                     GameManager.GAME_WIDTH / 2 - 275, 110);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Collect ingredients and deliver them to the oven!", 
+                     GameManager.GAME_WIDTH / 2 - 345, 110);
         
         //draw timer
         count.draw(g);
