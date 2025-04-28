@@ -15,13 +15,7 @@ public class DropOffPoint {
     }
     
     public void draw(Graphics g) {
-        // Draw drop-off point
-        g.setColor(Color.ORANGE);
-        g.fillRect(x, y, width, height);
-        g.setColor(Color.RED);
-        g.drawRect(x, y, width, height);
-        g.setColor(Color.BLACK);
-        g.drawString("DROP", x + 15, y + 35);
+    
     }
     
     public Rectangle getBounds() {
