@@ -17,6 +17,8 @@ public class Initialization {
         SoundEffects.preload("/sounds/Playermovement.wav");
         SoundEffects.preload("/sounds/PlayerJump.wav");
         SoundEffects.preload("/sounds/vegtableCollection.wav");
+        SoundEffects.preload("/sounds/CoundDownTimesUp.wav");
+
 
         // Preload image
         try {

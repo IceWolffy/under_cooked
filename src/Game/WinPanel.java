@@ -32,19 +32,15 @@ public class WinPanel extends JPanel {
             e.printStackTrace();
         }
 
-        // Winner Label
-        /*JLabel winnerLabel = new JLabel(winnerName + " Wins!", SwingConstants.CENTER);
-        winnerLabel.setFont(new Font("Arial", Font.BOLD, 40));
-        winnerLabel.setForeground(Color.BLACK);
-        winnerLabel.setBounds(550, 150, 300, 50); 
-        add(winnerLabel);*/
-
         // "Players Score:" Title
         scoreTitleLabel = new JLabel("Players Score:", SwingConstants.CENTER);
         scoreTitleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         scoreTitleLabel.setForeground(Color.BLACK);
         scoreTitleLabel.setBounds(150, 200, 300, 50); // Above the yellow box
         add(scoreTitleLabel);
+
+        //Play Win Sound Effect
+        SoundEffects.play("/sounds/CoundDownTimesUp.wav");
         
         // Score Label (left box)
         scoreLabel = new JLabel("P1: " + player1Score + "   P2: " + player2Score, SwingConstants.CENTER);
