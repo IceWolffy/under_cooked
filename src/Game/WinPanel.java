@@ -20,7 +20,7 @@ public class WinPanel extends JPanel {
 
     public WinPanel(String winnerName, int player1score, int player2Score, GameManager gameManager) {
         this.winnerName = winnerName;
-        this.player1Score = player1Score;
+        this.player1Score = player1score;
         this.player2Score = player2Score;
         this.gameManager = gameManager; 
 
@@ -43,7 +43,7 @@ public class WinPanel extends JPanel {
         SoundEffects.play("/sounds/CoundDownTimesUp.wav");
         
         // Score Label (left box)
-        scoreLabel = new JLabel("P1: " + player1Score + "   P2: " + player2Score, SwingConstants.CENTER);
+        scoreLabel = new JLabel("P1: " + player1score + "   P2: " + player2Score, SwingConstants.CENTER);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 26));
         scoreLabel.setForeground(Color.BLACK);
         scoreLabel.setBounds(190, 250, 300, 50); // Match left yellow box position
