@@ -30,14 +30,16 @@ public class LevelPanel extends JPanel {
     private final int POINTS_PER_INGREDIENT = 10;
     private Countdown count = new Countdown(60); // 60 seconds countdown
 
-    public LevelPanel(GameManager gameManager) {
+    public LevelPanel(GameManager gameManager, int levelNumber) {
+        this.levelNumber = new LevelHandler(levelNumber);
+
         // Initialize GameManager reference
-        LoadSave.getLevelData(levelNumber);
+        this.levelNumber = LoadSave.getLevelData(levelNumber);
         KeyHandler keyH = new KeyHandler(true, gameManager);   // Player 1 uses WASD controls
         KeyHandler keyH2 = new KeyHandler(false, gameManager); // Player 2 uses Arrow controls
 
-        player = new Player(keyH, 1, LoadSave.player1X, LoadSave.player1Y, LoadSave.getLevelData());
-        player2 = new Player(keyH2, 2, LoadSave.player2X, LoadSave.player2Y, LoadSave.getLevelData());
+        player = new Player(keyH, 1, LoadSave.player1X, LoadSave.player1Y, LoadSave.getLevelData(levelNumber));
+        player2 = new Player(keyH2, 2, LoadSave.player2X, LoadSave.player2Y, LoadSave.getLevelData(levelNumber));
         
         // Create a drop-off point (cooking station) in the center of the map
         dropOffPoint = new DropOffPoint(GameManager.GAME_WIDTH / 2 - 65, GameManager.GAME_HEIGHT / 2 + 256);
