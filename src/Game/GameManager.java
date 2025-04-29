@@ -94,6 +94,8 @@ public class GameManager {
 
     public void restartGame() {
         paused = false;
+
+        SoundEffects.stop();
         
         // Reset countdown
         countdown.reset(60);
@@ -118,6 +120,7 @@ public class GameManager {
     }
 
     public void goToMenu() {
+        SoundEffects.stop();
         paused = false;
         
         // Stop the countdown but don't reset it yet
@@ -142,6 +145,7 @@ public class GameManager {
     }
 
     public void showWinScreen(String winnerName, int player1Score, int player2Score) {
+        SoundEffects.stop();
         // Remove the old WinPanel if it exists
         for (Component comp : mainPanel.getComponents()) {
             if (comp instanceof WinPanel) {
@@ -158,6 +162,7 @@ public class GameManager {
     }
 
     public void nextLevel(){
+        SoundEffects.stop();
         if (currentLevel < maxLevel) {
             currentLevel++;
             
