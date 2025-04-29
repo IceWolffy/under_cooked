@@ -6,7 +6,6 @@ import Entity.Player;
 import Entity.DropOffPoint;
 import utils.LevelData;
 import utils.LoadSave;
-import utils.MusicPlayer;
 import Entity.Ingredient;
 
 import java.awt.*;
@@ -14,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class LevelPanel extends JPanel {
-    private MusicPlayer musicPlayer; // Background music
-
     private GameManager gameManager; // Reference to GameManager
 
     private LevelHandler levelHandler;
@@ -39,8 +36,9 @@ public class LevelPanel extends JPanel {
         this.gameManager = gameManager; // Initialize GameManager reference
 
         //Stop any previous music and starts a new one
-        MusicPlayer.play("/sounds/Level_" + levelNumber + ".wav");
-        
+        SoundEffects.stop(); // Stop all sounds
+        SoundEffects.loop("/sounds/Level_" + levelNumber + ".wav");
+
         // Load level data
         levelData = LoadSave.getLevelData(levelNumber); // Get level data from LoadSave
         if (levelData == null) {
