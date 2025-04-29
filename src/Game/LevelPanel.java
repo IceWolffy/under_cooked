@@ -133,7 +133,7 @@ public class LevelPanel extends JPanel {
                     // Switch to win panel
                     SwingUtilities.invokeLater(() -> {
                         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                        topFrame.setContentPane(new WinPanel(winnerName, gameManager));
+                        topFrame.setContentPane(new WinPanel(winnerName, player1Score, player2Score, gameManager));
                         topFrame.revalidate();
                         topFrame.repaint();
                     });
