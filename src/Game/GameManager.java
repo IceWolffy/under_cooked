@@ -73,6 +73,18 @@ public class GameManager {
         return countdown;
     }
 
+    public void startGame() { // Start the game
+        // Removes any old LevelPanel if it exists
+        if (levelPanel != null) {
+            mainPanel.remove(levelPanel);
+        }
+        levelPanel = new LevelPanel(this, currentLevel);
+        mainPanel.add(levelPanel, "gameScreen");
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        showScreen("gameScreen");
+    }
+
     public void pauseGame() {
         if (!paused) {
             countdown.stop();
