@@ -6,6 +6,8 @@ public class MusicPlayer {
     private static Clip clip;
 
     public static void play(String filepath){
+        stop(); // Stop any currently playing music
+        
         try {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(MusicPlayer.class.getResource(filepath));
             clip = AudioSystem.getClip();
