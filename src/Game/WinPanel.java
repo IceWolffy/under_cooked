@@ -68,7 +68,7 @@ public class WinPanel extends JPanel {
             gameManager.goToMenu(); 
         });
 
-        this.gameManager = gameManager;
+    
 
     }
 
