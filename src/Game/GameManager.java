@@ -35,7 +35,7 @@ public class GameManager {
 
         countdown = new Countdown(60); // 60 seconds countdown
 
-        levelPanel = new LevelPanel(this); // Pass GameManager to LevelPanel
+        levelPanel = new LevelPanel(this, currentLevel); // Pass GameManager to LevelPanel
         pauseScreen = new pauseScreen(this);
         mainMenu = new MainMenu(this);
 
@@ -102,7 +102,7 @@ public class GameManager {
         mainPanel.remove(levelPanel);
         
         // Create a new LevelPanel instance
-        levelPanel = new LevelPanel(this);
+        levelPanel = new LevelPanel(this, currentLevel); // Pass GameManager
         
         // Add the new LevelPanel to the card layout
         mainPanel.add(levelPanel, "gameScreen");
@@ -127,7 +127,7 @@ public class GameManager {
         mainPanel.remove(levelPanel);
         
         // Create a new LevelPanel for next time game is started
-        levelPanel = new LevelPanel(this);
+        levelPanel = new LevelPanel(this, currentLevel); // Pass GameManager
         mainPanel.add(levelPanel, "gameScreen");
         
         // Don't create a new MainMenu - use the existing one
