@@ -192,15 +192,28 @@ public class Player extends Entity {
 
 	// Draws the player img
 	public void draw(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
 		drawHitbox(g);
-		updateAnimationTick();
+		 updateAnimationTick();
 
-		if (keyH.leftPressed || keyH.rightPressed) {
-			g.drawImage(walkAnimation[walkIndex], x - 110, y - 99, 256, 256, null);
-		} else {
-			// Idle animation
-			g.drawImage(idleAnimation[idleIndex], x - 110, y - 99, 256, 256, null);
-		}
+		    BufferedImage currentFrame;
+		    if (keyH.leftPressed || keyH.rightPressed) {
+		        currentFrame = walkAnimation[walkIndex];
+		    } else {
+		        currentFrame = idleAnimation[idleIndex];
+		    }
+
+		    int drawX = x - 110;
+		    int drawY = y - 99;
+		    int drawWidth = 256;
+		    int drawHeight = 256;
+
+		    if (direction.equals("left")) {
+		        // Flip image horizontally
+		        g2.drawImage(currentFrame, drawX + drawWidth, drawY, -drawWidth, drawHeight, null);
+		    } else {
+		        g2.drawImage(currentFrame, drawX, drawY, drawWidth, drawHeight, null);
+		    }
 		
 		// Draw player's inventory at appropriate position
 		int inventoryX = playerId == 1 ? 10 : GameManager.GAME_WIDTH - 160;
