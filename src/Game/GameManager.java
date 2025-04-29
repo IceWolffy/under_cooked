@@ -126,6 +126,9 @@ public class GameManager {
         // Remove old LevelPanel to free resources
         mainPanel.remove(levelPanel);
         
+        // Reset the level to 1
+        currentLevel = 1;
+        
         // Create a new LevelPanel for next time game is started
         levelPanel = new LevelPanel(this, currentLevel); // Pass GameManager
         mainPanel.add(levelPanel, "gameScreen");
@@ -176,9 +179,6 @@ public class GameManager {
         }
     }
 
-    public void resetLevel(){
-        currentLevel = 1;
-    }
     
     public int getCurrentLevel() {
         return currentLevel;
