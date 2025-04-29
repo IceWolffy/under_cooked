@@ -81,23 +81,60 @@ public class GameManager {
 
     public void resumeGame() {
         if (paused) {
+        	paused = false;
             countdown.resume();
             showScreen("gameScreen");
             levelPanel.requestFocusInWindow();
-            paused = false;
         }
     }
 
     public void restartGame() {
+        paused = false;
+        
+        // Reset countdown
         countdown.reset(60);
+        
+        // Remove old LevelPanel
+        mainPanel.remove(levelPanel);
+        
+        // Create a new LevelPanel instance
+        levelPanel = new LevelPanel(this);
+        
+        // Add the new LevelPanel to the card layout
+        mainPanel.add(levelPanel, "gameScreen");
+        
+        // Show the game screen with the new LevelPanel
         showScreen("gameScreen");
+        
+        // Start the countdown
         countdown.start();
-        levelPanel.requestFocusInWindow(); // Ensure key input works 
+        
+        // Request focus for the new LevelPanel
+        levelPanel.requestFocusInWindow();
     }
 
     public void goToMenu() {
-        countdown.stop();
-        showScreen("menuScreen");
+    	 paused = false;
+         
+         // Reset countdown
+         countdown.reset(60);
+         
+         // Remove old LevelPanel
+         mainPanel.remove(levelPanel);
+         
+         mainMenu = new MainMenu(this);
+         
+         // Add the new LevelPanel to the card layout
+         mainPanel.add(mainMenu, "menuScreen");
+         
+         // Show the game screen with the new LevelPanel
+         showScreen("menuScreen");
+         
+         // Start the countdown
+         countdown.start();
+         
+         // Request focus for the new LevelPanel
+         levelPanel.requestFocusInWindow();
     }
 
     public boolean isPaused() {
