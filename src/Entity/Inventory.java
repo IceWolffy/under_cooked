@@ -1,6 +1,7 @@
 package Entity;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -54,13 +55,22 @@ public class Inventory {
     public void draw(Graphics g, int x, int y) {
         // Draw inventory background
         g.setColor(new Color(230, 230, 230, 200));
-        g.fillRect(x, y, 150, 50);
+        g.fillRect(x, y, 170, 50);
         g.setColor(Color.BLACK);
-        g.drawRect(x, y, 150, 50);
+        g.drawRect(x, y, 170, 50);
         
         // Draw player label and score
         g.setColor(playerId == 1 ? new Color(34, 139, 34) : new Color(183, 28, 28));
+        
+        // Before drawing the string:
+        Font originalFont = g.getFont();
+        g.setFont(new Font(originalFont.getName(), Font.BOLD, 14));
+
+        // Draw the string
         g.drawString("Player " + playerId + " - Score: " + score, x + 10, y + 20);
+
+        // After drawing, restore the original font
+        g.setFont(originalFont);
         
        
     }
