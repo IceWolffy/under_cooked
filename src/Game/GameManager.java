@@ -26,6 +26,9 @@ public class GameManager {
 
     private boolean paused = false;
 
+    private int currentLevel = 1;
+    private final int maxLevel = 3;
+
     public GameManager(){
         layout = new CardLayout();
         mainPanel = new JPanel(layout);
