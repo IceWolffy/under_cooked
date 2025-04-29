@@ -17,4 +17,11 @@ public class MusicPlayer {
         }
 
     }
+
+    public static void stop() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close();
+        }
+    }
 }
