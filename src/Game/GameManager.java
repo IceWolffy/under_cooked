@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 
 import javax.swing.*;
 
@@ -132,6 +133,22 @@ public class GameManager {
 
     public boolean isPaused() {
         return paused;
+    }
+
+    public void showWinScreen(String winnerName, int player1Score, int player2Score) {
+        // Remove the old WinPanel if it exists
+        for (Component comp : mainPanel.getComponents()) {
+            if (comp instanceof WinPanel) {
+                mainPanel.remove(comp);
+                break;
+            }
+        }
+        // Create a new WinPanel with the latest results
+        WinPanel winPanel = new WinPanel(winnerName, player1Score, player2Score, this);
+        mainPanel.add(winPanel, "winScreen");
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        showScreen("winScreen");
     }
     
 
