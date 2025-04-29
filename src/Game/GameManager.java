@@ -35,12 +35,10 @@ public class GameManager {
 
         countdown = new Countdown(60); // 60 seconds countdown
 
-        levelPanel = new LevelPanel(this, currentLevel); // Pass GameManager to LevelPanel
         pauseScreen = new pauseScreen(this);
         mainMenu = new MainMenu(this);
 
         mainPanel.add(mainMenu, "menuScreen");
-        mainPanel.add(levelPanel, "gameScreen");
         mainPanel.add(pauseScreen, "pauseScreen");
 
         JFrame frame = new JFrame("Undercooked");
