@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Entity.Player;
 import Entity.DropOffPoint;
+import utils.LevelData;
 import utils.LoadSave;
 import Entity.Ingredient;
 
@@ -15,6 +16,8 @@ public class LevelPanel extends JPanel {
 
     private GameManager gameManager; // Reference to GameManager
     private LevelHandler levelHandler;
+    private LevelData levelData;
+    private int levelNumber;
     private Player player;
     private Player player2;
     private DropOffPoint dropOffPoint;
@@ -29,7 +32,7 @@ public class LevelPanel extends JPanel {
 
     public LevelPanel(GameManager gameManager) {
         // Initialize GameManager reference
-        LoadSave.getLevelData();
+        LoadSave.getLevelData(levelNumber);
         KeyHandler keyH = new KeyHandler(true, gameManager);   // Player 1 uses WASD controls
         KeyHandler keyH2 = new KeyHandler(false, gameManager); // Player 2 uses Arrow controls
 
