@@ -67,7 +67,13 @@ public class WinPanel extends JPanel {
             SoundEffects.stop();
             gameManager.goToMenu(); 
         });
+
+        this.gameManager = gameManager;
+
     }
+
+    
+
 
     @Override
     protected void paintComponent(Graphics g) {
