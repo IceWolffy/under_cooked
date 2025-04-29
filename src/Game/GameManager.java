@@ -153,6 +153,28 @@ public class GameManager {
         mainPanel.repaint();
         showScreen("winScreen");
     }
+
+    public void nextLevel(){
+        if (currentLevel < maxLevel) {
+            currentLevel++;
+            
+            // Removes the old LevelPanel from the CardLayout
+            mainPanel.remove(levelPanel);
+
+            // Creates a new LevelPanel for the next level
+            levelPanel = new LevelPanel(this, currentLevel);
+            mainPanel.add(levelPanel, "gameScreen");
+
+            // Shows the new game screen
+            mainPanel.revalidate();
+            mainPanel.repaint();
+            showScreen("gameScreen");
+        
+    } else {
+            // If it's the last level, go back to the main menu
+            goToMenu();
+        }
+    }
     
 
 }
