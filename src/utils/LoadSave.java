@@ -34,7 +34,9 @@ public class LoadSave {
         return img;
     }
 
-    public static LevelData getLevelData() {
+    public static LevelData getLevelData(int levelNumber) {
+        String levelPath = "/level/level" + levelNumber + ".png";
+        
         BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
         int height = img.getHeight();
         int width = img.getWidth();

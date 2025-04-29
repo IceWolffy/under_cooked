@@ -20,9 +20,9 @@ public class LevelHandler {
     private static final int TERRAIN_TILE_COUNT = 200;   // Adjust based on your sprite sheet
     private static final int FOREGROUND_TILE_COUNT = 100; // Adjust based on your sprite sheet
 
-    public LevelHandler() {
+    public LevelHandler(int levelNumber) {
         // Get the level data from LoadSave
-        LevelData lvlData = LoadSave.getLevelData();  // Declare and assign lvlData here
+        LevelData lvlData = LoadSave.getLevelData(levelNumber);  // Declare and assign lvlData here
 
         // Set the level's data layers
         this.terrainData = lvlData.terrain;

@@ -20,13 +20,13 @@ public class Initialization {
         SoundEffects.preload("/sounds/CoundDownTimesUp.wav");
 
 
-        // Preload image
+        /* Preload image
         try {
             winBackgroundImage = ImageIO.read(Initialization.class.getResourceAsStream("/winpanel/winpanel2.jpg"));
         } catch (IOException e) {
             System.err.println("Could not load win background image");
             e.printStackTrace();
-        }
+        } */
 
      SwingUtilities.invokeLater(() -> {
             new GameManager(); // Runs on the EDT

@@ -41,7 +41,7 @@ public class MainMenu extends JPanel{
 
 
             // Pass the level map data when initializing the LevelPanel
-            gameManager.showScreen("gameScreen"); 
+            gameManager.startGame();
             frame.revalidate(); // Revalidate the layout
             frame.repaint(); // Force repaint to update the frame
             frame.getContentPane().requestFocusInWindow(); // Ensure focus

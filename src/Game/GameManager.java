@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 
 import javax.swing.*;
 
@@ -25,18 +26,19 @@ public class GameManager {
 
     private boolean paused = false;
 
+    private int currentLevel = 1;
+    private final int maxLevel = 3;
+
     public GameManager(){
         layout = new CardLayout();
         mainPanel = new JPanel(layout);
 
         countdown = new Countdown(60); // 60 seconds countdown
 
-        levelPanel = new LevelPanel(this); // Pass GameManager to LevelPanel
         pauseScreen = new pauseScreen(this);
         mainMenu = new MainMenu(this);
 
         mainPanel.add(mainMenu, "menuScreen");
-        mainPanel.add(levelPanel, "gameScreen");
         mainPanel.add(pauseScreen, "pauseScreen");
 
         JFrame frame = new JFrame("Undercooked");
@@ -71,6 +73,18 @@ public class GameManager {
         return countdown;
     }
 
+    public void startGame() { // Start the game
+        // Removes any old LevelPanel if it exists
+        if (levelPanel != null) {
+            mainPanel.remove(levelPanel);
+        }
+        levelPanel = new LevelPanel(this, currentLevel);
+        mainPanel.add(levelPanel, "gameScreen");
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        showScreen("gameScreen");
+    }
+
     public void pauseGame() {
         if (!paused) {
             countdown.stop();
@@ -90,6 +104,8 @@ public class GameManager {
 
     public void restartGame() {
         paused = false;
+
+        SoundEffects.stop();
         
         // Reset countdown
         countdown.reset(60);
@@ -98,7 +114,7 @@ public class GameManager {
         mainPanel.remove(levelPanel);
         
         // Create a new LevelPanel instance
-        levelPanel = new LevelPanel(this);
+        levelPanel = new LevelPanel(this, currentLevel); // Pass GameManager
         
         // Add the new LevelPanel to the card layout
         mainPanel.add(levelPanel, "gameScreen");
@@ -114,6 +130,7 @@ public class GameManager {
     }
 
     public void goToMenu() {
+        SoundEffects.stop();
         paused = false;
         
         // Stop the countdown but don't reset it yet
@@ -122,8 +139,11 @@ public class GameManager {
         // Remove old LevelPanel to free resources
         mainPanel.remove(levelPanel);
         
+        // Reset the level to 1
+        currentLevel = 1;
+        
         // Create a new LevelPanel for next time game is started
-        levelPanel = new LevelPanel(this);
+        levelPanel = new LevelPanel(this, currentLevel); // Pass GameManager
         mainPanel.add(levelPanel, "gameScreen");
         
         // Don't create a new MainMenu - use the existing one
@@ -133,6 +153,54 @@ public class GameManager {
     public boolean isPaused() {
         return paused;
     }
+
+    public void showWinScreen(String winnerName, int player1Score, int player2Score) {
+        SoundEffects.stop();
+        // Remove the old WinPanel if it exists
+        for (Component comp : mainPanel.getComponents()) {
+            if (comp instanceof WinPanel) {
+                mainPanel.remove(comp);
+                break;
+            }
+        }
+        // Create a new WinPanel with the latest results
+        WinPanel winPanel = new WinPanel(winnerName, player1Score, player2Score, this);
+        mainPanel.add(winPanel, "winScreen");
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        showScreen("winScreen");
+    }
+
+    public void nextLevel(){
+        SoundEffects.stop();
+        if (currentLevel < maxLevel) {
+            currentLevel++;
+            
+            // Removes the old LevelPanel from the CardLayout
+            mainPanel.remove(levelPanel);
+
+            // Creates a new LevelPanel for the next level
+            levelPanel = new LevelPanel(this, currentLevel);
+            mainPanel.add(levelPanel, "gameScreen");
+
+            // Shows the new game screen
+            mainPanel.revalidate();
+            mainPanel.repaint();
+            showScreen("gameScreen");
+        
+    } else {
+            // If it's the last level, go back to the main menu
+            goToMenu();
+        }
+    }
+
     
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public int getMaxLevel() {
+        return maxLevel;
+    }
 
 }
