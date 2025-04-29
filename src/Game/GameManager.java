@@ -176,5 +176,12 @@ public class GameManager {
         }
     }
     
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public int getMaxLevel() {
+        return maxLevel;
+    }
 
 }
