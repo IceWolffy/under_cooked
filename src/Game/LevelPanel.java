@@ -33,7 +33,7 @@ public class LevelPanel extends JPanel {
     private Countdown count = new Countdown(60); // 60 seconds countdown
 
     public LevelPanel(GameManager gameManager, int levelNumber) {
-        this.levelNumber `= levelNumber;
+        this.levelNumber = levelNumber;
         this.gameManager = gameManager; // Initialize GameManager reference
 
         // Load level data
@@ -58,7 +58,7 @@ public class LevelPanel extends JPanel {
         setBackground(new Color(252, 244, 163));
         setFocusable(true);
 
-        levelHandler = new LevelHandler();
+        levelHandler = new LevelHandler(levelNumber);
 
         // Spawn 5 ingredients randomly at start
         for (int i = 0; i < 5; i++) {
