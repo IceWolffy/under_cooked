@@ -15,9 +15,11 @@ import java.util.Random;
 public class LevelPanel extends JPanel {
 
     private GameManager gameManager; // Reference to GameManager
+
     private LevelHandler levelHandler;
     private LevelData levelData;
     private int levelNumber;
+
     private Player player;
     private Player player2;
     private DropOffPoint dropOffPoint;
@@ -31,10 +33,16 @@ public class LevelPanel extends JPanel {
     private Countdown count = new Countdown(60); // 60 seconds countdown
 
     public LevelPanel(GameManager gameManager, int levelNumber) {
-        this.levelNumber = new LevelHandler(levelNumber);
+        this.levelNumber `= levelNumber;
+        this.gameManager = gameManager; // Initialize GameManager reference
 
-        // Initialize GameManager reference
-        this.levelNumber = LoadSave.getLevelData(levelNumber);
+        // Load level data
+        levelData = LoadSave.getLevelData(levelNumber); // Get level data from LoadSave
+        if (levelData == null) {
+            System.err.println("Level data not found for level: " + levelNumber);
+            return;
+        }
+        
         KeyHandler keyH = new KeyHandler(true, gameManager);   // Player 1 uses WASD controls
         KeyHandler keyH2 = new KeyHandler(false, gameManager); // Player 2 uses Arrow controls
 
