@@ -27,11 +27,7 @@ public class WinPanel extends JPanel {
         setLayout(null); // no layout manager
 
         try {
-<<<<<<< HEAD
-            bgImage = ImageIO.read(new File("res" + File.separator + "winpanel" + File.separator + "win_background.jpeg"));
-=======
             bgImage = ImageIO.read(new File("res" + File.separator + "winpanel" + File.separator + "winpanel2.jpg"));
->>>>>>> origin/winpanel2
         } catch (Exception e) {
             e.printStackTrace();
         }
