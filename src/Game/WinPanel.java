@@ -13,16 +13,16 @@ public class WinPanel extends JPanel {
     private int player1Score;
     private int player2Score;
 
-
+    private JLabel scoreTitleLabel;
     private JLabel scoreLabel;
     private JLabel winnerLabel;
     private JButton backButton;
 
     public WinPanel(String winnerName, int player1score, int player2Score, GameManager gameManager) {
         this.winnerName = winnerName;
-        this.gameManager = gameManager;
         this.player1Score = player1Score;
-        this.player2Score = player2Score; 
+        this.player2Score = player2Score;
+        this.gameManager = gameManager; 
 
         setLayout(null); // no layout manager
 
@@ -38,24 +38,31 @@ public class WinPanel extends JPanel {
         winnerLabel.setForeground(Color.BLACK);
         winnerLabel.setBounds(550, 150, 300, 50); 
         add(winnerLabel);*/
+
+        // "Players Score:" Title
+        scoreTitleLabel = new JLabel("Players Score:", SwingConstants.CENTER);
+        scoreTitleLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        scoreTitleLabel.setForeground(Color.BLACK);
+        scoreTitleLabel.setBounds(150, 200, 300, 50); // Above the yellow box
+        add(scoreTitleLabel);
         
         // Score Label (left box)
         scoreLabel = new JLabel("P1: " + player1Score + "   P2: " + player2Score, SwingConstants.CENTER);
-        scoreLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 26));
         scoreLabel.setForeground(Color.BLACK);
-        scoreLabel.setBounds(150, 250, 300, 100); // Match left yellow box position
+        scoreLabel.setBounds(150, 250, 300, 50); // Match left yellow box position
         add(scoreLabel);
 
         // Winner Label (right box)
         winnerLabel = new JLabel(winnerName + " Wins!", SwingConstants.CENTER);
         winnerLabel.setFont(new Font("Arial", Font.BOLD, 30));
         winnerLabel.setForeground(Color.BLACK);
-        winnerLabel.setBounds(920, 250, 300, 100); // Match right yellow box position
+        winnerLabel.setBounds(930, 250, 250, 50); // Match right yellow box position
         add(winnerLabel);
 
+        //back to menu button
         JButton backButton = new JButton("Back to Menu");
-        //backButton.setBounds(600, 500, 200, 50);
-        backButton.setBounds(630, 300, 200, 50);
+        backButton.setBounds(590, 360, 200, 50);
         backButton.setFont(new Font("Arial", Font.BOLD, 20));
         backButton.setBackground(new Color(222, 206, 59));
         add(backButton);
