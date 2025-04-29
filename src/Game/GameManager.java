@@ -114,27 +114,20 @@ public class GameManager {
     }
 
     public void goToMenu() {
-    	 paused = false;
-         
-         // Reset countdown
-         countdown.reset(60);
-         
-         // Remove old LevelPanel
-         mainPanel.remove(levelPanel);
-         
-         mainMenu = new MainMenu(this);
-         
-         // Add the new LevelPanel to the card layout
-         mainPanel.add(mainMenu, "menuScreen");
-         
-         // Show the game screen with the new LevelPanel
-         showScreen("menuScreen");
-         
-         // Start the countdown
-         countdown.start();
-         
-         // Request focus for the new LevelPanel
-         levelPanel.requestFocusInWindow();
+        paused = false;
+        
+        // Stop the countdown but don't reset it yet
+        countdown.stop();
+        
+        // Remove old LevelPanel to free resources
+        mainPanel.remove(levelPanel);
+        
+        // Create a new LevelPanel for next time game is started
+        levelPanel = new LevelPanel(this);
+        mainPanel.add(levelPanel, "gameScreen");
+        
+        // Don't create a new MainMenu - use the existing one
+        showScreen("menuScreen");
     }
 
     public boolean isPaused() {
