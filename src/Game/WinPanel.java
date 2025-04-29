@@ -68,6 +68,17 @@ public class WinPanel extends JPanel {
             gameManager.goToMenu(); 
         });
 
+        JButton nextButton = new JButton("Next Level");
+        nextButton.setBounds(690, 450, 300, 50);
+        nextButton.setFont(new Font("Arial", Font.BOLD, 20));
+        nextButton.setBackground(new Color(222, 206, 59));
+        add(nextButton);
+
+        nextButton.addActionListener(e -> {
+            SoundEffects.stop();
+            gameManager.nextLevel(); 
+        });
+
     
 
     }
