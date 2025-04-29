@@ -50,19 +50,19 @@ public class WinPanel extends JPanel {
         scoreLabel = new JLabel("P1: " + player1Score + "   P2: " + player2Score, SwingConstants.CENTER);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 26));
         scoreLabel.setForeground(Color.BLACK);
-        scoreLabel.setBounds(150, 250, 300, 50); // Match left yellow box position
+        scoreLabel.setBounds(190, 250, 300, 50); // Match left yellow box position
         add(scoreLabel);
 
         // Winner Label (right box)
         winnerLabel = new JLabel(winnerName + " Wins!", SwingConstants.CENTER);
         winnerLabel.setFont(new Font("Arial", Font.BOLD, 30));
         winnerLabel.setForeground(Color.BLACK);
-        winnerLabel.setBounds(930, 250, 250, 50); // Match right yellow box position
+        winnerLabel.setBounds(1200, 250, 250, 50); // Match right yellow box position
         add(winnerLabel);
 
         //back to menu button
         JButton backButton = new JButton("Back to Menu");
-        backButton.setBounds(590, 360, 200, 50);
+        backButton.setBounds(690, 360, 300, 50);
         backButton.setFont(new Font("Arial", Font.BOLD, 20));
         backButton.setBackground(new Color(222, 206, 59));
         add(backButton);
