@@ -175,6 +175,10 @@ public class GameManager {
             goToMenu();
         }
     }
+
+    public void resetLevel(){
+        currentLevel = 1;
+    }
     
     public int getCurrentLevel() {
         return currentLevel;
