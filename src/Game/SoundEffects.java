@@ -7,7 +7,7 @@ import java.io.InputStream;
 public class SoundEffects {
 
     private static Clip currentClip;  //preload and cache to prevent game & sound lag
-    private static final HashMap<String, Clip> soundCache = new HashMap<>();
+    public static final HashMap<String, Clip> soundCache = new HashMap<>();
 
     public static void preload(String soundFile) {
         if (soundCache.containsKey(soundFile)) return;
