@@ -32,7 +32,7 @@ public class LevelPanel extends JPanel {
     private final int POINTS_PER_INGREDIENT = 10;
     private Countdown count = new Countdown(60); // 60 seconds countdown
 
-    private private SpecialCoins specialCoin; // Special coin object
+    private SpecialCoins specialCoin; // Special coin object
     private long specialSpawnTime = System.currentTimeMillis() + 10_000; // 10s after game start
     private String activeMessage = "special Coin spawned!";
     private long messageEndTime = 0;
