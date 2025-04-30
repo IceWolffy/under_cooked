@@ -37,6 +37,13 @@ public class HelpMethodsTest {
         assertTrue(result);
     }
 
+    @Test
+    public void testCanMoveHere_solidTile_returnsFalse() {
+        // Pixel (160,160) => tile (5,5), which is solid
+        boolean result = HelpMethods.canMoveHere(160, 160, 32, 32, levelData, 0, 0);
+        assertFalse(result);
+    }
+
     
     
 }
