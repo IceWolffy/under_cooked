@@ -19,7 +19,7 @@ public class SpecialCoins {
         this.y = y;
 
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/SpecialCoins/question.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/SpecialCoins/specialcoin.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
