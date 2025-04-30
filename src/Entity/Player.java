@@ -126,10 +126,12 @@ public class Player extends Entity {
 		    // Horizontal movement
 		    if (keyH.leftPressed) {
 		        direction = "left";
-		        xSpeed = -speed;
+		        //xSpeed = -speed;     old walking speed method
+				x -= (int)(speed * speedMultiplier);
 		    } else if (keyH.rightPressed) {
 		        direction = "right";
-		        xSpeed = speed;
+		        //xSpeed = speed;
+				x += (int)(speed * speedMultiplier);
 		    }
 
 		    // Jump
