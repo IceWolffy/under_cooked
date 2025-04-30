@@ -229,6 +229,36 @@ public class LevelPanel extends JPanel {
         return new Ingredient(x, y);
     }
 
+    private SpecialCoins createRandomSpecialIngredient() {
+        int padding = 50;
+        int x = rand.nextInt(GameManager.GAME_WIDTH - 100 - padding) + padding;
+        int y = rand.nextInt(GameManager.GAME_HEIGHT - 300 - padding) + padding;
+        return new SpecialCoins(x, y);
+    }
+
+    private void applySpecialEffect(Player target, int playerNum) {
+        boolean speedUp = SpecialCoins.randomEffect();
+        double multiplier = speedUp ? 2.0 : 0.5;
+    
+        target.setSpeedMultiplier(multiplier);
+        activeMessage = "Player " + playerNum + (speedUp ? " has gained speed potion!" : " has been slowed!");
+        messageEndTime = System.currentTimeMillis() + 3000;
+    
+        // Reset speed after 7 seconds
+        new Thread(() -> {
+            try {
+                Thread.sleep(7000);
+                target.setSpeedMultiplier(1.0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    
+        specialCoin.collected = true;
+        specialCoin = null;
+        specialSpawnTime = System.currentTimeMillis() + 10_000;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
