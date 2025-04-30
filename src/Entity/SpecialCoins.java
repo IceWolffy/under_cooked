@@ -4,39 +4,55 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.util.Random;
 
 public class SpecialCoins {
     public int x, y;
     public boolean collected = false;
-    private static final int SIZE = 40;
 
-    private BufferedImage image;
-    private static final Random rand = new Random();
+    private static final int FRAME_WIDTH = 32;
+    private static final int FRAME_HEIGHT = 32;
+    private static final int FRAME_COUNT = 8;
+    private static final int FRAME_DELAY = 5;
+
+    private BufferedImage spriteSheet;
+    private int currentFrame = 0;
+    private int tickCount = 0;
 
     public SpecialCoins(int x, int y) {
         this.x = x;
         this.y = y;
 
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/SpecialCoins/specialcoin.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            spriteSheet = ImageIO.read(getClass().getResourceAsStream("/SpecialCoins/Bush.png"));
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println("Error loading special coin sprite sheet: " + e.getMessage());
+        }
+    }
+
+    // Returns true 50% of the time for speed boost, false for slow down
+    public boolean getSpeedBoost() {
+        return Math.random() < 0.5;
+    }
+
+
+
+    public void draw(Graphics g) {
+        if (!collected && spriteSheet != null) {
+            int col = currentFrame % 4;
+            int row = currentFrame / 4;
+            g.drawImage(spriteSheet, x, y, x + FRAME_WIDTH, y + FRAME_HEIGHT,
+                        col * FRAME_WIDTH, row * FRAME_HEIGHT,
+                        col * FRAME_WIDTH + FRAME_WIDTH, row * FRAME_HEIGHT + FRAME_HEIGHT, null);
+
+            tickCount++;
+            if (tickCount >= FRAME_DELAY) {
+                currentFrame = (currentFrame + 1) % FRAME_COUNT;
+                tickCount = 0;
+            }
         }
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, SIZE, SIZE);
-    }
-
-    public void draw(Graphics g) {
-        if (!collected && image != null) {
-            g.drawImage(image, x, y, SIZE, SIZE, null);
-        }
-    }
-
-    // Random effect: true = speed up, false = slow down
-    public static boolean randomEffect() {
-        return rand.nextBoolean();
+        return new Rectangle(x, y, FRAME_WIDTH, FRAME_HEIGHT);
     }
 }

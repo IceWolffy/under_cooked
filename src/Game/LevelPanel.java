@@ -237,7 +237,7 @@ public class LevelPanel extends JPanel {
     }
 
     private void applySpecialEffect(Player target, int playerNum) {
-        boolean speedUp = SpecialCoins.randomEffect();
+        boolean speedUp = specialCoin.getSpeedBoost();
         double multiplier = speedUp ? 2.0 : 0.5;
     
         target.setSpeedMultiplier(multiplier);
