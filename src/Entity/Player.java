@@ -38,6 +38,8 @@ public class Player extends Entity {
 	private long lastWalkSoundTime = 0;
 	private final long walkCooldown = 300;
 
+	private double speedMultiplier = 1.0;
+
 
 	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY, LevelData levelData) {
 
@@ -159,6 +161,11 @@ public class Player extends Entity {
 		    updateHitbox();
 		}
 
+	//for special coins
+	public void setSpeedMultiplier(double multiplier) {
+		this.speedMultiplier = multiplier;
+	}
+	
 
 	@Override
 	public void updateHitbox() {
