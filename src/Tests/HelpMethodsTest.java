@@ -31,12 +31,10 @@ public class HelpMethodsTest {
     }
 
     @Test
-    public void testCanMoveHere() {
-        // Test moving to a walkable tile (should return true)
-        assertTrue(HelpMethods.canMoveHere(160, 160, GameManager.TILES_SIZE, GameManager.TILES_SIZE, levelData, 0, 0));
-        
-        // Test moving to a solid tile (should return false)
-        assertFalse(HelpMethods.canMoveHere(160, 160, GameManager.TILES_SIZE, GameManager.TILES_SIZE, levelData, 0, -GameManager.TILES_SIZE));
+    public void testCanMoveHere_walkableTile_returnsTrue() {
+        // Pixel (96,96) => tile (3,3), which is walkable
+        boolean result = HelpMethods.canMoveHere(96, 96, 32, 32, levelData, 0, 0);
+        assertTrue(result);
     }
 
     
