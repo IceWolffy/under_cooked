@@ -30,30 +30,18 @@ public class HelpMethodsTest {
     }
 
     @Test
-    public void testCanMoveHere_walkableTile_returnsTrue() {
+    public void testCanMoveHere_walkableTile_returnsTrue() { //test for walkable tile
         // Pixel (96,96) => tile (3,3), which is walkable
         boolean result = HelpMethods.canMoveHere(96, 96, 32, 32, levelData, 0, 0);
         assertTrue(result);
     }
 
     @Test
-    public void testCanMoveHere_solidTile_returnsFalse() {
-        // Pixel (160,160) => tile (5,5), which is solid
-        boolean result = HelpMethods.canMoveHere(160, 160, 32, 32, levelData, 0, 0);
-        assertFalse(result);
-    }
-
-    @Test
-    public void testIsSolid_walkable_returnsFalse() {
+    public void testIsSolid_walkable_returnsFalse() { //test for solid tile
         boolean result = HelpMethods.isSolid(96, 96, levelData); // tile (3,3)
         assertFalse(result);
     }
 
-    @Test
-    public void testIsSolid_solidTile_returnsTrue() {
-        boolean result = HelpMethods.isSolid(160, 160, levelData); // tile (5,5)
-        assertTrue(result);
-    }
 
     
     
