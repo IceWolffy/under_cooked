@@ -3,6 +3,7 @@ package Game;
 import javax.swing.*;
 
 import Entity.Player;
+import Entity.SpecialCoins;
 import Entity.DropOffPoint;
 import utils.LevelData;
 import utils.LoadSave;
@@ -159,6 +160,26 @@ public class LevelPanel extends JPanel {
 
                     break; // exit the game loop
                 }
+
+                // Spawn special coin after delay
+                    if (specialCoin == null && System.currentTimeMillis() >= specialSpawnTime) {
+                        specialCoin = createRandomSpecialIngredient();
+                    }
+
+                    // Handle special coin collision
+                    if (specialCoin != null && !specialCoin.collected) {
+                        if (player.getBounds().intersects(specialCoin.getBounds())) {
+                            applySpecialEffect(player, 1);
+                        } else if (player2.getBounds().intersects(specialCoin.getBounds())) {
+                            applySpecialEffect(player2, 2);
+                        }
+                    }
+
+                    // Clear the message after 3 seconds
+                    if (!activeMessage.isEmpty() && System.currentTimeMillis() >= messageEndTime) {
+                        activeMessage = "";
+                    }
+
 
                 repaint();
                 try {
