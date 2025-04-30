@@ -50,6 +50,12 @@ public class HelpMethodsTest {
         assertFalse(result);
     }
 
+    @Test
+    public void testIsSolid_solidTile_returnsTrue() {
+        boolean result = HelpMethods.isSolid(160, 160, levelData); // tile (5,5)
+        assertTrue(result);
+    }
+
     
     
 }
