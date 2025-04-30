@@ -44,6 +44,12 @@ public class HelpMethodsTest {
         assertFalse(result);
     }
 
+    @Test
+    public void testIsSolid_walkable_returnsFalse() {
+        boolean result = HelpMethods.isSolid(96, 96, levelData); // tile (3,3)
+        assertFalse(result);
+    }
+
     
     
 }
