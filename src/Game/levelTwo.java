@@ -31,7 +31,7 @@ public class levelTwo extends JPanel {
     private final int POINTS_PER_INGREDIENT = 10;
     private Countdown count = new Countdown(60); // 60 seconds countdown
 
-    public LevelPanel(GameManager gameManager, int levelNumber) {
+    public levelTwo(GameManager gameManager, int levelNumber) {
         this.levelNumber = levelNumber;
         this.gameManager = gameManager; // Initialize GameManager reference
 

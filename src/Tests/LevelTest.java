@@ -17,7 +17,7 @@ public class LevelTest {
 
     @BeforeEach
     void setUp() {
-        handler = new LevelHandler();
+        handler = new LevelHandler(1);
     }
 
     @Test
@@ -55,8 +55,9 @@ public class LevelTest {
     }
     @Test
     void testIsSolidOutOfBounds() {
-        var data = LoadSave.getLevelData();
+        var data = LoadSave.getLevelData(1);
         boolean result = HelpMethods.isSolid(-10, -10, data);
         assertTrue(result, "Out-of-bounds coordinates should be solid");
     }
+    
 }
