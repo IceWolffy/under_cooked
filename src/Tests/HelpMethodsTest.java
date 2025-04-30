@@ -21,8 +21,7 @@ public class HelpMethodsTest {
         // Set all tiles to walkable (0)
         for (int y = 0; y < 27; y++) {
             for (int x = 0; x < 48; x++) {
-                levelData.terrain[y][x] = 0;
-                levelData.foreground[y][x] = 0;
+                levelData.terrain[y][x] = 0; // Walkable
             }
         }
 
