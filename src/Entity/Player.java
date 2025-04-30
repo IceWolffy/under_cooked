@@ -38,6 +38,8 @@ public class Player extends Entity {
 	private long lastWalkSoundTime = 0;
 	private final long walkCooldown = 300;
 
+	private double speedMultiplier = 1.0;
+
 
 	public Player(KeyHandler keyH, int playerId, int spawnX, int spawnY, LevelData levelData) {
 
@@ -124,10 +126,12 @@ public class Player extends Entity {
 		    // Horizontal movement
 		    if (keyH.leftPressed) {
 		        direction = "left";
-		        xSpeed = -speed;
+		        //xSpeed = -speed;     old walking speed method
+				x -= (int)(speed * speedMultiplier);
 		    } else if (keyH.rightPressed) {
 		        direction = "right";
-		        xSpeed = speed;
+		        //xSpeed = speed;
+				x += (int)(speed * speedMultiplier);
 		    }
 
 		    // Jump
@@ -159,6 +163,11 @@ public class Player extends Entity {
 		    updateHitbox();
 		}
 
+	//for special coins
+	public void setSpeedMultiplier(double multiplier) {
+		this.speedMultiplier = multiplier;
+	}
+	
 
 	@Override
 	public void updateHitbox() {

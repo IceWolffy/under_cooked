@@ -3,6 +3,7 @@ package Game;
 import javax.swing.*;
 
 import Entity.Player;
+import Entity.SpecialCoins;
 import Entity.DropOffPoint;
 import utils.LevelData;
 import utils.LoadSave;
@@ -30,6 +31,12 @@ public class LevelPanel extends JPanel {
     // Points awarded per ingredient delivered
     private final int POINTS_PER_INGREDIENT = 10;
     private Countdown count = new Countdown(60); // 60 seconds countdown
+
+    private SpecialCoins specialCoin; // Special coin object
+    private long specialSpawnTime = System.currentTimeMillis() + 10_000; // 10s after game start
+    private String activeMessage = "special Coin spawned!";
+    private long messageEndTime = 0;
+
 
     public LevelPanel(GameManager gameManager, int levelNumber) {
         this.levelNumber = levelNumber;
@@ -154,6 +161,26 @@ public class LevelPanel extends JPanel {
                     break; // exit the game loop
                 }
 
+                // Spawn special coin after delay
+                    if (specialCoin == null && System.currentTimeMillis() >= specialSpawnTime) {
+                        specialCoin = createRandomSpecialIngredient();
+                    }
+
+                    // Handle special coin collision
+                    if (specialCoin != null && !specialCoin.collected) {
+                        if (player.getBounds().intersects(specialCoin.getBounds())) {
+                            applySpecialEffect(player, 1);
+                        } else if (player2.getBounds().intersects(specialCoin.getBounds())) {
+                            applySpecialEffect(player2, 2);
+                        }
+                    }
+
+                    // Clear the message after 3 seconds
+                    if (!activeMessage.isEmpty() && System.currentTimeMillis() >= messageEndTime) {
+                        activeMessage = "";
+                    }
+
+
                 repaint();
                 try {
                     Thread.sleep(16); // ~60 FPS
@@ -202,6 +229,36 @@ public class LevelPanel extends JPanel {
         return new Ingredient(x, y);
     }
 
+    private SpecialCoins createRandomSpecialIngredient() {
+        int padding = 50;
+        int x = rand.nextInt(GameManager.GAME_WIDTH - 100 - padding) + padding;
+        int y = rand.nextInt(GameManager.GAME_HEIGHT - 300 - padding) + padding;
+        return new SpecialCoins(x, y);
+    }
+
+    private void applySpecialEffect(Player target, int playerNum) {
+        boolean speedUp = specialCoin.getSpeedBoost();
+        double multiplier = speedUp ? 2.0 : 0.5;
+    
+        target.setSpeedMultiplier(multiplier);
+        activeMessage = "Player " + playerNum + (speedUp ? " has gained speed potion!" : " has been slowed!");
+        messageEndTime = System.currentTimeMillis() + 3000;
+    
+        // Reset speed after 7 seconds
+        new Thread(() -> {
+            try {
+                Thread.sleep(7000);
+                target.setSpeedMultiplier(1.0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    
+        specialCoin.collected = true;
+        specialCoin = null;
+        specialSpawnTime = System.currentTimeMillis() + 10_000;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -223,8 +280,21 @@ public class LevelPanel extends JPanel {
         g.setFont(new Font("Arial", Font.BOLD, 30));
         g.drawString("Collect ingredients and deliver them to the oven!", 
                      GameManager.GAME_WIDTH / 2 - 345, 110);
-        
+
         //draw timer
         count.draw(g);
+
+        // Draw special coin
+        if (specialCoin != null) {
+            specialCoin.draw(g);
+        }
+
+        // Draw message
+        if (!activeMessage.isEmpty()) {
+            g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 32));
+            g.drawString(activeMessage, GameManager.GAME_WIDTH / 2 - 220, 70);
+        }
+
     }
 }
