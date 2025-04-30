@@ -5,5 +5,6 @@
     ],
     "java.project.referencedLibraries": [
         "test-lib\\**\\*.jar"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
