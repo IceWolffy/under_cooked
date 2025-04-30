@@ -280,8 +280,21 @@ public class LevelPanel extends JPanel {
         g.setFont(new Font("Arial", Font.BOLD, 30));
         g.drawString("Collect ingredients and deliver them to the oven!", 
                      GameManager.GAME_WIDTH / 2 - 345, 110);
-        
+
         //draw timer
         count.draw(g);
+
+        // Draw special coin
+        if (specialCoin != null) {
+            specialCoin.draw(g);
+        }
+
+        // Draw message
+        if (!activeMessage.isEmpty()) {
+            g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 32));
+            g.drawString(activeMessage, GameManager.GAME_WIDTH / 2 - 220, 70);
+        }
+
     }
 }
