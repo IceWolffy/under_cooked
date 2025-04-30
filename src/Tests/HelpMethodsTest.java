@@ -29,5 +29,16 @@ public class HelpMethodsTest {
         // Add a solid tile at tile (5,5) => pixel position (160, 160)
         levelData.terrain[5][5] = 1;
     }
+
+    @Test
+    public void testCanMoveHere() {
+        // Test moving to a walkable tile (should return true)
+        assertTrue(HelpMethods.canMoveHere(160, 160, GameManager.TILES_SIZE, GameManager.TILES_SIZE, levelData, 0, 0));
+        
+        // Test moving to a solid tile (should return false)
+        assertFalse(HelpMethods.canMoveHere(160, 160, GameManager.TILES_SIZE, GameManager.TILES_SIZE, levelData, 0, -GameManager.TILES_SIZE));
+    }
+
+    
     
 }
