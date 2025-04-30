@@ -222,7 +222,13 @@ public class Player extends Entity {
 		// Debug info (Just for testing, delete later)
 		g.setColor(Color.WHITE);
 		g.drawString("X: " + x + ", Y: " + y, x, y - 10);
-		g.drawString("Inventory: " + inventory.getItemCount() + "/3", x, y - 25);
+		// Change color to red if inventory is full, otherwise keep it white
+			if (inventory.isFull()) {
+				g.setColor(new Color(255, 0, 0));
+			} else {
+				g.setColor(Color.WHITE);
+			}
+			g.drawString("Inventory: " + inventory.getItemCount() + "/3", x, y - 25);
 	}
 
 	public Rectangle getBounds() {
